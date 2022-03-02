@@ -62,13 +62,14 @@ class Bag {
         }
         this.bagItem[this.index] = item;
         objects[item.name].set({x:this.startX, y:this.startY + this.offset * this.index, scaleX:this.scaleX, scaleY:this.scaleY});
-        createjs.Tween.get(objects[item.name]).to({x:this.startX, y:this.startY + this.offset * this.index, scaleX:this.scaleX, scaleY:this.scaleY}, 200);
+        createjs.Tween.get(objects[item.name]).to({x:this.startX, y:this.startY + this.offset * this.index, scaleX:this.scaleX, scaleY:this.scaleY, alpha:1}, 200);
         this.index++;
         if(objects[item.name].dragable != true){
             objects[item.name].dragable = true;
         }
         objects[item.name].addEventListener("pressmove",onbagitemDragged);
         objects[item.name].addEventListener("pressup",onbagitemDraggedEnd);
+        this.reload();
     }
     getItem(name){
         for (var i = 0; i < this.index; i++) { 
@@ -143,9 +144,9 @@ class TaskController{
         this.addTask(new Task(this.size,"car",[],true));//上车
     }
     enableTask(id){
-        for(var i = 0;i<this.tasks[id].next.length; ++i){
-            this.tasks[this.tasks[id].next[i]].enable = true;
-        }
+        // for(var i = 0;i<this.tasks[id].next.length; ++i){
+        //     this.tasks[this.tasks[id].next[i]].enable = true;
+        // }
     }
     completeTask(key){
         for(var i = 0;i<this.size; ++i){
@@ -229,7 +230,8 @@ function initSceneOne(){
         {id:"e2", src:"img/level3/hints/e.png"},
         {id:"task1", src:"img/level3/hints/task1.png"},
         {id:"task2", src:"img/level3/hints/task2.png"},
-        {id:"dial", src:"img/level3/phone/dial.png"}
+        {id:"dial", src:"img/level3/phone/dial.png"},
+        {id:"thanks", src:"img/level3/outdoor/thanks.png"}
     ]);
 }
 
@@ -273,6 +275,12 @@ function HandleCompleteSceneOne() {
     objects["dial"] = new createjs.Bitmap(Queue.getResult("dial")).set({x:640, y:550, scaleX:0.15, scaleY:0.15, alpha:0.01});
     objects["e1"] = new createjs.Bitmap(Queue.getResult("e1")).set({x:835, y:628, scaleX:0.01, scaleY:0.01, alpha:0.01});
     objects["e2"] = new createjs.Bitmap(Queue.getResult("e2")).set({x:835, y:628, scaleX:0.01, scaleY:0.01, alpha:0.01});
+
+    var e1button = new createjs.Shape(); objects["e1button"] = e1button;
+    e1button.graphics.beginFill("red").drawRect(0,0,400,400); e1button.set({x:835, y:628, scaleX:0.05, scaleY:0.05, alpha:0.01});
+    var e2button = new createjs.Shape(); objects["e2button"] = e2button;
+    e2button.graphics.beginFill("red").drawRect(0,0,400,400); e2button.set({x:835, y:628, scaleX:0.05, scaleY:0.05, alpha:0.01});
+
     objects["task1"] = new createjs.Bitmap(Queue.getResult("task1")).set({x:0, y:0, scaleX:0.01, scaleY:0.01, alpha:0.01});
     objects["task2"] = new createjs.Bitmap(Queue.getResult("task2")).set({x:0, y:0, scaleX:0.01, scaleY:0.01, alpha:0.01});
  
@@ -287,7 +295,6 @@ function HandleCompleteSceneOne() {
     objects["phone"].addEventListener("click",onphoneClicked);
 
     drawSceneOne();
-    SceneState = SceneOne;
 }
 
 function drawSceneOne(){
@@ -310,6 +317,8 @@ function drawSceneOne(){
     if(controller.checkStatus("sendmail") == COMPLETED && controller.checkStatus("report") == COMPLETED){
         container.addChild(objects["e1"]);
         container.addChild(objects["e2"]);
+        container.addChild(objects["e1button"]);
+        container.addChild(objects["e2button"])
     }
     container.addChild(objects["announcement"]);  
     container.addChild(objects["window"]);
@@ -320,6 +329,8 @@ function drawSceneOne(){
 
     texthint.text = " ";
     texthint.set({alpha:1});
+
+    SceneState = SceneOne;
 
     stage.update();
 }
@@ -335,8 +346,6 @@ function HandleCompleteSceneTwo(){
     objects["car"].addEventListener("click", oncarClicked);
 
     drawSceneTwo();
-
-    SceneState = SceneTwo;
 }
 
 function drawSceneTwo(){
@@ -350,6 +359,8 @@ function drawSceneTwo(){
 
     texthint.text = " ";
     texthint.set({alpha:1});
+    
+    SceneState = SceneTwo;
 
     stage.update();
 }
@@ -379,9 +390,11 @@ function ondiaryOneClicked(){
             createjs.Tween.get(objects["diaryOne"]).to({x:380, y:0, scaleX:0.4, scaleY:0.4, alpha:1}, 200);
             createjs.Tween.get(objects["e1"]).to({x:700, y:500, scaleX:0.05, scaleY:0.05, alpha:1}, 200);
             createjs.Tween.get(objects["e2"]).to({x:1100, y:500, scaleX:0.05, scaleY:0.05, alpha:1}, 200);
+            createjs.Tween.get(objects["e1button"]).to({x:700, y:500, scaleX:0.3, scaleY:0.3, alpha:0.01}, 200);
+            createjs.Tween.get(objects["e2button"]).to({x:1100, y:500, scaleX:0.3, scaleY:0.3, alpha:0.01}, 200);
 
-            objects["e1"].addEventListener("click",one1Clicked);
-            objects["e2"].addEventListener("click",one2Clicked);
+            objects["e1button"].addEventListener("click",one1Clicked);
+            objects["e2button"].addEventListener("click",one2Clicked);
         }
         else{
             createjs.Tween.get(objects["diaryOne"]).to({x:365, y:0, scaleX:0.4, scaleY:0.4, alpha:1}, 200);
@@ -392,9 +405,11 @@ function ondiaryOneClicked(){
             createjs.Tween.get(objects["diaryOne"]).to({x:835, y:628, scaleX:0.03, scaleY:0.03, alpha:0.01}, 200);
             createjs.Tween.get(objects["e1"]).to({x:835, y:628, scaleX:0.01, scaleY:0.01, alpha:0.01}, 200);
             createjs.Tween.get(objects["e2"]).to({x:835, y:628, scaleX:0.01, scaleY:0.01, alpha:0.01}, 200);
+            createjs.Tween.get(objects["e1button"]).to({x:700, y:500, scaleX:0.05, scaleY:0.05, alpha:0.01}, 200);
+            createjs.Tween.get(objects["e2button"]).to({x:1100, y:500, scaleX:0.05, scaleY:0.05, alpha:0.01}, 200);
 
-            objects["e1"].removeEventListener("click",one1Clicked);
-            objects["e2"].removeEventListener("click",one2Clicked);
+            objects["e1button"].removeEventListener("click",one1Clicked);
+            objects["e2button"].removeEventListener("click",one2Clicked);
 
             createjs.Tween.get(objects["task1"]).to({x:0, y:0, scaleX:0.01, scaleY:0.01, alpha:0.01}, 200);
             createjs.Tween.get(objects["task2"]).to({x:0, y:0, scaleX:0.01, scaleY:0.01, alpha:0.01}, 200);
@@ -514,7 +529,6 @@ function ondialClicked(evt){
     if(phoneOffset == 5){
         if(inputnumber == "31624"){
             controller.completeTask("phone");
-            inputnumber = "Complete";
 
             showHint("受伤妇女已及时送医,正在接受治疗。",1000);
 
@@ -557,14 +571,16 @@ function ondoorClicked(){
 }
 
 function oncarClicked(){
-    if(controller.checkStatus("car") == DISABLED){
+    if(controller.checkStatus("car") == DISABLED || SceneState != SceneTwo){
         return;
     }
     if(bag.getItem("helmet") != null && bag.getItem("armband") != null){
-        showHint("在中山路找到两人,成功解救",1000)
+        showHint("在中山路找到两人,成功解救",1000);
+        objects["thanks"] = new createjs.Bitmap(Queue.getResult("thanks")).set({x:0, y:0, scaleX:0.01, scaleY:0.01, alpha:1});
+        bag.add(new BagItem("thanks",920,628,0.07,0.07,0,0.01));
     }
     else{
-        showHint("需要与日军交涉,请携带钢盔与表明身份的袖章",1000)
+        showHint("需要与日军交涉,请携带钢盔与表明身份的袖章",1000);
     }
 }
 
