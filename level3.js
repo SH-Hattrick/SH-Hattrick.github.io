@@ -196,10 +196,14 @@ function init(){
     stage.update();
     createjs.Ticker.setFPS(60);
     createjs.Ticker.addEventListener("tick", stage);
+    createjs.Ticker.addEventListener("tick", handleTick);
     level3_adjust_screen();    
     initSceneOne();
 }
 
+function handleTick(){
+
+}
 
 function initSceneOne(){
     Queue.on("complete", HandleCompleteSceneOne, this);
@@ -314,6 +318,9 @@ function drawSceneOne(){
 
     bag.reload();
 
+    texthint.text = " ";
+    texthint.set({alpha:1});
+
     stage.update();
 }
 
@@ -340,6 +347,9 @@ function drawSceneTwo(){
     container.addChild(objects["car"]);
 
     bag.reload();
+
+    texthint.text = " ";
+    texthint.set({alpha:1});
 
     stage.update();
 }
@@ -495,7 +505,6 @@ function ondialClicked(evt){
     for(var i=0;i<10;++i){
         if(dianum[i] == evt.target.id){
             inputnumber += i.toString();
-            console.log(inputnumber);
             textnumber.text = inputnumber;
             container.addChild(textnumber);
             phoneOffset++;
@@ -608,7 +617,10 @@ function showHint(str, time){
     hint = str;
     texthint.text = hint;
     container.addChild(texthint);
-    createjs.Tween.get(texthint).to({alpha:0},time);
+    createjs.Tween.get(texthint).to({alpha:0}, time).call(function(){
+        texthint.text = " ";
+        texthint.set({alpha:1});
+    });
 }
 
 function clearScreen(){
