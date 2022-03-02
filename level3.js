@@ -516,7 +516,7 @@ function ondialClicked(evt){
             controller.completeTask("phone");
             inputnumber = "Complete";
 
-            showHint("受伤妇女已及时送医,正在接受治疗。",3000);
+            showHint("受伤妇女已及时送医,正在接受治疗。",1000);
 
             onphoneClicked();
         }
@@ -561,10 +561,10 @@ function oncarClicked(){
         return;
     }
     if(bag.getItem("helmet") != null && bag.getItem("armband") != null){
-        showHint("在中山路找到两人,成功解救",3000)
+        showHint("在中山路找到两人,成功解救",1000)
     }
     else{
-        showHint("需要与日军交涉,请携带钢盔与表明身份的袖章",3000)
+        showHint("需要与日军交涉,请携带钢盔与表明身份的袖章",1000)
     }
 }
 
