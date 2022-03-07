@@ -27,6 +27,8 @@
     <script src="./js/easeljs-0.8.1.min.js"></script>
     <script src="./js/preloadjs-0.6.2.min.js"></script>
     <script src="./js/tweenjs-0.6.1.min.js"></script>
+    <!-- <script src="./js/jquery.js"></script> -->
+    <script src="media.js"></script>
 </head>
 
 <body id = "main" >
@@ -37,6 +39,10 @@
         <button type="button" onclick=loadlevel2();>场景二</button>
         <button type="button" onclick=loadlevel3();>场景三</button>
     </div>
+
+    <audio name = "musicplayer" id = musicplayer autoplay="autoplay" controls="controls" loop="loop" src="media/bgm1.mp3">
+        你的浏览器版本太低， 无法播放音乐
+    </audio>
 
 
     <script>

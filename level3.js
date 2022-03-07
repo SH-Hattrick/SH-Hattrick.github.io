@@ -37,6 +37,13 @@ class BagItem {
         this.scaleY = scaleY;
         this.rotation = rotation;
         this.alpha = alpha;
+
+        this.scaleXoffset = 1;
+        this.scaleYoffset = 1;
+    }
+    setscaleoffset(x,y){
+        this.scaleXoffset = x;
+        this.scaleYoffset = y;
     }
 }
 class Bag {
@@ -56,13 +63,13 @@ class Bag {
     add(item){
         for(var i=0;i<this.index;++i){
             if(this.bagItem[i].name == item.name){
-                createjs.Tween.get(objects[item.name]).to({x:this.startX, y:this.startY + this.offset * i, scaleX:this.scaleX, scaleY:this.scaleY}, 200);
+                createjs.Tween.get(objects[item.name]).to({x:this.startX, y:this.startY + this.offset * i, scaleX:this.scaleX * item.scaleXoffset, scaleY:this.scaleY * item.scaleYoffset}, 200);
                 return;
             }
         }
         this.bagItem[this.index] = item;
-        objects[item.name].set({x:this.startX, y:this.startY + this.offset * this.index, scaleX:this.scaleX, scaleY:this.scaleY});
-        createjs.Tween.get(objects[item.name]).to({x:this.startX, y:this.startY + this.offset * this.index, scaleX:this.scaleX, scaleY:this.scaleY, alpha:1}, 200);
+        objects[item.name].set({x:this.startX, y:this.startY + this.offset * this.index, scaleX:this.scaleX * item.scaleXoffset, scaleY:this.scaleY * item.scaleYoffset});
+        createjs.Tween.get(objects[item.name]).to({x:this.startX, y:this.startY + this.offset * this.index, scaleX:this.scaleX* item.scaleXoffset, scaleY:this.scaleY* item.scaleYoffset, alpha:1}, 200);
         this.index++;
         if(objects[item.name].dragable != true){
             objects[item.name].dragable = true;
@@ -94,15 +101,17 @@ class Bag {
                     this.bagItem[j-1] = this.bagItem[j];
                 }
                 this.index--;
+                container.removeChild(objects[name]);
                 break;
             }
         }
+        this.reload();
     }
     reload(){
         for(var i=0;i<this.index;++i){
             container.removeChild(objects[this.bagItem[i].name]);
             container.addChild(objects[this.bagItem[i].name]);
-            createjs.Tween.get(objects[this.bagItem[i].name]).to({x:this.startX, y:this.startY + this.offset * i, scaleX:this.scaleX, scaleY:this.scaleY}, 200);
+            createjs.Tween.get(objects[this.bagItem[i].name]).to({x:this.startX, y:this.startY + this.offset * i, scaleX:this.scaleX *this.bagItem[i].scaleXoffset, scaleY:this.scaleY *this.bagItem[i].scaleYoffset}, 200);
         }
     }
 }; var bag = new Bag(6);
@@ -446,7 +455,9 @@ function onarmbandClicked(){
         createjs.Tween.get(objects["armband"]).to({x:800, y:250, scaleX:0.9, scaleY:0.9, alpha:1}, 200);
     }
     else{
-        bag.add(new BagItem("armband",920,628,0.07,0.07,0,0.01));
+        var newitem = new BagItem("armband",920,628,0.07,0.07,0,0.01);
+        newitem.setscaleoffset(2,2);
+        bag.add(newitem);
         controller.completeTask("armband");
     }
 }

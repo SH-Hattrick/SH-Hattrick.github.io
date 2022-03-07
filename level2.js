@@ -33,6 +33,13 @@ class BagItem {
         this.scaleY = scaleY;
         this.rotation = rotation;
         this.alpha = alpha;
+
+        this.scaleXoffset = 1;
+        this.scaleYoffset = 1;
+    }
+    setscaleoffset(x,y){
+        this.scaleXoffset = x;
+        this.scaleYoffset = y;
     }
 }
 class Bag {
@@ -52,13 +59,13 @@ class Bag {
     add(item){
         for(var i=0;i<this.index;++i){
             if(this.bagItem[i].name == item.name){
-                createjs.Tween.get(objects[item.name]).to({x:this.startX, y:this.startY + this.offset * i, scaleX:this.scaleX, scaleY:this.scaleY}, 200);
+                createjs.Tween.get(objects[item.name]).to({x:this.startX, y:this.startY + this.offset * i, scaleX:this.scaleX * item.scaleXoffset, scaleY:this.scaleY * item.scaleYoffset}, 200);
                 return;
             }
         }
         this.bagItem[this.index] = item;
-        objects[item.name].set({x:this.startX, y:this.startY + this.offset * this.index, scaleX:this.scaleX, scaleY:this.scaleY});
-        createjs.Tween.get(objects[item.name]).to({x:this.startX, y:this.startY + this.offset * this.index, scaleX:this.scaleX, scaleY:this.scaleY, alpha:1}, 200);
+        objects[item.name].set({x:this.startX, y:this.startY + this.offset * this.index, scaleX:this.scaleX * item.scaleXoffset, scaleY:this.scaleY * item.scaleYoffset});
+        createjs.Tween.get(objects[item.name]).to({x:this.startX, y:this.startY + this.offset * this.index, scaleX:this.scaleX* item.scaleXoffset, scaleY:this.scaleY* item.scaleYoffset, alpha:1}, 200);
         this.index++;
         if(objects[item.name].dragable != true){
             objects[item.name].dragable = true;
@@ -100,7 +107,7 @@ class Bag {
         for(var i=0;i<this.index;++i){
             container.removeChild(objects[this.bagItem[i].name]);
             container.addChild(objects[this.bagItem[i].name]);
-            createjs.Tween.get(objects[this.bagItem[i].name]).to({x:this.startX, y:this.startY + this.offset * i, scaleX:this.scaleX, scaleY:this.scaleY}, 200);
+            createjs.Tween.get(objects[this.bagItem[i].name]).to({x:this.startX, y:this.startY + this.offset * i, scaleX:this.scaleX *this.bagItem[i].scaleXoffset, scaleY:this.scaleY *this.bagItem[i].scaleYoffset}, 200);
         }
     }
 }; var bag = new Bag(6);
@@ -241,6 +248,10 @@ function HandleCompleteSceneOne() {
     objects["diary"] = new createjs.Bitmap(Queue.getResult("diaryone")).set({x:900, y:600, scaleX:0.06, scaleY:0.035, alpha:0.01});
     objects["photo"] = new createjs.Bitmap(Queue.getResult("photo")).set({x:0, y:0, scaleX:0.01, scaleY:0.01,rotaion:0, alpha:0.01});
     objects["photoframe"] = new createjs.Bitmap(Queue.getResult("photoframe")).set({x:666, y:602, scaleX:0.064, scaleY:0.095, rotation:-15, alpha:0.01});
+    
+    var photoframesqure = new createjs.Shape(); objects["photoframesquare"] = photoframesqure;
+    photoframesqure.graphics.beginFill("red").drawRect(0,0,400,400); photoframesqure.set({x:650, y:580, scaleX:0.3, scaleY:0.3, rotation:0, alpha:0.01});
+
     objects["seal"] = new createjs.Bitmap(Queue.getResult("seal")).set({x:950, y:550, scaleX:0.06, scaleY:0.035, alpha:1});
     objects["map"] = new createjs.Bitmap(Queue.getResult("map")).set({x:380, y:380, scaleX:0.05, scaleY:0.1, alpha:0.01});
     objects["typer"] = new createjs.Bitmap(Queue.getResult("typer")).set({x:1140, y:520, scaleX:0.22, scaleY:0.22, alpha:0.01});
@@ -250,7 +261,7 @@ function HandleCompleteSceneOne() {
     objects["xjkfill"] = new createjs.Bitmap(Queue.getResult("xjk")).set({x:1140, y:520, scaleX:0.01, scaleY:0.01, alpha:0.01});
     objects["zslfill"] = new createjs.Bitmap(Queue.getResult("zsl")).set({x:1140, y:520, scaleX:0.01, scaleY:0.01, alpha:0.01});
     objects["announcement"] = new createjs.Bitmap(Queue.getResult("announcement")).set({x:767, y:630, scaleX:0.03, scaleY:0.025, alpha:0.8});
-    objects["sealmark"] = new createjs.Bitmap(Queue.getResult("sealmark")).set({x:767, y:630, scaleX:0.01, scaleY:0.01, alpha:0.01});
+    objects["sealmark"] = new createjs.Bitmap(Queue.getResult("sealmark")).set({x:767, y:630, scaleX:0.01, scaleY:0.01,  alpha:0.01});
 
     objects["diary"].addEventListener("click", ondiaryClicked);
     objects["seal"].addEventListener("click", onsealClicked);
@@ -279,6 +290,7 @@ function drawSceneOne(){
     container.addChild(objects["sealmark"]);
     container.addChild(objects["diary"]);
     container.addChild(objects["photo"]);
+    container.addChild(objects["photoframesquare"]);
 
     bag.reload();
 
@@ -319,7 +331,7 @@ function ondiaryClicked(){
             }
             else{
                 createjs.Tween.get(objects["diary"]).to({x:900, y:600, scaleX:0.06, scaleY:0.035, alpha:0.01}, 200);
-                objects["photoframe"].on("mouseover", onphotoframeTriggered);
+                objects["photoframesquare"].on("mouseover", onphotoframeTriggered);
                 if(bag.getItem("photo") == null){
                     createjs.Tween.get(objects["photo"]).to({x:0, y:0, scaleX:0.01, scaleY:0.01,rotaion:0, alpha:0.01}, 200);
                     objects["photo"].removeEventListener("click", onphotoClicked);
@@ -379,13 +391,16 @@ function ontyperClicked(){
 }
 
 function onannouncementClicked(){
+    if(controller.checkStatus("seal") == DISABLED){
+        return;
+    }
     if(objects["announcement"].scaleX < 0.1){
         createjs.Tween.get(objects["announcement"]).to({x:420, y:150, scaleX:0.3, scaleY:0.3, alpha:1}, 200);
-        createjs.Tween.get(objects["sealmark"]).to({x:1240, y:600, scaleX:0.07, scaleY:0.07, rotation:20}, 200);
+        createjs.Tween.get(objects["sealmark"]).to({x:1194, y:630, scaleX:0.075, scaleY:0.075}, 200);
     }
     else{
         createjs.Tween.get(objects["announcement"]).to({x:767, y:630, scaleX:0.03, scaleY:0.025, alpha:0.8}, 200);
-        createjs.Tween.get(objects["sealmark"]).to({x:767, y:630, scaleX:0.01, scaleY:0.01, rotation:0}, 200);
+        createjs.Tween.get(objects["sealmark"]).to({x:840, y:663, scaleX:0.01, scaleY:0.01}, 200);
     }
 }
 
@@ -418,6 +433,9 @@ function onphotoframeTriggered(evt){
 }
 
 function onsealmarkTriggered(){
+    if(controller.checkStatus("seal") == DISABLED){
+        return;
+    }
     if(itemHeld != null && itemHeld.name == "seal"){
         bag.removeItem("seal");
         objects["sealmark"].alpha = 1;
@@ -495,7 +513,9 @@ function onmapClicked(){
 function onxjkClicked(){
     if(bag.getItem("xjk") == null){
         createjs.Tween.get(objects["xjk"]).to({x:820, y:350, scaleX:1, scaleY:1, alpha:1}, 200);
-        bag.add(new BagItem("xjk",920,628,0.07,0.07,0,0.01));
+        var newitem = new BagItem("xjk",920,628,0.07,0.07,0,0.01);
+        newitem.setscaleoffset(3,3);
+        bag.add(newitem);
     }
     else if(objects["xjk"].scaleX < 0.4 && objects["xjk"].x == bag.startX){
         createjs.Tween.get(objects["xjk"]).to({x:820, y:350, scaleX:1, scaleY:1, alpha:1}, 200);
@@ -505,7 +525,9 @@ function onxjkClicked(){
 function onzslClicked(){
     if(bag.getItem("zsl") == null){
         createjs.Tween.get(objects["zsl"]).to({x:820, y:350, scaleX:1, scaleY:1, alpha:1}, 200);
-        bag.add(new BagItem("zsl",920,628,0.07,0.07,0,0.01));
+        var newitem = new BagItem("zsl",920,628,0.07,0.07,0,0.01);
+        newitem.setscaleoffset(3,3);
+        bag.add(newitem);
     }
     else if(objects["zsl"].scaleX < 0.4 && objects["zsl"].x == bag.startX){
         createjs.Tween.get(objects["zsl"]).to({x:820, y:350, scaleX:1, scaleY:1, alpha:1}, 200);
@@ -526,7 +548,7 @@ function onbagitemDraggedEnd(evt){
         
     }
     else{
-        setTimeout(function(){itemHeld = null;}, 100)
+        setTimeout(function(){itemHeld = null;}, 500)
         bag.reload();
     }
 }
