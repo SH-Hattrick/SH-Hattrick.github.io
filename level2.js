@@ -18,7 +18,7 @@ var progressnum = 0;
 var SceneState = 0;
 const SceneOne = 1;
 const SceneMap = 10;
-
+var loading;
 var diaryState = 0;
 //var text = container.addChild(new createjs.Text("加载中...", "150px Times", "#fff").set({x:190, y:470}));
 var texthint = new createjs.Text("", "Italic 40px KaiTi", "#fff").set({x:190, y:900});//提示信息
@@ -98,7 +98,7 @@ class Bag {
                     this.bagItem[j-1] = this.bagItem[j];
                 }
                 this.index--;
-                container.removeChild(objects[name]);
+                container.removeChild(objects[objects[name]]);
                 break;
             }
         }
@@ -195,8 +195,8 @@ function init(){
 
     stage.enableMouseOver();
     createjs.Touch.enable(stage);
-
-    var text = container.addChild(new createjs.Text("正在打开日记...  "+progressnum+"%", "150px kaiti", "#fff").set({x:190, y:470}));
+    loading = new createjs.Text("正在打开日记...  "+progressnum, "150px kaiti", "#fff").set({x:190, y:470});
+    var text = container.addChild(loading);
     stage.update();
     createjs.Ticker.setFPS(60);
     createjs.Ticker.addEventListener("tick", stage);
@@ -251,6 +251,10 @@ function initSceneOne(){
 function HandleProgress(){
     let num = `${Math.floor(Queue.progress * 100)}%`;
     progressnum = num;
+    container.removeChild(loading)
+    loading = new createjs.Text("正在打开日记...  "+progressnum, "150px kaiti", "#fff").set({x:190, y:470});
+    var text = container.addChild(loading);
+    stage.update();
 }
 
 function HandleCompleteSceneOne() {
@@ -436,7 +440,7 @@ function onphotoframeTriggered(evt){
         objects["photoframe"].alpha = 1;
         controller.completeTask("photo");
 
-        container.removeChild("diary");
+        container.removeChild(objects["diary"]);
         objects["diary"] = new createjs.Bitmap(Queue.getResult("diarytwo")).set({x:900, y:600, scaleX:0.06, scaleY:0.035, alpha:0.01});
         diaryState++;
         objects["diary"].addEventListener("click", ondiaryClicked);
@@ -454,7 +458,7 @@ function onsealmarkTriggered(){
         objects["sealmark"].alpha = 1;
         controller.completeTask("seal");
 
-        container.removeChild("diary");
+        container.removeChild(objects["diary"]);
         objects["diary"] = new createjs.Bitmap(Queue.getResult("diaryfour")).set({x:900, y:600, scaleX:0.06, scaleY:0.035, alpha:0.01});
         diaryState++;
         objects["diary"].addEventListener("click", ondiaryClicked);
@@ -476,7 +480,7 @@ function ontelegramTriggered(){
         controller.completeTask("telegram");
         ontyperClicked();
         //解锁日记三
-        container.removeChild("diary");
+        container.removeChild(objects["diary"]);
         objects["diary"] = new createjs.Bitmap(Queue.getResult("diarythree")).set({x:900, y:600, scaleX:0.06, scaleY:0.035, alpha:0.01});
         diaryState++;
         objects["diary"].addEventListener("click", ondiaryClicked);

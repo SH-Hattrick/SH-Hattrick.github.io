@@ -8,6 +8,9 @@ var rects = [];//diary turn window
 var bg;
 var Queue = new createjs.LoadQueue();
 
+var loading;
+var progressnum = 0;
+
 const COMPLETED = 2;
 const READY = 1;
 const DISABLED = 0;
@@ -201,8 +204,8 @@ function init(){
 
     stage.enableMouseOver();
     createjs.Touch.enable(stage);
-
-    var text = container.addChild(new createjs.Text("正在打开日记...", "150px kaiti", "#fff").set({x:190, y:470}));
+    loading = new createjs.Text("正在打开日记...  "+progressnum, "150px kaiti", "#fff").set({x:190, y:470});
+    var text = container.addChild(loading);
     stage.update();
     createjs.Ticker.setFPS(60);
     createjs.Ticker.addEventListener("tick", stage);
@@ -217,6 +220,7 @@ function handleTick(){
 
 function initSceneOne(){
     Queue.on("complete", HandleCompleteSceneOne, this);
+    Queue.on("progress", HandleProgress, this);
     Queue.loadManifest([
         {id:"bgindoor", src:"img/level3/indoor/bgindoor.png"},
         {id:"armband", src:"img/level3/indoor/armband.png"},
@@ -268,6 +272,16 @@ function level3_adjust_screen(){
         container.x = 1080;
     }
 };
+
+
+function HandleProgress(){
+    let num = `${Math.floor(Queue.progress * 100)}%`;
+    progressnum = num;
+    container.removeChild(loading)
+    loading = new createjs.Text("正在打开日记...  "+progressnum, "150px kaiti", "#fff").set({x:190, y:470});
+    var text = container.addChild(loading);
+    stage.update();
+}
 
 function HandleCompleteSceneOne() {
     //搭建第一个室内场景
