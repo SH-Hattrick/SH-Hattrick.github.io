@@ -21,7 +21,7 @@ var phoneOffset = 0; //输入到第几个数字
 var dianum = [0,0,0,0,0,0,0,0,0,0]; //数字按钮id
 var inputnumber = "";//输入的号码
 var textnumber = new createjs.Text(inputnumber, "Italic 150px KaiTi", "#fff").set({x:190, y:470});//显示的号码
-
+//var text = container.addChild(new createjs.Text("加载中...", "150px Times", "#fff").set({x:190, y:470}));
 var texthint = new createjs.Text("", "Italic 40px KaiTi", "#fff").set({x:190, y:900});//提示信息
 
 var itemHeld = null;
@@ -202,7 +202,7 @@ function init(){
     stage.enableMouseOver();
     createjs.Touch.enable(stage);
 
-    var text = container.addChild(new createjs.Text("The Diaries of John Rabe", "150px Times", "#fff").set({x:190, y:470}));
+    var text = container.addChild(new createjs.Text("正在打开日记...", "150px Times", "#fff").set({x:190, y:470}));
     stage.update();
     createjs.Ticker.setFPS(60);
     createjs.Ticker.addEventListener("tick", stage);

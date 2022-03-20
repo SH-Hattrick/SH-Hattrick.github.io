@@ -19,7 +19,7 @@ const SceneOne = 1;
 const SceneMap = 10;
 
 var diaryState = 0;
-
+//var text = container.addChild(new createjs.Text("加载中...", "150px Times", "#fff").set({x:190, y:470}));
 var texthint = new createjs.Text("", "Italic 40px Times", "#fff").set({x:190, y:900});//提示信息
 /////////////////////////////////////// class /////////////////////////////////////////////
 
@@ -195,7 +195,7 @@ function init(){
     stage.enableMouseOver();
     createjs.Touch.enable(stage);
 
-    var text = container.addChild(new createjs.Text("The Diaries of John Rabe", "150px Times", "#fff").set({x:190, y:470}));
+    var text = container.addChild(new createjs.Text("正在打开日记...", "150px Times", "#fff").set({x:190, y:470}));
     stage.update();
     createjs.Ticker.setFPS(60);
     createjs.Ticker.addEventListener("tick", stage);
