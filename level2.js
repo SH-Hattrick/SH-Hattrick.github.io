@@ -14,6 +14,7 @@ const DISABLED = 0;
 
 var itemHeld = null;
 
+var progressnum = 0;
 var SceneState = 0;
 const SceneOne = 1;
 const SceneMap = 10;
@@ -195,7 +196,7 @@ function init(){
     stage.enableMouseOver();
     createjs.Touch.enable(stage);
 
-    var text = container.addChild(new createjs.Text("正在打开日记...", "150px kaiti", "#fff").set({x:190, y:470}));
+    var text = container.addChild(new createjs.Text("正在打开日记...  "+progressnum+"%", "150px kaiti", "#fff").set({x:190, y:470}));
     stage.update();
     createjs.Ticker.setFPS(60);
     createjs.Ticker.addEventListener("tick", stage);
@@ -225,6 +226,7 @@ function level2_adjust_screen(){
 
 function initSceneOne(){
     Queue.on("complete", HandleCompleteSceneOne, this);
+    Queue.on("progress", HandleProgress, this);
     Queue.loadManifest([
         {id:"Sceneone", src:"img/level2/Sceneone.png"},
         {id:"diaryone", src:"img/level2/diary/diaryone.png"},
@@ -246,7 +248,14 @@ function initSceneOne(){
     ]);
 }
 
+function HandleProgress(){
+    let num = `${Math.floor(Queue.progress * 100)}%`;
+    progressnum = num;
+}
+
 function HandleCompleteSceneOne() {
+    progressnum = 0;
+
     objects["Sceneone"] = new createjs.Bitmap(Queue.getResult("Sceneone"));
     objects["diary"] = new createjs.Bitmap(Queue.getResult("diaryone")).set({x:900, y:600, scaleX:0.06, scaleY:0.035, alpha:0.01});
     objects["photo"] = new createjs.Bitmap(Queue.getResult("photo")).set({x:0, y:0, scaleX:0.01, scaleY:0.01,rotaion:0, alpha:0.01});
