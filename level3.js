@@ -202,7 +202,7 @@ function init(){
     stage.enableMouseOver();
     createjs.Touch.enable(stage);
 
-    var text = container.addChild(new createjs.Text("正在打开日记...", "150px Times", "#fff").set({x:190, y:470}));
+    var text = container.addChild(new createjs.Text("正在打开日记...", "150px kaiti", "#fff").set({x:190, y:470}));
     stage.update();
     createjs.Ticker.setFPS(60);
     createjs.Ticker.addEventListener("tick", stage);
@@ -256,13 +256,16 @@ function initSceneTwo(){
 
 function level3_adjust_screen(){
     canvas = document.getElementById("wrapper");
-    canvas.width = canvasX;
-    canvas.height = canvasY;
+    canvas.width = 1920;
+    canvas.height = 1080;
     if(document.documentElement.clientWidth <= document.documentElement.clientHeight){
-        canvas.width = canvasX;
-        canvas.height = canvasY;
-        container.rotation = 90; //container_indoor.rotation = container_outdoor.rotation = 90;
-        container.x = 90; //container_indoor.x = container_outdoor.x = 1080
+        //alert("?");
+        screen = 0;
+        //text.set({x:570, y:190, rotation:90});
+        canvas.width = 1080;
+        canvas.height = 1920;
+        container.rotation = 90;
+        container.x = 1080;
     }
 };
 
