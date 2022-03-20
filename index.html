@@ -27,8 +27,7 @@
     <script src="./js/easeljs-0.8.1.min.js"></script>
     <script src="./js/preloadjs-0.6.2.min.js"></script>
     <script src="./js/tweenjs-0.6.1.min.js"></script>
-    <!-- <script src="./js/jquery.js"></script> -->
-    <script src="media.js"></script>
+    <script src="./js/jquery.js"></script>
 </head>
 
 <body id = "main" >
@@ -36,23 +35,34 @@
         您的浏览器暂不支持！
     </canvas>
     <div class="center-in-center" id="a">
+        <button type="button" onclick=loadlevel1();>场景一</button>
         <button type="button" onclick=loadlevel2();>场景二</button>
         <button type="button" onclick=loadlevel3();>场景三</button>
     </div>
 
-    <audio name = "musicplayer" id = musicplayer autoplay="autoplay" controls="controls" loop="loop" src="media/bgm1.mp3">
+    <audio name = "musicplayer" id = "myaudio" autoplay="autoplay" loop="loop" src="media/bgm1.mp3">
         你的浏览器版本太低， 无法播放音乐
     </audio>
 
-
+    <script src="media.js"></script>
     <script>
+
+        function loadlevel1(){
+            var oHead = document.getElementsByTagName('HEAD').item(0);
+            var oScript= document.createElement("script");
+            oScript.type = "text/javascript";   
+            oScript.src="app.js";
+            document.getElementById("a").remove();
+            document.getElementById("myaudio").play();
+            oHead.appendChild(oScript);
+        }
         function loadlevel2(){
             var oHead = document.getElementsByTagName('HEAD').item(0);
             var oScript= document.createElement("script");
             oScript.type = "text/javascript";   
             oScript.src="level2.js";
             document.getElementById("a").remove();
-
+            document.getElementById("myaudio").play();
             oHead.appendChild(oScript);
         }
         function loadlevel3(){
@@ -61,6 +71,7 @@
             oScript.type = "text/javascript";   
             oScript.src="level3.js";
             document.getElementById("a").remove();
+            document.getElementById("myaudio").play();
             oHead.appendChild( oScript);
         }
     </script>

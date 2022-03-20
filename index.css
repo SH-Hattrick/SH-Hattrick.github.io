@@ -5,4 +5,41 @@ canvas {
 
 body {
     background-color: black;
+
+}@media screen and (orientation: portrait) {
+    html{
+       width : 100% ;
+       height : 100% ;
+        overflow : hidden;
+    }
+    body{
+        width : 100% ;
+       height : 100% ;
+        overflow : hidden;
+    }
+    #print{
+       position : absolute ;
+    }
+} 
+@media screen and (orientation: landscape) {
+     html{
+       width : 100% ;
+       height : 100% ;
+    } 
+     body{
+        width : 100% ;
+       height : 100% ;
+    }
+         #print{
+          position : absolute ;
+          top : 0 ; 
+          left : 0 ;
+          width : 100% ;
+          height : 100% ;
+       }
+}
+#print p{
+      margin: auto ;
+      margin-top : 20px ;
+      text-align: center;
 }

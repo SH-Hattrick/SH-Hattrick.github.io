@@ -20,9 +20,9 @@ const ScenePhone = 3;
 var phoneOffset = 0; //输入到第几个数字
 var dianum = [0,0,0,0,0,0,0,0,0,0]; //数字按钮id
 var inputnumber = "";//输入的号码
-var textnumber = new createjs.Text(inputnumber, "150px Times", "#fff").set({x:190, y:470});//显示的号码
+var textnumber = new createjs.Text(inputnumber, "Italic 150px KaiTi", "#fff").set({x:190, y:470});//显示的号码
 
-var texthint = new createjs.Text("", "40px Times", "#fff").set({x:190, y:900});//提示信息
+var texthint = new createjs.Text("", "Italic 40px KaiTi", "#fff").set({x:190, y:900});//提示信息
 
 var itemHeld = null;
 /////////////////////////////////////// class /////////////////////////////////////////////
@@ -541,7 +541,7 @@ function ondialClicked(evt){
         if(inputnumber == "31624"){
             controller.completeTask("phone");
 
-            showHint("受伤妇女已及时送医,正在接受治疗。",1000);
+            showHint("受伤妇女已及时送医,正在接受治疗。",2000);
 
             onphoneClicked();
         }
@@ -586,12 +586,12 @@ function oncarClicked(){
         return;
     }
     if(bag.getItem("helmet") != null && bag.getItem("armband") != null){
-        showHint("在中山路找到两人,成功解救",1000);
+        showHint("在中山路找到两人,成功解救",2000);
         objects["thanks"] = new createjs.Bitmap(Queue.getResult("thanks")).set({x:0, y:0, scaleX:0.01, scaleY:0.01, alpha:1});
         bag.add(new BagItem("thanks",920,628,0.07,0.07,0,0.01));
     }
     else{
-        showHint("需要与日军交涉,请携带钢盔与表明身份的袖章",1000);
+        showHint("需要与日军交涉,请携带钢盔与表明身份的袖章",2000);
     }
 }
 
@@ -629,7 +629,7 @@ function onmailboxTrigger(evt){
 }
 
 function onbagitemDraggedEnd(evt){
-    //待修改
+    //待修改b
     var itemID = evt.target.id;
     if(false){
         

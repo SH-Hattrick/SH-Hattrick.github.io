@@ -20,7 +20,7 @@ const SceneMap = 10;
 
 var diaryState = 0;
 
-var texthint = new createjs.Text("", "40px Times", "#fff").set({x:190, y:900});//提示信息
+var texthint = new createjs.Text("", "Italic 40px Times", "#fff").set({x:190, y:900});//提示信息
 /////////////////////////////////////// class /////////////////////////////////////////////
 
 //背包系统
@@ -304,6 +304,7 @@ function drawSceneOne(){
 function showHint(str, time){
     texthint.set({alpha:1});
     hint = str;
+    texthint.style = "Italic";
     texthint.text = hint;
     container.addChild(texthint);
     createjs.Tween.get(texthint).to({alpha:0}, time).call(function(){
