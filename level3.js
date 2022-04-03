@@ -658,6 +658,7 @@ function onbagitemDraggedEnd(evt){
 }
 
 function showHint(str, time){
+    texthint.set({alpha:1});
     hint = str;
     texthint.text = hint;
     container.addChild(texthint);

@@ -1,7 +1,7 @@
 // JavaScript Document
 function autoPlay(){//自动播放
   var myAuto = document.getElementById("myaudio");
-  myAuto.src = '/media/bgm1.mp3';//MP3路径
+  myAuto.src = '/sound/bgm1.mp3';//MP3路径
   //myAuto.play();
 }
 function pausePlay(){//暂停播放

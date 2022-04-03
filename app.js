@@ -1,4 +1,4 @@
-createjs.Sound.alternateExtensions = ["wav", "m4a"];
+//createjs.Sound.alternateExtensions = ["wav", "m4a"];
 var stage = new createjs.Stage("wrapper");
 createjs.Touch.enable(stage);
 var container = new createjs.Container();

@@ -320,7 +320,6 @@ function drawSceneOne(){
 function showHint(str, time){
     texthint.set({alpha:1});
     hint = str;
-    texthint.style = "Italic";
     texthint.text = hint;
     container.addChild(texthint);
     createjs.Tween.get(texthint).to({alpha:0}, time).call(function(){
