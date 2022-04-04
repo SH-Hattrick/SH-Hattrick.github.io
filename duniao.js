@@ -349,6 +349,8 @@ function HandleCompleteSceneTwo() {
 }
 
 function HandleCompleteSceneThree(){
+    clearScreen();
+
     loading.set({alpha:0});
 
     progressnum = 0;
