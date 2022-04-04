@@ -24,8 +24,8 @@ var loading;
 
 
 var texthint = new createjs.Text("", "Italic 40px KaiTi", "#fff").set({x:190, y:900});//提示信息
-var textSceneone = new createjs.Text("水手从遥远的东方紧急赶来，在海上鸣响汽笛迎接他新生的孩子。那时他不曾预想：\n\n日后的小拉贝会像楼顶那只善飞的渡鸟一样，游走世界各地，飞得那么高，那么远，\n\n并深深奉献于他曾经去往的中国。"
-    ,"Italic 40px KaiTi","#fff").set({x:100, y:100});
+var textSceneone = new createjs.Text("水手从遥远的东方紧急赶来，\n\n在海上鸣响汽笛迎接他新生的孩子。\n\n那时他不曾预想：\n\n日后的小拉贝会像楼顶那只善飞的渡鸟一样，游走世界各地，飞得那么高，那么远，\n\n并深深奉献于他曾经去往的中国。"
+    ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 var textSceneTwo = new createjs.Text("童年时，父亲从中国带回的那些传说和艺术品，\n\n就像一些文明的种子播撒在了拉贝心中。\n\n他兴奋于能有一份工作，让他领略东方古国文化的神韵。\n\n1918年，拉贝远渡重洋，来到了心仪已久的北京。"
     ,"Italic 50px KaiTi","#000").set({x:100, y:100});
 var textSceneThree = new createjs.Text("年轻人，我们需要一名会计兼文书，\n\n如果你不计较工资的微博，\n\n不嫌弃工作的辛劳，\n\n明天就可以来这儿上班。"
@@ -40,11 +40,18 @@ var textSceneFour4 = new createjs.Text("拉贝和公司的中国人相处得尤�
     ,"Italic 50px KaiTi","#fff").set({x:950, y:100});
 var textSceneFive1 = new createjs.Text("生意之余，拉贝热衷于领略中国文化的精髓。\n\n北京的博物馆、庙宇、宫殿、古玩市场、甚至周围的田野和乡村，\n\n都让他和道拉惊叹并赞不绝口。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
-var textSceneFive2 = new createjs.Text("拿起老相机，看看100年前拉贝镜头下的颐和园是什么样子吧"
+var textSceneFive2 = new createjs.Text("拿起老相机，\n\n看看100年前拉贝镜头下的颐和园是什么样子吧"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:500});
+var textSceneFive3 = new createjs.Text("出于对中国文化的热爱，\n\n他收集了大量有关北京的照片和绘画，\n\n并辅以对北京社会生活方方面面的详细记录。"
+    ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
+var textSceneSix1 = new createjs.Text("1930年8月份，\n\n拉贝女儿的婚礼在天津一处教堂举行。\n\n牧师牵着两位新人的手说：\n\n天使们走到了一起。"
+    ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
+var textSceneSix2 = new createjs.Text("我一生中最美好的青年时代\n\n都在这个国家愉快度过，\n\n我的儿孙都出生在这里，我\n\n的事业在这里得到了成功，\n\n我始终得到了中国人的厚待。\n\n——约翰·拉贝"
+    ,"Italic 50px KaiTi","#fff").set({x:1150, y:100});
+var textSceneSeven1 = new createjs.Text("1930年，\n\n因为出色的工作能力，\n\n西门子上海总部任命拉贝为南京分公司经理，\n\n把他放到中国首都来开辟业务。"
+    ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 
-
-
+    
 /////////////////////////////////////// class /////////////////////////////////////////////
 
 
@@ -164,10 +171,16 @@ class TaskController{
         this.initTask();
     }
     initTask(){
-        this.addTask(new Task(this.size,"files",[],true));//放置照片
-        this.addTask(new Task(this.size,"marriage",[],true));//电报
-        this.addTask(new Task(this.size,"factory",[],true));//盖章
-        this.addTask(new Task(this.size,"workmate",[],true));//盖章
+        this.addTask(new Task(this.size,"files",[],true));
+        this.addTask(new Task(this.size,"marriage",[],true));
+        this.addTask(new Task(this.size,"factory",[],true));
+        this.addTask(new Task(this.size,"workmate",[],true));
+
+        this.addTask(new Task(this.size,"o1",[],true));
+        this.addTask(new Task(this.size,"o2",[],true));
+        this.addTask(new Task(this.size,"o3",[],true));
+        this.addTask(new Task(this.size,"o4",[],true));
+        this.addTask(new Task(this.size,"s5",[],false));
     }
     enableTask(name){
         for(var i = 0;i<this.tasks.length; ++i){
@@ -265,7 +278,14 @@ function initSceneOne(){
         {id:"marriage", src:"img/duniao/marriage.jpg"},
         {id:"factory", src:"img/duniao/factory.jpg"},
         {id:"workmate", src:"img/duniao/workmate.jpg"},
-        {id:"camera", src:"img/duniao/camera.png"}
+        {id:"camera", src:"img/duniao/camera.png"},
+        {id:"oldphoto1", src:"img/duniao/o1.jpg"},
+        {id:"oldphoto2", src:"img/duniao/o2.jpg"},
+        {id:"oldphoto3", src:"img/duniao/o3.jpg"},
+        {id:"oldphoto4", src:"img/duniao/o4.jpg"},
+        {id:"family", src:"img/duniao/family.jpg"},
+        {id:"orgfile", src:"img/duniao/orgfile.jpg"},
+        {id:"map", src:"img/duniao/map.png"}
     ]);
 }
 
@@ -282,7 +302,15 @@ function initSceneFour(){
 }
 
 function initSceneFive(){
-    console.log(5);
+    HandleCompleteSceneFive();
+}
+
+function intitSceneSix(){
+    HandleCompleteSceneSix();
+}
+
+function intitSceneSeven(){
+    HandleCompleteSceneSeven();
 }
 
 function HandleProgress(){
@@ -346,13 +374,9 @@ function HandleCompleteSceneFour(){
     objects["workmate"] = new createjs.Bitmap(Queue.getResult("workmate")).set({alpha:0.01, x:1600, y:250, scaleX:0.2, scaleY:0.2});
     objects["camera"] = new createjs.Bitmap(Queue.getResult("camera")).set({alpha:0, x:980, y:530, scaleX:0.1, scaleY:0.1});
 
-    var button1 = new createjs.Shape(); objects["button1"] = button1;
-    button1.graphics.beginFill("white").drawRect(0,0,400,400); button1.set({x:880, y:480, scaleX:0.02, scaleY:0.02, alpha:0});
-    var buttontext = new createjs.Text("整理文件", "Italic 40px KaiTi", "#000").set({x:380, y:750, alpha:0})
+    objects["orgfile"] = new createjs.Bitmap(Queue.getResult("orgfile")).set({x:880, y:480, scaleX:0.02, scaleY:0.02, alpha:0});
     
-    objects["buttontext"] = buttontext;
-    objects["buttontext"].addEventListener("click", onbuttonClicked);
-    objects["button1"].addEventListener("click", onbuttonClicked);
+    objects["orgfile"].addEventListener("click", onbuttonClicked);
     objects["file1"].addEventListener("click", onfilecloseClicked);
     objects["file2"].addEventListener("click", onfilecloseClicked);
     objects["file3"].addEventListener("click", onfilecloseClicked);
@@ -361,12 +385,42 @@ function HandleCompleteSceneFour(){
     objects["factory"].addEventListener("click", onfactoryClicked);
     objects["workmate"].addEventListener("click", onphotoClicked);
     objects["camera"].addEventListener("click", oncameraClicked);
+    
 
     drawSceneFour();
 }
 
 function HandleCompleteSceneFive(){
+    loading.set({alpha:0});
 
+    progressnum = 0;
+
+    objects["o1"] = new createjs.Bitmap(Queue.getResult("oldphoto1")).set({alpha:0, x:100, y:0, scaleX:0.17, scaleY:0.17});
+    objects["o2"] = new createjs.Bitmap(Queue.getResult("oldphoto2")).set({alpha:0, x:1050, y:0, scaleX:0.17, scaleY:0.17});
+    objects["o3"] = new createjs.Bitmap(Queue.getResult("oldphoto3")).set({alpha:0, x:100, y:520, scaleX:0.17, scaleY:0.17});
+    objects["o4"] = new createjs.Bitmap(Queue.getResult("oldphoto4")).set({alpha:0, x:1050, y:520, scaleX:0.17, scaleY:0.17});
+
+    drawSceneFive();
+}
+
+function HandleCompleteSceneSix(){
+    loading.set({alpha:0});
+
+    progressnum = 0;
+
+    objects["family"] = new createjs.Bitmap(Queue.getResult("family")).set({alpha:0, x:100, y:100, scaleX:0.32, scaleY:0.32});
+
+    drawSceneSix();
+}
+
+function HandleCompleteSceneSeven(){
+    loading.set({alpha:0});
+
+    progressnum = 0;
+
+    objects["map"] = new createjs.Bitmap(Queue.getResult("map")).set({alpha:0, scaleX:0.2, scaleY:0.2, x:600});
+
+    drawSceneSeven();
 }
 
 function drawSceneOne(){
@@ -403,10 +457,9 @@ function drawSceneFour(){
         container.addChild(objects["file2"]);
         container.addChild(objects["file3"]);
         container.addChild(objects["file4"]);
-        container.addChild(objects["button1"]);
-        container.addChild(objects["buttontext"]);
         container.addChild(objects["marriage"]);
         container.addChild(objects["factory"]);
+        container.addChild(objects["orgfile"]);
         container.addChild(objects["workmate"]);
     });
     createjs.Tween.get(objects["Scenefour"]).to({alpha:1}, 1000);
@@ -414,9 +467,64 @@ function drawSceneFour(){
 }
 
 function drawSceneFive(){
-    
+    container.addChild(objects["o1"]);
+    container.addChild(objects["o2"]);
+    container.addChild(objects["o3"]);
+    container.addChild(objects["o4"]);
+
+    createjs.Tween.get(objects["o1"]).to({alpha:0.2}, 1000);
+    createjs.Tween.get(objects["o2"]).to({alpha:0.2}, 1000);
+    createjs.Tween.get(objects["o3"]).to({alpha:0.2}, 1000);
+    createjs.Tween.get(objects["o4"]).to({alpha:0.2}, 1000).call(function(){
+        objects["o1"].addEventListener("click", ono1Clicked);
+        objects["o2"].addEventListener("click", ono2Clicked);
+        objects["o3"].addEventListener("click", ono3Clicked);
+        objects["o4"].addEventListener("click", ono4Clicked);
+    });
 }
 
+function drawSceneSix(){
+    container.addChild(textSceneSix1);
+    textSceneSix1.set({alpha:0});
+    createjs.Tween.get(textSceneSix1).to({alpha:1}, 1000).call(function(){
+        createjs.Tween.get(textSceneSix1).to({alpha:1},5000).call(function(){
+            createjs.Tween.get(textSceneSix1).to({alpha:0},1000).call(function(){
+                container.removeChild(textSceneSix1);
+                container.addChild(textSceneSix2);
+                container.addChild(objects["family"])
+                textSceneSix2.set({alpha:0});
+                createjs.Tween.get(objects["family"]).to({alpha:1}, 1000);
+                createjs.Tween.get(textSceneSix2).to({alpha:1}, 1000).call(function(){
+                    createjs.Tween.get(textSceneSix2).to({alpha:1}, 5000).call(function(){
+                        createjs.Tween.get(objects["family"]).to({alpha:0}, 1000);
+                        createjs.Tween.get(textSceneSix2).to({alpha:0}, 1000).call(function(){
+                            container.removeChild(textSceneSix1);
+                            container.removeChild(textSceneSix2);
+                            container.removeChild(objects["family"]);
+                            intitSceneSeven();
+                        });
+                    });
+                });
+            });
+        });
+    });
+}
+
+function drawSceneSeven(){
+    container.addChild(objects["map"]);
+    container.addChild(textSceneSeven1);
+    textSceneSeven1.set({alpha:0});
+    createjs.Tween.get(textSceneSeven1).to({alpha:1}, 1000).call(function(){
+        createjs.Tween.get(textSceneSeven1).to({alpha:1}, 5000).call(function(){
+            createjs.Tween.get(textSceneSeven1).to({alpha:0}, 1000).call(function(){
+                container.removeChild(textSceneSeven1);
+                createjs.Tween.get(objects["map"]).to({alpha:1}, 1000).call(function(){
+                    alert("end");
+                })
+            })
+        })
+    })
+}
 
 function showHint(str, time){
     texthint.set({alpha:1});
@@ -495,8 +603,7 @@ function onfilesClicked(){
     createjs.Tween.get(objects["file2"]).to({x:600, y:400, scaleX:0.15, scaleY:0.15, alpha:1}, 200);
     createjs.Tween.get(objects["file3"]).to({x:900, y:100, scaleX:0.15, scaleY:0.15, alpha:1}, 200);
     createjs.Tween.get(objects["file4"]).to({x:1200, y:400, scaleX:0.15, scaleY:0.15, alpha:1}, 200);
-    createjs.Tween.get(objects["button1"]).to({alpha:1, x:380, y:750, scaleX:0.5, scaleY:0.2}, 200);
-    createjs.Tween.get(objects["buttontext"]).to({alpha:1, x:400, y:770, scaleX:1, scaleY:1}, 200);
+    createjs.Tween.get(objects["orgfile"]).to({x:300, y:600, scaleX:0.15, scaleY:0.15, alpha:1}, 200);
 }
 
 function onfilecloseClicked(){
@@ -504,8 +611,7 @@ function onfilecloseClicked(){
     createjs.Tween.get(objects["file2"]).to({alpha:0, x:880, y:480, scaleX:0.02, scaleY:0.02}, 200);
     createjs.Tween.get(objects["file3"]).to({alpha:0, x:880, y:480, scaleX:0.02, scaleY:0.02}, 200);
     createjs.Tween.get(objects["file4"]).to({alpha:0, x:880, y:480, scaleX:0.02, scaleY:0.02}, 200);
-    createjs.Tween.get(objects["button1"]).to({alpha:0, x:880, y:480, scaleX:0.02, scaleY:0.02}, 200);
-    createjs.Tween.get(objects["buttontext"]).to({alpha:0, x:880, y:480, scaleX:0.02, scaleY:0.02}, 200);
+    createjs.Tween.get(objects["orgfile"]).to({x:880, y:480, scaleX:0.02, scaleY:0.02, alpha:0}, 200);
 }
 
 function onbuttonClicked(){
@@ -516,8 +622,7 @@ function onbuttonClicked(){
         container.removeChild(objects["file2"]);
         container.removeChild(objects["file3"]);
         container.removeChild(objects["file4"]);
-        container.removeChild(objects["button1"]);
-        container.removeChild(objects["buttontext"]);
+        container.removeChild(objects["orgfile"]);
         createjs.Tween.get(objects["Scenefour"]).to({alpha:0.5}, 1000).call(function(){
 
             textSceneFour1.set({alpha:0});
@@ -633,6 +738,75 @@ function clearScreen(){
     for(var i;i<objects.length;++i){
         container.removeChild(objects[i]);
     }
+}
+
+function ono1Clicked(){
+    objects["o1"].removeEventListener("click", ono1Clicked);
+    createjs.Tween.get(objects["o1"]).to({alpha:1}, 2000).call(function(){
+        controller.completeTask("o1");
+        if(controller.checkStatus("o1") == COMPLETED
+        && controller.checkStatus("o2") == COMPLETED
+        && controller.checkStatus("o3") == COMPLETED
+        && controller.checkStatus("o4") == COMPLETED){
+            scene5end();
+        }
+    })
+}
+
+function ono2Clicked(){
+    objects["o2"].removeEventListener("click", ono2Clicked);
+    createjs.Tween.get(objects["o2"]).to({alpha:1}, 2000).call(function(){
+        controller.completeTask("o2");
+        if(controller.checkStatus("o1") == COMPLETED
+        && controller.checkStatus("o2") == COMPLETED
+        && controller.checkStatus("o3") == COMPLETED
+        && controller.checkStatus("o4") == COMPLETED){
+            scene5end();
+        }
+    })
+}
+
+function ono3Clicked(){
+    objects["o3"].removeEventListener("click", ono3Clicked);
+    createjs.Tween.get(objects["o3"]).to({alpha:1}, 2000).call(function(){
+        controller.completeTask("o3");
+        if(controller.checkStatus("o1") == COMPLETED
+        && controller.checkStatus("o2") == COMPLETED
+        && controller.checkStatus("o3") == COMPLETED
+        && controller.checkStatus("o4") == COMPLETED){
+            scene5end();
+        }
+    })
+}
+
+function ono4Clicked(){
+    objects["o4"].removeEventListener("click", ono4Clicked);
+    createjs.Tween.get(objects["o4"]).to({alpha:1}, 2000).call(function(){
+        controller.completeTask("o4");
+        if(controller.checkStatus("o1") == COMPLETED
+        && controller.checkStatus("o2") == COMPLETED
+        && controller.checkStatus("o3") == COMPLETED
+        && controller.checkStatus("o4") == COMPLETED){
+            scene5end();
+        }
+    })
+}
+
+function scene5end(){
+    createjs.Tween.get(objects["o1"]).to({alpha:0}, 1000);
+    createjs.Tween.get(objects["o2"]).to({alpha:0}, 1000);
+    createjs.Tween.get(objects["o3"]).to({alpha:0}, 1000);
+    createjs.Tween.get(objects["o4"]).to({alpha:0}, 1000).call(function(){
+        textSceneFive3.set({alpha:0});
+        container.addChild(textSceneFive3);
+        createjs.Tween.get(textSceneFive3).to({alpha:1},1000).call(function(){
+            createjs.Tween.get(textSceneFive3).to({alpha:1},5000).call(function(){
+                createjs.Tween.get(textSceneFive3).to({alpha:0},1000).call(function(){
+                    intitSceneSix();
+                });
+            });
+        });
+    });
 }
 
 ///////////////////////////////////////Now we are on a go/////////////////////////////////////////
