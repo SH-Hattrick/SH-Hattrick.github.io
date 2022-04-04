@@ -336,12 +336,14 @@ function HandleCompleteSceneOne() {
 }
 
 function HandleCompleteSceneTwo() {
+    clearScreen();
+
     loading.set({alpha:0});
 
     progressnum = 0;
 
-    objects["AsiaEuroMap"] = new createjs.Bitmap(Queue.getResult("AsiaEuroMap")).set({x: 100,scaleX:0.33, scaleY:0.33});
-    objects["raven"] = new createjs.Bitmap(Queue.getResult("raven")).set({x:450,y:300,scaleX:0.04,scaleY:0.04});
+    objects["AsiaEuroMap"] = new createjs.Bitmap(Queue.getResult("AsiaEuroMap")).set({alpha:0, x: 100,scaleX:0.33, scaleY:0.33});
+    objects["raven"] = new createjs.Bitmap(Queue.getResult("raven")).set({alpha:0,x:450,y:300,scaleX:0.04,scaleY:0.04});
 
     objects["raven"].addEventListener("click", onRavenClicked);
 
@@ -361,6 +363,8 @@ function HandleCompleteSceneThree(){
 }
 
 function HandleCompleteSceneFour(){
+    clearScreen();
+
     loading.set({alpha:0});
 
     progressnum = 0;
@@ -393,6 +397,8 @@ function HandleCompleteSceneFour(){
 }
 
 function HandleCompleteSceneFive(){
+    clearScreen();
+    
     loading.set({alpha:0});
 
     progressnum = 0;
@@ -406,6 +412,8 @@ function HandleCompleteSceneFive(){
 }
 
 function HandleCompleteSceneSix(){
+    clearScreen();
+
     loading.set({alpha:0});
 
     progressnum = 0;
@@ -416,6 +424,8 @@ function HandleCompleteSceneSix(){
 }
 
 function HandleCompleteSceneSeven(){
+    clearScreen();
+
     loading.set({alpha:0});
 
     progressnum = 0;
@@ -440,6 +450,8 @@ function drawSceneOne(){
 function drawSceneTwo(){
     container.addChild(objects["AsiaEuroMap"]);
     container.addChild(objects["raven"]);
+    createjs.Tween.get(objects["AsiaEuroMap"]).to({alpha:1}, 1000);
+    createjs.Tween.get(objects["raven"]).to({alpha:1}, 1000);
 }
 
 function drawSceneThree(){
