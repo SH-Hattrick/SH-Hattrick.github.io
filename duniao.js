@@ -173,6 +173,8 @@ class TaskController{
         this.addTask(new Task(this.size,"factory",[],true));
         this.addTask(new Task(this.size,"workmate",[],true));
 
+        this.addTask(new Task(this.size,"scenefour",[],true));
+
         this.addTask(new Task(this.size,"o1",[],true));
         this.addTask(new Task(this.size,"o2",[],true));
         this.addTask(new Task(this.size,"o3",[],true));
@@ -183,6 +185,13 @@ class TaskController{
         for(var i = 0;i<this.tasks.length; ++i){
             if(this.tasks[i].key == name){
                 this.tasks[i].enable = true;
+            }
+        }
+    }
+    disableTask(name){
+        for(var i = 0;i<this.tasks.length; ++i){
+            if(this.tasks[i].key == name){
+                this.tasks[i].enable = false;
             }
         }
     }
@@ -570,7 +579,7 @@ function removeHint(){
 
 function onSceneoneClicked(){
     objects["Sceneone"].removeEventListener("click", onSceneoneClicked);
-    playEffect("ship.wav", 3000);
+    playEffect("ship.wav", 4000);
     createjs.Tween.get(objects["Sceneone"]).to({alpha:0.3}, 2000).call(function(){
         container.addChild(textSceneone); 
         textSceneone.set({alpha:0});
@@ -627,6 +636,10 @@ function onFrontDoorClicked(){
 }
 
 function onfilesClicked(){
+    if(controller.checkStatus("scenefour") == DISABLED){
+        return;
+    }
+    controller.disableTask("scenefour");
     createjs.Tween.get(objects["file1"]).to({x:300, y:100, scaleX:0.15, scaleY:0.15, alpha:1}, 200);
     createjs.Tween.get(objects["file2"]).to({x:600, y:400, scaleX:0.15, scaleY:0.15, alpha:1}, 200);
     createjs.Tween.get(objects["file3"]).to({x:900, y:100, scaleX:0.15, scaleY:0.15, alpha:1}, 200);
@@ -635,6 +648,7 @@ function onfilesClicked(){
 }
 
 function onfilecloseClicked(){
+    controller.enableTask("scenefour");
     createjs.Tween.get(objects["file1"]).to({alpha:0, x:880, y:480, scaleX:0.02, scaleY:0.02}, 200);
     createjs.Tween.get(objects["file2"]).to({alpha:0, x:880, y:480, scaleX:0.02, scaleY:0.02}, 200);
     createjs.Tween.get(objects["file3"]).to({alpha:0, x:880, y:480, scaleX:0.02, scaleY:0.02}, 200);
@@ -644,6 +658,7 @@ function onfilecloseClicked(){
 
 function onbuttonClicked(){
     onfilecloseClicked();
+    controller.disableTask("scenefour");
     createjs.Tween.get(objects["Scenefour"]).to({alpha:1}, 500).call(function(){
         container.removeChild(objects["files"]);
         container.removeChild(objects["file1"]);
@@ -660,6 +675,7 @@ function onbuttonClicked(){
                     createjs.Tween.get(textSceneFour1).to({alpha:0}, 1000).call(function(){
                         container.removeChild(textSceneFour1);
                         controller.completeTask("files");
+                        controller.enableTask("scenefour");
                     });
                     createjs.Tween.get(objects["Scenefour"]).to({alpha:1}, 1000);
                 })
@@ -669,6 +685,10 @@ function onbuttonClicked(){
 }
 
 function onmarriageClicked(){
+    if(controller.checkStatus("scenefour") == DISABLED){
+        return;
+    }
+    controller.disableTask("scenefour");
     objects["marriage"].removeEventListener("click", onmarriageClicked);
     createjs.Tween.get(objects["files"]).to({alpha:0.5}, 1000);
     createjs.Tween.get(objects["Scenefour"]).to({alpha:0.5}, 1000).call(function(){
@@ -680,6 +700,7 @@ function onmarriageClicked(){
                 container.removeChild(textSceneFour2);
                 objects["marriage"].addEventListener("click", onmarriageClicked);
                 controller.completeTask("marriage");
+                controller.enableTask("scenefour");
             });
         });
     });
@@ -690,6 +711,10 @@ function onmarriageClicked(){
 }
 
 function onfactoryClicked(){
+    if(controller.checkStatus("scenefour") == DISABLED){
+        return;
+    }
+    controller.disableTask("scenefour");
     objects["factory"].removeEventListener("click", onfactoryClicked);
     createjs.Tween.get(objects["files"]).to({alpha:0.5}, 1000);
     createjs.Tween.get(objects["Scenefour"]).to({alpha:0.5}, 1000).call(function(){
@@ -702,6 +727,7 @@ function onfactoryClicked(){
                 container.removeChild(textSceneFour3);
                 objects["factory"].addEventListener("click", onfactoryClicked);
                 controller.completeTask("factory");
+                controller.enableTask("scenefour");
             });
         })
     });
@@ -712,6 +738,10 @@ function onfactoryClicked(){
 }
 
 function onphotoClicked(){
+    if(controller.checkStatus("scenefour") == DISABLED){
+        return;
+    }
+    controller.disableTask("scenefour");
     objects["workmate"].removeEventListener("click", onphotoClicked);
     createjs.Tween.get(objects["files"]).to({alpha:0.5}, 1000);
     createjs.Tween.get(objects["Scenefour"]).to({alpha:0.5}, 1000).call(function(){
@@ -723,6 +753,7 @@ function onphotoClicked(){
                 container.removeChild(textSceneFour4);
                 objects["factory"].addEventListener("click", onfactoryClicked);
                 controller.completeTask("workmate");
+                controller.enableTask("scenefour");
             });
         })
     });
@@ -733,7 +764,7 @@ function onphotoClicked(){
 }
 
 function oncameraClicked(){
-    playEffect("shuttle.aiff");
+    playEffect("shuttle.wav");
     if(controller.checkStatus("marriage") == COMPLETED 
     && controller.checkStatus("factory") == COMPLETED
     && controller.checkStatus("files") == COMPLETED
