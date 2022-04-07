@@ -750,6 +750,7 @@ function onphotoClicked(){
             createjs.Tween.get(objects["Scenefour"]).to({alpha:1}, 1000);
             createjs.Tween.get(objects["workmate"]).to({x:1300, y:200, scaleX:0.1, scaleY:0.16, alpha:0.01}, 200);
             createjs.Tween.get(textSceneFour4).to({alpha:0}, 1000).call(function(){
+                container.removeChild(objects["Scenefour"]);
                 container.removeChild(textSceneFour4);
                 objects["factory"].addEventListener("click", onfactoryClicked);
                 controller.completeTask("workmate");
