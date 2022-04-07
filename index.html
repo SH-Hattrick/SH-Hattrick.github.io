@@ -41,7 +41,10 @@
         <button type="button" onclick=loadduniao();>渡鸟的遐想</button>
     </div>
 
-    <audio name = "musicplayer" id = "myaudio" autoplay="autoplay" loop="loop" src="sound/bgm1.mp3">
+    <audio name = "musicplayer" id = "myaudio" autoplay="autoplay" loop="loop" src="sound/bgm1.mp3" volume=0.2>
+        你的浏览器版本太低， 无法播放音乐
+    </audio>
+    <audio name = "musicplayer" id = "effect" autoplay="autoplay">
         你的浏览器版本太低， 无法播放音乐
     </audio>
 
@@ -54,6 +57,8 @@
             oScript.type = "text/javascript";   
             oScript.src="app.js";
             document.getElementById("a").remove();
+            document.getElementById("effect").volume = 0.5;
+            document.getElementById("myaudio").volume = 0.2;
             document.getElementById("myaudio").play();
             oHead.appendChild(oScript);
         }
@@ -63,6 +68,8 @@
             oScript.type = "text/javascript";   
             oScript.src="level2.js";
             document.getElementById("a").remove();
+            document.getElementById("effect").volume = 0.5;
+            document.getElementById("myaudio").volume = 0.2;
             document.getElementById("myaudio").play();
             oHead.appendChild(oScript);
         }
@@ -72,6 +79,8 @@
             oScript.type = "text/javascript";   
             oScript.src="level3.js";
             document.getElementById("a").remove();
+            document.getElementById("effect").volume = 0.5;
+            document.getElementById("myaudio").volume = 0.2;
             document.getElementById("myaudio").play();
             oHead.appendChild(oScript);
         }
@@ -81,6 +90,8 @@
             oScript.type = "text/javascript";   
             oScript.src="duniao.js";
             document.getElementById("a").remove();
+            document.getElementById("effect").volume = 0.5;
+            document.getElementById("myaudio").volume = 0.2;
             document.getElementById("myaudio").play();
             oHead.appendChild(oScript);
         }

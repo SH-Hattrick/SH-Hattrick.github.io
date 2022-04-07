@@ -18,10 +18,6 @@ var progressnum = 0;
 var SceneState = 0;
 const SceneOne = 1;
 var loading;
-//var text = container.addChild(new createjs.Text("加载中...", "150px Times", "#fff").set({x:190, y:470}));
-
-
-
 
 var texthint = new createjs.Text("", "Italic 40px KaiTi", "#fff").set({x:190, y:900});//提示信息
 var textSceneone = new createjs.Text("水手从遥远的东方紧急赶来，\n\n在海上鸣响汽笛迎接他新生的孩子。\n\n那时他不曾预想：\n\n日后的小拉贝会像楼顶那只善飞的渡鸟一样，游走世界各地，飞得那么高，那么远，\n\n并深深奉献于他曾经去往的中国。"
@@ -50,7 +46,8 @@ var textSceneSix2 = new createjs.Text("我一生中最美好的青年时代\n\n�
     ,"Italic 50px KaiTi","#fff").set({x:1150, y:100});
 var textSceneSeven1 = new createjs.Text("1930年，\n\n因为出色的工作能力，\n\n西门子上海总部任命拉贝为南京分公司经理，\n\n把他放到中国首都来开辟业务。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
-
+var endingtext = new createjs.Text("约翰·拉贝"
+    ,"Italic 300px KaiTi","#fff").set({x:220, y:350});
     
 /////////////////////////////////////// class /////////////////////////////////////////////
 
@@ -226,7 +223,6 @@ class TaskController{
 /////////////////////////////////////// methods /////////////////////////////////////////////
 function init(){
     createjs.MotionGuidePlugin.install();
-
     container = new createjs.Container();
     stage.addChild(container);
 
@@ -450,8 +446,8 @@ function drawSceneOne(){
 function drawSceneTwo(){
     container.addChild(objects["AsiaEuroMap"]);
     container.addChild(objects["raven"]);
-    createjs.Tween.get(objects["AsiaEuroMap"]).to({alpha:1}, 1000);
-    createjs.Tween.get(objects["raven"]).to({alpha:1}, 1000);
+    createjs.Tween.get(objects["AsiaEuroMap"]).to({alpha:1},1000);
+    createjs.Tween.get(objects["raven"]).to({alpha:1},1000);
 }
 
 function drawSceneThree(){
@@ -501,7 +497,7 @@ function drawSceneSix(){
     container.addChild(textSceneSix1);
     textSceneSix1.set({alpha:0});
     createjs.Tween.get(textSceneSix1).to({alpha:1}, 1000).call(function(){
-        createjs.Tween.get(textSceneSix1).to({alpha:1},5000).call(function(){
+        createjs.Tween.get(textSceneSix1).to({alpha:1},7000).call(function(){
             createjs.Tween.get(textSceneSix1).to({alpha:0},1000).call(function(){
                 container.removeChild(textSceneSix1);
                 container.addChild(textSceneSix2);
@@ -509,7 +505,7 @@ function drawSceneSix(){
                 textSceneSix2.set({alpha:0});
                 createjs.Tween.get(objects["family"]).to({alpha:1}, 1000);
                 createjs.Tween.get(textSceneSix2).to({alpha:1}, 1000).call(function(){
-                    createjs.Tween.get(textSceneSix2).to({alpha:1}, 5000).call(function(){
+                    createjs.Tween.get(textSceneSix2).to({alpha:1}, 7000).call(function(){
                         createjs.Tween.get(objects["family"]).to({alpha:0}, 1000);
                         createjs.Tween.get(textSceneSix2).to({alpha:0}, 1000).call(function(){
                             container.removeChild(textSceneSix1);
@@ -529,15 +525,31 @@ function drawSceneSeven(){
     container.addChild(textSceneSeven1);
     textSceneSeven1.set({alpha:0});
     createjs.Tween.get(textSceneSeven1).to({alpha:1}, 1000).call(function(){
-        createjs.Tween.get(textSceneSeven1).to({alpha:1}, 5000).call(function(){
+        createjs.Tween.get(textSceneSeven1).to({alpha:1}, 7000).call(function(){
             createjs.Tween.get(textSceneSeven1).to({alpha:0}, 1000).call(function(){
                 container.removeChild(textSceneSeven1);
                 createjs.Tween.get(objects["map"]).to({alpha:1}, 1000).call(function(){
-                    alert("end");
+                    createjs.Tween.get(objects["map"]).to({alpha:1}, 7000).call(function(){
+                        createjs.Tween.get(objects["map"]).to({alpha:0}, 1000).call(function(){
+                            ending();
+                        })
+                    })
                 })
             })
         })
     })
+}
+
+function ending(){
+    container.addChild(endingtext);
+    endingtext.set({alpha:0});
+    createjs.Tween.get(endingtext).to({alpha:1}, 1000).call(function(){
+        createjs.Tween.get(endingtext).to({alpha:1}, 7000).call(function(){
+            createjs.Tween.get(endingtext).to({alpha:0}, 1000).call(function(){
+                container.removeChild(endingtext);
+            });
+        });
+    });
 }
 
 function showHint(str, time){
@@ -557,6 +569,8 @@ function removeHint(){
 }
 
 function onSceneoneClicked(){
+    objects["Sceneone"].removeEventListener("click", onSceneoneClicked);
+    playEffect("ship.wav", 3000);
     createjs.Tween.get(objects["Sceneone"]).to({alpha:0.3}, 2000).call(function(){
         container.addChild(textSceneone); 
         textSceneone.set({alpha:0});
@@ -581,7 +595,7 @@ function onRavenClicked(){
         textSceneTwo.set({alpha:0});
         container.addChild(textSceneTwo);
         createjs.Tween.get(textSceneTwo).to({alpha:1}, 1000).call(function(){
-            createjs.Tween.get(textSceneTwo).to({alpha:1}, 5000).call(function(){
+            createjs.Tween.get(textSceneTwo).to({alpha:1}, 7000).call(function(){
                 createjs.Tween.get(objects["raven"]).to({alpha:0}, 1000);
                 createjs.Tween.get(objects["AsiaEuroMap"]).to({alpha:0}, 1000);
                 createjs.Tween.get(textSceneTwo).to({alpha:0}, 1000).call(function(){
@@ -601,7 +615,7 @@ function onFrontDoorClicked(){
         textSceneThree.set({alpha:0});
         container.addChild(textSceneThree);
         createjs.Tween.get(textSceneThree).to({alpha:1}, 1000).call(function(){
-            createjs.Tween.get(textSceneThree).to({alpha:1}, 5000).call(function(){
+            createjs.Tween.get(textSceneThree).to({alpha:1}, 7000).call(function(){
                 createjs.Tween.get(textSceneThree).to({alpha:0}, 1000).call(function(){
                     container.removeChild(objects["FrontDoor"]);
                     container.removeChild(textSceneThree);
@@ -642,7 +656,7 @@ function onbuttonClicked(){
             textSceneFour1.set({alpha:0});
             container.addChild(textSceneFour1);
             createjs.Tween.get(textSceneFour1).to({alpha:1}, 200).call(function(){
-                createjs.Tween.get(textSceneFour1).to({alpha:1}, 5000).call(function(){
+                createjs.Tween.get(textSceneFour1).to({alpha:1}, 7000).call(function(){
                     createjs.Tween.get(textSceneFour1).to({alpha:0}, 1000).call(function(){
                         container.removeChild(textSceneFour1);
                         controller.completeTask("files");
@@ -679,6 +693,7 @@ function onfactoryClicked(){
     objects["factory"].removeEventListener("click", onfactoryClicked);
     createjs.Tween.get(objects["files"]).to({alpha:0.5}, 1000);
     createjs.Tween.get(objects["Scenefour"]).to({alpha:0.5}, 1000).call(function(){
+        playEffect("elecnoise.wav", 3000);
         objects["factory"].addEventListener("click", function(){
             createjs.Tween.get(objects["files"]).to({alpha:1}, 1000);
             createjs.Tween.get(objects["Scenefour"]).to({alpha:1}, 1000);
@@ -718,6 +733,7 @@ function onphotoClicked(){
 }
 
 function oncameraClicked(){
+    playEffect("shuttle.aiff");
     if(controller.checkStatus("marriage") == COMPLETED 
     && controller.checkStatus("factory") == COMPLETED
     && controller.checkStatus("files") == COMPLETED
@@ -732,7 +748,7 @@ function oncameraClicked(){
             textSceneFive2.set({alpha:0});
             createjs.Tween.get(textSceneFive2).to({alpha:1}, 1000);
             createjs.Tween.get(textSceneFive1).to({alpha:1}, 1000).call(function(){
-                createjs.Tween.get(textSceneFive1).to({alpha:1}, 5000).call(function(){
+                createjs.Tween.get(textSceneFive1).to({alpha:1}, 7000).call(function(){
                     createjs.Tween.get(textSceneFive1).to({alpha:0}, 1000);
                     createjs.Tween.get(textSceneFive2).to({alpha:0}, 1000).call(function(){
                         container.removeChild(textSceneFive1);
@@ -814,13 +830,23 @@ function scene5end(){
         textSceneFive3.set({alpha:0});
         container.addChild(textSceneFive3);
         createjs.Tween.get(textSceneFive3).to({alpha:1},1000).call(function(){
-            createjs.Tween.get(textSceneFive3).to({alpha:1},5000).call(function(){
+            createjs.Tween.get(textSceneFive3).to({alpha:1},7000).call(function(){
                 createjs.Tween.get(textSceneFive3).to({alpha:0},1000).call(function(){
                     intitSceneSix();
                 });
             });
         });
     });
+}
+
+function playEffect(str, timegap){
+    
+    document.getElementById("myaudio").volume = 0.05;
+    document.getElementById("effect").src = "sound/" + str;
+    document.getElementById("effect").play();
+    setTimeout(function(){
+        document.getElementById("myaudio").volume = 0.2;
+    }, timegap);
 }
 
 ///////////////////////////////////////Now we are on a go/////////////////////////////////////////

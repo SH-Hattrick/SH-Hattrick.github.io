@@ -79,8 +79,8 @@ function HandleComplete() {
     things.push(new createjs.Bitmap(Queue.getResult("outdoor")));
     
     bg.addEventListener("click", function() {
-        createjs.Sound.play("box_sound");
-        createjs.Sound.play("bgm", {loop:-1});
+        //createjs.Sound.play("box_sound");
+        //createjs.Sound.play("bgm", {loop:-1});
 
         bg.removeEventListener("click", arguments.callee);
         createjs.Tween.get(container).to({alpha:0}, 1000).call(function(){
@@ -101,13 +101,13 @@ function HandleComplete() {
         }).to({alpha:1}, 1000);
     });
     things[0].addEventListener("click", function() {
-        createjs.Sound.play("book_sound");
+        //createjs.Sound.play("book_sound");
         things[0].removeEventListener("click", arguments.callee);
         container.addChild(things[1]);
         container.addChild(things[2]);
     });
     things[2].addEventListener("click", function() {
-        createjs.Sound.play("book_sound");
+        //createjs.Sound.play("book_sound");
         things[2].removeEventListener("click", arguments.callee);
         createjs.Tween.get(container).to({alpha:0}, 1000).call(function(){
         container.removeChild(things[0]);
@@ -118,7 +118,7 @@ function HandleComplete() {
         }).to({alpha:1}, 1000);
     })
     things[3].addEventListener("click", function() {
-        createjs.Sound.play("door_sound");
+        //createjs.Sound.play("door_sound");
         things[3].removeEventListener("click", arguments.callee);
         createjs.Tween.get(container).to({alpha:0}, 1000).call(function(){
         state = 1;
@@ -236,13 +236,13 @@ function draw_rects() {
 };draw_rects();
 
 function aircraft_handler() {
-    createjs.Sound.play("bag_sound");
+    //createjs.Sound.play("bag_sound");
     container.removeChild(things[12]);
     container.addChild(things[13]);
 }
 
 function window_handler() {
-    createjs.Sound.play("door_sound");
+    //createjs.Sound.play("door_sound");
     things[6].set({alpha:1});
     container.addChild(things[6]);
     if(things[5].x == 50 || things[5].x == 630) {
@@ -258,7 +258,7 @@ function shelter_handler() {
 }
 
 function newspaper_handler() {
-    createjs.Sound.play("book_sound");
+    //createjs.Sound.play("book_sound");
     if(things[11].x == 1490) {
         container.addChild(bg);
         container.removeChild(things[11]);
@@ -272,7 +272,7 @@ function newspaper_handler() {
 }
 
 function diary_handler() {
-    createjs.Sound.play("book_sound");
+    //createjs.Sound.play("book_sound");
     container.removeChild(things[13]);
     container.addChild(bg);
     container.addChild(things[state+7]);
@@ -286,7 +286,7 @@ function diary_handler() {
 }
 
 function diaryx_handler() {
-    createjs.Sound.play("book_sound");
+    //createjs.Sound.play("book_sound");
     things[state+7].set({x:954, y:581, scaleX:0.03, scaleY:0.03});
     container.removeChild(things[state+7]);
     container.removeChild(bg);
@@ -320,7 +320,7 @@ function state3_end() {
     state = 4;
     container.addChild(bg);
     createjs.Tween.get(container).to({alpha:0}, 1000).to({alpha:1}, 1000).call(function() {
-        createjs.Sound.play("book_sound");
+        //createjs.Sound.play("book_sound");
         shelter_handler();
         container.addChild(things[10]);
         createjs.Tween.get(things[10]).to({x:304, y:0, scaleX:0.9, scaleY:0.9}, 300);
@@ -345,7 +345,7 @@ function ticket1_move(e) {
 }
 function ticket1_end() {
     if(things[8].x == 304 && things[1].x > 550 && things[1].x < 888 && things[1].y > 510 && things[1].y < 820) {
-        createjs.Sound.play("book_sound");
+        //createjs.Sound.play("book_sound");
         things[1].set({x:580, y: 440, scaleX:0.16, scaleY:0.16});
         if(things[0].y == 400) {
             state1_end();
@@ -369,7 +369,7 @@ function ticket2_move(e) {
 }
 function ticket2_end() {
     if(things[8].x == 304 && things[0].x > 1000 && things[0].x < 1350 && things[0].y > 450 && things[0].y < 820) {
-        createjs.Sound.play("book_sound");
+        //createjs.Sound.play("book_sound");
         things[0].set({x:980, y:400, scaleX:0.17, scaleY:0.17});
         if(things[1].y == 440) {
             state1_end();
@@ -381,7 +381,7 @@ function ticket2_end() {
 }
 
 function ticket1_handler() {
-    createjs.Sound.play("book_sound");
+    //createjs.Sound.play("book_sound");
     if(things[1].scaleX != 0.4) {
         container.addChild(bg);
         createjs.Tween.get(things[1]).to({rotation:0}).to({x:480, y:-50, scaleX:0.4, scaleY:0.4}, 300);
@@ -399,7 +399,7 @@ function ticket1_handler() {
 }
 
 function ticket2_handler() {
-    createjs.Sound.play("book_sound");
+    //createjs.Sound.play("book_sound");
     if(things[0].scaleX != 0.4) {
         container.addChild(bg);
         createjs.Tween.get(things[0]).to({rotation:0}).to({x:480, y:-50, scaleX:0.4, scaleY:0.4}, 300);
@@ -417,7 +417,7 @@ function ticket2_handler() {
 }
 
 function letter_handler() {
-    createjs.Sound.play("book_sound");
+    //createjs.Sound.play("book_sound");
     container.removeChild(things[2]);
     container.addChild(bg);
     container.addChild(things[3]);
@@ -427,7 +427,7 @@ function letter_handler() {
 }
 
 function letterx_handler() {
-    createjs.Sound.play("book_sound");
+    //createjs.Sound.play("book_sound");
     createjs.Tween.get(things[3]).to({x:50, y:50, scaleX:0.3, scaleY:0.3}, 300);
     createjs.Tween.get(things[4]).to({x:50, y:50, scaleX:0.3, scaleY:0.3}, 300).call(function(){
         container.removeChild(things[3]);
@@ -439,7 +439,7 @@ function letterx_handler() {
 }
 
 function sand_handler() {
-    createjs.Sound.play("bag_sound");
+    //createjs.Sound.play("bag_sound");
     things[5].removeEventListener("click", arguments.callee);
     //things[5].addEventListener("mousedown", press_start(e));
     things[5].addEventListener("pressmove", sand_move);
@@ -474,7 +474,7 @@ function sand_end() {
 }
 
 function tele_handler() {
-    createjs.Sound.play("bag_sound");
+    //createjs.Sound.play("bag_sound");
     things[7].removeEventListener("click", arguments.callee);
     createjs.Tween.get(things[7]).to({x:40, y:570, scaleX:0.16, scaleY:0.16}, 500);
     things[7].addEventListener("pressmove", tele_move);
@@ -494,8 +494,8 @@ function tele_move(e) {
 }
 function tele_end() {
     if(state == 2 && things[7].x > 650 && things[7].x < 1350 && things[7].y < 350) {
-        createjs.Sound.play("bag_sound");
-        createjs.Sound.play("air_sound");
+        //createjs.Sound.play("bag_sound");
+        //createjs.Sound.play("air_sound");
         container.addChild(things[12]);
         state = 3;
         things[7].set({x:40, y:570, scaleX:0.16, scaleY:0.16});
@@ -510,7 +510,7 @@ function gameover() {
     if(things[5].x == 630)
         state3_end();
     else {
-        createjs.Sound.play("bomb_sound");
+        //createjs.Sound.play("bomb_sound");
         text.text = "    You Were Bombed.";
         createjs.Tween.get(container).to({alpha:0.95}, 500).call(function(){createjs.Sound.play("bomb_sound");})
 .to({alpha:0.01}, 5500).call(function(){window.location.reload();});
