@@ -39,6 +39,7 @@
         <button type="button" onclick=loadlevel2();>场景二</button>
         <button type="button" onclick=loadlevel3();>场景三</button>
         <button type="button" onclick=loadduniao();>渡鸟的遐想</button>
+        <button type="button" onclick=loadecho();>永远的回声</button>
     </div>
 
     <audio name = "musicplayer" id = "myaudio" autoplay="autoplay" loop="loop" src="sound/bgm1.mp3" volume=0.2>
@@ -89,6 +90,17 @@
             var oScript= document.createElement("script");
             oScript.type = "text/javascript";   
             oScript.src="duniao.js";
+            document.getElementById("a").remove();
+            document.getElementById("effect").volume = 0.5;
+            document.getElementById("myaudio").volume = 0.2;
+            document.getElementById("myaudio").play();
+            oHead.appendChild(oScript);
+        }        
+        function loadecho(){
+            var oHead = document.getElementsByTagName('HEAD').item(0);
+            var oScript= document.createElement("script");
+            oScript.type = "text/javascript";   
+            oScript.src="echo.js";
             document.getElementById("a").remove();
             document.getElementById("effect").volume = 0.5;
             document.getElementById("myaudio").volume = 0.2;
