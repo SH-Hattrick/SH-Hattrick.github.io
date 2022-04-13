@@ -219,8 +219,8 @@ function level2_adjust_screen(){
         //text.set({x:570, y:190, rotation:90});
         canvas.width = 1080;
         canvas.height = 1920;
-        container.rotation = 90;
-        container.x = 1080;
+        //container.rotation = 90;
+        //container.x = 1080;
     }
 };
 
@@ -331,7 +331,6 @@ function showHint(str, time){
 function removeHint(){
     texthint.text = " ";
     texthint.set({alpha:1});
-
 }
 
 function ondiaryClicked(){

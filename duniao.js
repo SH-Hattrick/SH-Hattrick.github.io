@@ -24,9 +24,9 @@ var textSceneone = new createjs.Text("水手从遥远的东方紧急赶来，\n\
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 var textSceneTwo = new createjs.Text("童年时，父亲从中国带回的那些传说和艺术品，\n\n就像一些文明的种子播撒在了拉贝心中。\n\n他兴奋于能有一份工作，让他领略东方古国文化的神韵。\n\n1918年，拉贝远渡重洋，来到了心仪已久的北京。"
     ,"Italic 50px KaiTi","#000").set({x:100, y:100});
-var textSceneThree = new createjs.Text("年轻人，我们需要一名会计兼文书，\n\n如果你不计较工资的微博，\n\n不嫌弃工作的辛劳，\n\n明天就可以来这儿上班。"
+var textSceneThree = new createjs.Text("\"年轻人，我们需要一名会计兼文书，\n\n如果你不计较工资的微薄，\n\n不嫌弃工作的辛劳，\n\n明天就可以来这儿上班。\""
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
-var textSceneFour1 = new createjs.Text("拉贝，感谢你出色地完成会计整理的任务，\n\n为公司省去每月结算的好几百美元，\n\n你真是公司商务中的第一流专家！"
+var textSceneFour1 = new createjs.Text("\"拉贝，感谢你出色地完成会计整理的任务，\n\n为公司省去每月结算的好几百美元，\n\n你真是公司商务中的第一流专家！\""
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 var textSceneFour2 = new createjs.Text("在拉贝影响下，\n\n他的未婚妻道拉对中国的向往之情由来已久。\n\n在爱人到达北京的次年，\n\n勇敢的道拉独自旅行到中国，\n\n1909年10月，\n\n他们在北京举行了婚礼"
     ,"Italic 50px KaiTi","#fff").set({x:900, y:100});
@@ -750,7 +750,6 @@ function onphotoClicked(){
             createjs.Tween.get(objects["Scenefour"]).to({alpha:1}, 1000);
             createjs.Tween.get(objects["workmate"]).to({x:1300, y:200, scaleX:0.1, scaleY:0.16, alpha:0.01}, 200);
             createjs.Tween.get(textSceneFour4).to({alpha:0}, 1000).call(function(){
-                container.removeChild(objects["Scenefour"]);
                 container.removeChild(textSceneFour4);
                 objects["factory"].addEventListener("click", onfactoryClicked);
                 controller.completeTask("workmate");
