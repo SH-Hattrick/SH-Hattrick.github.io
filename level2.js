@@ -220,7 +220,7 @@ function level2_adjust_screen(){
         canvas.width = 1080;
         canvas.height = 1920;
         container.rotation = 90;
-        //container.x = 1080;
+        container.x = 1080;
     }
 };
 
