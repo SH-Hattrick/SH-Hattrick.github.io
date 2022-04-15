@@ -370,6 +370,9 @@ function HandleCompleteSceneTwo(){
 
     objects["door"].addEventListener("click", ondoorClicked);
     objects["mailbox"].on("mouseover", onmailboxTrigger);
+    if(isMobile){
+        objects["mailbox"].on("touchmove", onmailboxTrigger);
+    }
     objects["car"].addEventListener("click", oncarClicked);
 
     drawSceneTwo();

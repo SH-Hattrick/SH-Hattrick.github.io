@@ -286,9 +286,15 @@ function HandleCompleteSceneOne() {
     objects["seal"].addEventListener("click", onsealClicked);
     objects["map"].addEventListener("click", onmapClicked);
     objects["telegram"].on("mouseover", ontelegramTriggered);
+    if(isMobile){
+        objects["telegram"].on("touchmove", ontelegramTriggered);
+    }
     objects["typer"].addEventListener("click", ontyperClicked);
     objects["announcement"].addEventListener("click", onannouncementClicked);
     objects["sealmark"].on("mouseover", onsealmarkTriggered);
+    if(isMobile){
+        objects["sealmark"].on("touchmove", onsealmarkTriggered);
+    }
 
     drawSceneOne();
 }
@@ -351,7 +357,6 @@ function ondiaryClicked(){
                 createjs.Tween.get(objects["diary"]).to({x:900, y:600, scaleX:0.06, scaleY:0.035, alpha:0.01}, 200);
                 objects["photoframesquare"].on("mouseover", onphotoframeTriggered);
                 if(isMobile){
-                    alert();
                     objects["photoframesquare"].on("touchmove", onphotoframeTriggered);
                 }
                 if(bag.getItem("photo") == null){
