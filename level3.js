@@ -7,7 +7,7 @@ var objects = {};
 var rects = [];//diary turn window
 var bg;
 var Queue = new createjs.LoadQueue();
-
+var isMobile = false;
 var loading;
 var progressnum = 0;
 
@@ -100,7 +100,7 @@ class Bag {
     removeItem(name){
         for (var i = 0; i < this.index; i++) { 
             if(this.bagItem[i].name == name){
-                for(var j=i+1;j<this.index;++j){
+                for(var j=i+1;j<=this.index;++j){
                     this.bagItem[j-1] = this.bagItem[j];
                 }
                 this.index--;
@@ -270,6 +270,7 @@ function level3_adjust_screen(){
         canvas.height = 1920;
         container.rotation = 90;
         container.x = 1080;
+        isMobile = true;
     }
 };
 
@@ -612,12 +613,6 @@ function oncarClicked(){
     }
 }
 
-function onbagitemDragged(evt){
-    evt.target.x = evt.stageX;
-    evt.target.y = evt.stageY;
-    itemHeld = bag.getItemByID(evt.target.id);
-}
-
 function onmailboxTrigger(evt){
     if(itemHeld != null && itemHeld.name == "Rabeletter"){
         bag.removeItem("Rabeletter");
@@ -666,6 +661,18 @@ function showHint(str, time){
         texthint.text = " ";
         texthint.set({alpha:1});
     });
+}
+
+function onbagitemDragged(evt){
+    if(!isMobile){
+        evt.target.x = evt.stageX;
+        evt.target.y = evt.stageY;
+    }
+    else{
+        evt.target.x = evt.stageY;
+        evt.target.y = 1020 - evt.stageX;
+    }
+    itemHeld = bag.getItemByID(evt.target.id);
 }
 
 function clearScreen(){

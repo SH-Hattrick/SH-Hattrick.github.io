@@ -7,7 +7,7 @@ var objects = {};
 var rects = [];//diary turn window
 var bg;
 var Queue = new createjs.LoadQueue();
-
+var isMobile = false;
 const COMPLETED = 2;
 const READY = 1;
 const DISABLED = 0;
@@ -23,7 +23,7 @@ var texthint = new createjs.Text("", "Italic 40px KaiTi", "#fff").set({x:190, y:
 var textSceneone = new createjs.Text("水手从遥远的东方紧急赶来，\n\n在海上鸣响汽笛迎接他新生的孩子。\n\n那时他不曾预想：\n\n日后的小拉贝会像楼顶那只善飞的渡鸟一样，游走世界各地，飞得那么高，那么远，\n\n并深深奉献于他曾经去往的中国。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 var textSceneTwo = new createjs.Text("童年时，父亲从中国带回的那些传说和艺术品，\n\n就像一些文明的种子播撒在了拉贝心中。\n\n他兴奋于能有一份工作，让他领略东方古国文化的神韵。\n\n1918年，拉贝远渡重洋，来到了心仪已久的北京。"
-    ,"Italic 50px KaiTi","#000").set({x:100, y:100});
+    ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 var textSceneThree = new createjs.Text("\"年轻人，我们需要一名会计兼文书，\n\n如果你不计较工资的微薄，\n\n不嫌弃工作的辛劳，\n\n明天就可以来这儿上班。\""
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 var textSceneFour1 = new createjs.Text("\"拉贝，感谢你出色地完成会计整理的任务，\n\n为公司省去每月结算的好几百美元，\n\n你真是公司商务中的第一流专家！\""
@@ -122,11 +122,11 @@ class Bag {
     removeItem(name){
         for (var i = 0; i < this.index; i++) { 
             if(this.bagItem[i].name == name){
-                for(var j=i+1;j<this.index;++j){
+                for(var j=i+1;j<=this.index;++j){
                     this.bagItem[j-1] = this.bagItem[j];
                 }
                 this.index--;
-                container.removeChild(objects[objects[name]]);
+                container.removeChild(objects[name]);
                 break;
             }
         }
@@ -263,6 +263,7 @@ function duniao_adjust_screen(){
         canvas.height = 1920;
         container.rotation = 90;
         container.x = 1080;
+        isMobile = true;
     }
 };
 
@@ -276,6 +277,7 @@ function initSceneOne(){
         {id:"FrontDoor", src:"img/duniao/FrontDoor.png"},
         {id:"Scenefour", src:"img/duniao/Scenefour.png"},
         {id:"files", src:"img/duniao/files.png"},
+        {id:"files_org", src:"img/duniao/files_org.png"},
         {id:"file1", src:"img/duniao/file1.jpg"},
         {id:"file2", src:"img/duniao/file2.jpg"},
         {id:"file3", src:"img/duniao/file3.jpg"},
@@ -375,7 +377,7 @@ function HandleCompleteSceneFour(){
     progressnum = 0;
 
     objects["Scenefour"] = new createjs.Bitmap(Queue.getResult("Scenefour")).set({alpha:0});
-    objects["files"] = new createjs.Bitmap(Queue.getResult("files")).set({alpha:0, x:830, y:480, scaleX:0.1, scaleY:0.1});
+    objects["files"] = new createjs.Bitmap(Queue.getResult("files")).set({alpha:0, x:830, y:480, scaleX:0.13, scaleY:0.13});
     objects["file1"] = new createjs.Bitmap(Queue.getResult("file1")).set({alpha:0, x:880, y:480, scaleX:0.02, scaleY:0.02});
     objects["file2"] = new createjs.Bitmap(Queue.getResult("file2")).set({alpha:0, x:880, y:480, scaleX:0.02, scaleY:0.02});
     objects["file3"] = new createjs.Bitmap(Queue.getResult("file3")).set({alpha:0, x:880, y:480, scaleX:0.02, scaleY:0.02});
@@ -408,10 +410,10 @@ function HandleCompleteSceneFive(){
 
     progressnum = 0;
 
-    objects["o1"] = new createjs.Bitmap(Queue.getResult("oldphoto1")).set({alpha:0, x:100, y:0, scaleX:0.17, scaleY:0.17});
-    objects["o2"] = new createjs.Bitmap(Queue.getResult("oldphoto2")).set({alpha:0, x:1050, y:0, scaleX:0.17, scaleY:0.17});
-    objects["o3"] = new createjs.Bitmap(Queue.getResult("oldphoto3")).set({alpha:0, x:100, y:520, scaleX:0.17, scaleY:0.17});
-    objects["o4"] = new createjs.Bitmap(Queue.getResult("oldphoto4")).set({alpha:0, x:1050, y:520, scaleX:0.17, scaleY:0.17});
+    objects["o1"] = new createjs.Bitmap(Queue.getResult("oldphoto1")).set({alpha:0, x:100, y:50, scaleX:0.17, scaleY:0.17});
+    objects["o2"] = new createjs.Bitmap(Queue.getResult("oldphoto2")).set({alpha:0, x:400, y:450, scaleX:0.17, scaleY:0.17});
+    objects["o3"] = new createjs.Bitmap(Queue.getResult("oldphoto3")).set({alpha:0, x:900, y:50, scaleX:0.17, scaleY:0.17});
+    objects["o4"] = new createjs.Bitmap(Queue.getResult("oldphoto4")).set({alpha:0, x:1200, y:450, scaleX:0.17, scaleY:0.17});
 
     drawSceneFive();
 }
@@ -599,8 +601,8 @@ function onSceneoneClicked(){
 function onRavenClicked(){
     objects["raven"].removeEventListener("click", onRavenClicked);
     createjs.Tween.get(objects["raven"]).to({guide: {path: [450, 300, 460, 500, 600, 700, 900, 750, 1200, 650]}}, 6000).call(function(){
-        createjs.Tween.get(objects["raven"]).to({alpha:0.6}, 1000);
-        createjs.Tween.get(objects["AsiaEuroMap"]).to({alpha:0.6}, 1000);
+        createjs.Tween.get(objects["raven"]).to({alpha:0}, 1000);
+        createjs.Tween.get(objects["AsiaEuroMap"]).to({alpha:0}, 1000);
         textSceneTwo.set({alpha:0});
         container.addChild(textSceneTwo);
         createjs.Tween.get(textSceneTwo).to({alpha:1}, 1000).call(function(){
@@ -666,6 +668,9 @@ function onbuttonClicked(){
         container.removeChild(objects["file3"]);
         container.removeChild(objects["file4"]);
         container.removeChild(objects["orgfile"]);
+
+        objects["files"] = new createjs.Bitmap(Queue.getResult("files_org")).set({alpha:1, x:830, y:480, scaleX:0.1, scaleY:0.1});
+        container.addChild(objects["files"]);
         createjs.Tween.get(objects["Scenefour"]).to({alpha:0.5}, 1000).call(function(){
 
             textSceneFour1.set({alpha:0});

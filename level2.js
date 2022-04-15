@@ -8,6 +8,8 @@ var rects = [];//diary turn window
 var bg;
 var Queue = new createjs.LoadQueue();
 
+var isMobile = false;
+
 const COMPLETED = 2;
 const READY = 1;
 const DISABLED = 0;
@@ -94,11 +96,11 @@ class Bag {
     removeItem(name){
         for (var i = 0; i < this.index; i++) { 
             if(this.bagItem[i].name == name){
-                for(var j=i+1;j<this.index;++j){
+                for(var j=i+1;j<=this.index;++j){
                     this.bagItem[j-1] = this.bagItem[j];
                 }
                 this.index--;
-                container.removeChild(objects[objects[name]]);
+                container.removeChild(objects[name]);
                 break;
             }
         }
@@ -195,6 +197,7 @@ function init(){
 
     stage.enableMouseOver();
     createjs.Touch.enable(stage);
+    
     loading = new createjs.Text("正在打开日记...  "+progressnum, "150px kaiti", "#fff").set({x:190, y:470});
     var text = container.addChild(loading);
     stage.update();
@@ -214,13 +217,13 @@ function level2_adjust_screen(){
     canvas.width = 1920;
     canvas.height = 1080;
     if(document.documentElement.clientWidth <= document.documentElement.clientHeight){
-        //alert("?");
         screen = 0;
         //text.set({x:570, y:190, rotation:90});
         canvas.width = 1080;
         canvas.height = 1920;
         container.rotation = 90;
         container.x = 1080;
+        isMobile = true;
     }
 };
 
@@ -262,7 +265,7 @@ function HandleCompleteSceneOne() {
 
     objects["Sceneone"] = new createjs.Bitmap(Queue.getResult("Sceneone"));
     objects["diary"] = new createjs.Bitmap(Queue.getResult("diaryone")).set({x:900, y:600, scaleX:0.06, scaleY:0.035, alpha:0.01});
-    objects["photo"] = new createjs.Bitmap(Queue.getResult("photo")).set({x:0, y:0, scaleX:0.01, scaleY:0.01,rotaion:0, alpha:0.01});
+    objects["photo"] = new createjs.Bitmap(Queue.getResult("photo")).set({x:0, y:0, scaleX:0.01, scaleY:0.01,rotaion:0, alpha:0});
     objects["photoframe"] = new createjs.Bitmap(Queue.getResult("photoframe")).set({x:666, y:602, scaleX:0.064, scaleY:0.095, rotation:-15, alpha:0.01});
     
     var photoframesqure = new createjs.Shape(); objects["photoframesquare"] = photoframesqure;
@@ -347,6 +350,10 @@ function ondiaryClicked(){
             else{
                 createjs.Tween.get(objects["diary"]).to({x:900, y:600, scaleX:0.06, scaleY:0.035, alpha:0.01}, 200);
                 objects["photoframesquare"].on("mouseover", onphotoframeTriggered);
+                if(isMobile){
+                    alert();
+                    objects["photoframesquare"].on("touchmove", onphotoframeTriggered);
+                }
                 if(bag.getItem("photo") == null){
                     createjs.Tween.get(objects["photo"]).to({x:0, y:0, scaleX:0.01, scaleY:0.01,rotaion:0, alpha:0.01}, 200);
                     objects["photo"].removeEventListener("click", onphotoClicked);
@@ -423,7 +430,7 @@ function onphotoClicked(){
     if(controller.checkStatus("photo" == COMPLETED)){
         return;
     }
-    if(bag.getItem("photo") == null){
+    if(bag.getItem("photo") == null && controller.checkStatus("photo") != COMPLETED){
         objects["photo"].rotation = 0;
         bag.add(new BagItem("photo",920,628,0.07,0.07,0,0.01));
     }
@@ -550,14 +557,21 @@ function onzslClicked(){
 }
 
 function onbagitemDragged(evt){
-    evt.target.x = evt.stageX;
-    evt.target.y = evt.stageY;
+    if(!isMobile){
+        evt.target.x = evt.stageX;
+        evt.target.y = evt.stageY;
+    }
+    else{
+        evt.target.x = evt.stageY;
+        evt.target.y = 1020 - evt.stageX;
+    }
     itemHeld = bag.getItemByID(evt.target.id);
 }
 
 
 function onbagitemDraggedEnd(evt){
     //待修改
+    //console.log(evt.target.x + " " + evt.target.y);
     var itemID = evt.target.id;
     if(false){
         

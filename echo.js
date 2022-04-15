@@ -7,7 +7,7 @@ var objects = {};
 var rects = [];//diary turn window
 var bg;
 var Queue = new createjs.LoadQueue();
-
+var isMobile = false;
 const COMPLETED = 2;
 const READY = 1;
 const DISABLED = 0;
@@ -122,11 +122,11 @@ class Bag {
     removeItem(name){
         for (var i = 0; i < this.index; i++) { 
             if(this.bagItem[i].name == name){
-                for(var j=i+1;j<this.index;++j){
+                for(var j=i+1;j<=this.index;++j){
                     this.bagItem[j-1] = this.bagItem[j];
                 }
                 this.index--;
-                container.removeChild(objects[objects[name]]);
+                container.removeChild(objects[name]);
                 break;
             }
         }
@@ -252,6 +252,7 @@ function duniao_adjust_screen(){
         canvas.height = 1920;
         container.rotation = 90;
         container.x = 1080;
+        isMobile = true;
     }
 };
 
@@ -260,6 +261,7 @@ function initSceneOne(){
     Queue.on("progress", HandleProgress, this);
     Queue.loadManifest([
         {id:"dock", src:"img/echo/dock.png"},
+        {id:"rabe", src:"img/echo/rabe.png"},
         {id:"s2_1", src:"img/echo/s2_1.png"},
         {id:"s2_2", src:"img/echo/s2_2.png"},
         {id:"arrowhead", src:"img/echo/arrowhead.png"},
@@ -293,6 +295,7 @@ function HandleCompleteSceneOne() {
     progressnum = 0;
 
     objects["dock"] = new createjs.Bitmap(Queue.getResult("dock")).set({alpha:0});
+    objects["rabe"] = new createjs.Bitmap(Queue.getResult("rabe")).set({alpha:0});
 
     drawSceneOne();
 }
@@ -334,14 +337,18 @@ function drawSceneOne(){
     removeHint();
 
     container.addChild(objects["dock"]);
+    container.addChild(objects["rabe"]);
 
     createjs.Tween.get(objects["dock"]).to({alpha:1}, 2000).call(function(){
-        objects["dock"].addEventListener("click", function(){
-            createjs.Tween.get(objects["dock"]).to({alpha:0}, 1000).call(function(){
-                container.removeChild(objects["dock"]);
-                initSceneTwo();
-            })
-        });
+        createjs.Tween.get(objects["rabe"]).to({alpha:1}, 2000).call(function(){
+            objects["dock"].addEventListener("click", function(){
+                createjs.Tween.get(objects["rabe"]).to({alpha:0}, 1000);
+                createjs.Tween.get(objects["dock"]).to({alpha:0}, 1000).call(function(){
+                    container.removeChild(objects["dock"]);
+                    initSceneTwo();
+                })
+            });
+        })
     });
 
     stage.update();
