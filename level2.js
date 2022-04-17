@@ -196,8 +196,8 @@ function init(){
     stage.addChild(container);
 
     stage.enableMouseOver();
-    createjs.Touch.enable(stage);
-    
+    createjs.Touch.enable(stage, false, true);
+
     loading = new createjs.Text("正在打开日记...  "+progressnum, "150px kaiti", "#fff").set({x:190, y:470});
     var text = container.addChild(loading);
     stage.update();
@@ -287,13 +287,13 @@ function HandleCompleteSceneOne() {
     objects["map"].addEventListener("click", onmapClicked);
     objects["telegram"].on("mouseover", ontelegramTriggered);
     if(isMobile){
-        objects["telegram"].on("touchmove", ontelegramTriggered);
+        objects["telegram"].addEventListener("click", ontelegramTriggered);
     }
     objects["typer"].addEventListener("click", ontyperClicked);
     objects["announcement"].addEventListener("click", onannouncementClicked);
     objects["sealmark"].on("mouseover", onsealmarkTriggered);
     if(isMobile){
-        objects["sealmark"].on("touchmove", onsealmarkTriggered);
+        objects["sealmark"].addEventListener("click", onsealmarkTriggered);
     }
 
     drawSceneOne();
@@ -357,7 +357,7 @@ function ondiaryClicked(){
                 createjs.Tween.get(objects["diary"]).to({x:900, y:600, scaleX:0.06, scaleY:0.035, alpha:0.01}, 200);
                 objects["photoframesquare"].on("mouseover", onphotoframeTriggered);
                 if(isMobile){
-                    objects["photoframesquare"].on("touchmove", onphotoframeTriggered);
+                    objects["photoframesquare"].addEventListener("click", onphotoframeTriggered);
                 }
                 if(bag.getItem("photo") == null){
                     createjs.Tween.get(objects["photo"]).to({x:0, y:0, scaleX:0.01, scaleY:0.01,rotaion:0, alpha:0.01}, 200);
@@ -445,7 +445,8 @@ function onphotoClicked(){
 }
 
 function onphotoframeTriggered(evt){
-    if(itemHeld != null && itemHeld.name == "photo"){
+    
+    if((itemHeld != null && itemHeld.name == "photo") || (isMobile && bag.getItem("photo") != null)){
         bag.removeItem("photo");
         objects["photoframe"].alpha = 1;
         controller.completeTask("photo");
@@ -463,7 +464,7 @@ function onsealmarkTriggered(){
     if(controller.checkStatus("seal") == DISABLED){
         return;
     }
-    if(itemHeld != null && itemHeld.name == "seal"){
+    if((itemHeld != null && itemHeld.name == "seal") || (isMobile && bag.getItem("seal") != null)){
         bag.removeItem("seal");
         objects["sealmark"].alpha = 1;
         controller.completeTask("seal");
@@ -477,11 +478,11 @@ function onsealmarkTriggered(){
 }
 
 function ontelegramTriggered(){
-    if(itemHeld != null && itemHeld.name == "zsl"){
+    if((itemHeld != null && itemHeld.name == "zsl") || (isMobile && bag.getItem("zsl") != null)){
         bag.removeItem("zsl");
         objects["zslfill"].alpha = 1;
     }
-    else if(itemHeld != null && itemHeld.name == "xjk"){
+    else if((itemHeld != null && itemHeld.name == "xjk") || (isMobile && bag.getItem("xjk") != null)){
         bag.removeItem("xjk");
         objects["xjkfill"].alpha = 1;
     }

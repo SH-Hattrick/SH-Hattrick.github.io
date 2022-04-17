@@ -371,7 +371,7 @@ function HandleCompleteSceneTwo(){
     objects["door"].addEventListener("click", ondoorClicked);
     objects["mailbox"].on("mouseover", onmailboxTrigger);
     if(isMobile){
-        objects["mailbox"].on("touchmove", onmailboxTrigger);
+        objects["mailbox"].addEventListener("click", onmailboxTrigger);
     }
     objects["car"].addEventListener("click", oncarClicked);
 
@@ -617,7 +617,7 @@ function oncarClicked(){
 }
 
 function onmailboxTrigger(evt){
-    if(itemHeld != null && itemHeld.name == "Rabeletter"){
+    if((itemHeld != null && itemHeld.name == "Rabeletter") || (isMobile && bag.getItem("Rabeletter") != null)){
         bag.removeItem("Rabeletter");
         container.removeChild(objects["Rabeletter"]);
         controller.completeTask("sendmail");
@@ -629,7 +629,7 @@ function onmailboxTrigger(evt){
             controller.enableTask("car");
         }
     }
-    else if(itemHeld != null && itemHeld.name == "report"){
+    else if((itemHeld != null && itemHeld.name == "report") || (isMobile && bag.getItem("report") != null)){
         bag.removeItem("report");
         container.removeChild(objects["report"]);
         controller.completeTask("sendreport");
