@@ -327,11 +327,11 @@ function HandleCompleteSceneOne() {
 function drawSceneOne(){
     bg = container.addChild(objects["bg1"]);
 
+    container.addChild(objects["letter"]);
     container.addChild(objects["armband"]);
     container.addChild(objects["helmet"]);
     container.addChild(objects["diary"]);
     container.addChild(objects["appendix"]);   
-    container.addChild(objects["letter"]);
     container.addChild(objects["diaryOne"]);
     container.addChild(objects["task1"]);
     container.addChild(objects["task2"]);

@@ -14,13 +14,16 @@ const DISABLED = 0;
 
 var itemHeld = null;
 
+var ravenmove;
+var ravenmovedir = 1;
+
 var progressnum = 0;
 var SceneState = 0;
 const SceneOne = 1;
 var loading;
 
 var texthint = new createjs.Text("", "Italic 40px KaiTi", "#fff").set({x:190, y:900});//提示信息
-var textSceneone = new createjs.Text("水手从遥远的东方紧急赶来，\n\n在海上鸣响汽笛迎接他新生的孩子。\n\n那时他不曾预想：\n\n日后的小拉贝会像楼顶那只善飞的渡鸟一样，游走世界各地，飞得那么高，那么远，\n\n并深深奉献于他曾经去往的中国。"
+var textSceneone = new createjs.Text("水手从遥远的东方紧急赶来，\n\n在海上鸣响汽笛迎接他新生的孩子。\n\n那时他不曾预想：\n\n日后的小拉贝会像楼顶那只善飞的渡鸟一样，\n游走世界各地，飞得那么高，那么远，\n\n并深深奉献于他曾经去往的中国。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 var textSceneTwo = new createjs.Text("童年时，父亲从中国带回的那些传说和艺术品，\n\n就像一些文明的种子播撒在了拉贝心中。\n\n他兴奋于能有一份工作，让他领略东方古国文化的神韵。\n\n1918年，拉贝远渡重洋，来到了心仪已久的北京。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
@@ -31,13 +34,13 @@ var textSceneFour1 = new createjs.Text("\"拉贝，感谢你出色地完成会�
 var textSceneFour2 = new createjs.Text("在拉贝影响下，\n\n他的未婚妻道拉对中国的向往之情由来已久。\n\n在爱人到达北京的次年，\n\n勇敢的道拉独自旅行到中国，\n\n1909年10月，\n\n他们在北京举行了婚礼"
     ,"Italic 50px KaiTi","#fff").set({x:900, y:100});
 var textSceneFour3 = new createjs.Text("凭借着自己的才能与勤奋，\n\n拉贝在西门子站稳了脚跟，\n\n很快就出任西门子北京分公司经理，\n\n之后又在天津分公司工作。"
-    ,"Italic 50px KaiTi","#fff").set({x:950, y:100});
+    ,"Italic 50px KaiTi","#fff").set({x:950, y:150});
 var textSceneFour4 = new createjs.Text("拉贝和公司的中国人相处得尤为融洽，\n\n他很喜欢和中国人交朋友，\n\n其中有一位交鲍家良的青年在他手下干会计，\n\n拉贝待他情同父子。"
-    ,"Italic 50px KaiTi","#fff").set({x:950, y:100});
+    ,"Italic 50px KaiTi","#fff").set({x:950, y:150});
 var textSceneFive1 = new createjs.Text("生意之余，拉贝热衷于领略中国文化的精髓。\n\n北京的博物馆、庙宇、宫殿、古玩市场、甚至周围的田野和乡村，\n\n都让他和道拉惊叹并赞不绝口。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 var textSceneFive2 = new createjs.Text("拿起老相机，\n\n看看100年前拉贝镜头下的颐和园是什么样子吧"
-    ,"Italic 50px KaiTi","#fff").set({x:100, y:500});
+    ,"Italic 50px KaiTi","#fff").set({x:100, y:350});
 var textSceneFive3 = new createjs.Text("出于对中国文化的热爱，\n\n他收集了大量有关北京的照片和绘画，\n\n并辅以对北京社会生活方方面面的详细记录。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 var textSceneSix1 = new createjs.Text("1930年8月份，\n\n拉贝女儿的婚礼在天津一处教堂举行。\n\n牧师牵着两位新人的手说：\n\n天使们走到了一起。"
@@ -268,7 +271,7 @@ function duniao_adjust_screen(){
 };
 
 function initSceneOne(){
-    Queue.on("complete", HandleCompleteSceneOne, this);
+    Queue.on("complete", HandleCompleteSceneTwo, this);
     Queue.on("progress", HandleProgress, this);
     Queue.loadManifest([
         {id:"Sceneone", src:"img/duniao/Sceneone.png"},
@@ -353,6 +356,11 @@ function HandleCompleteSceneTwo() {
     objects["raven"] = new createjs.Bitmap(Queue.getResult("raven")).set({alpha:0,x:450,y:300,scaleX:0.04,scaleY:0.04});
 
     objects["raven"].addEventListener("click", onRavenClicked);
+
+    ravenmove = setInterval(function(){
+        ravenmovedir = -ravenmovedir;
+        createjs.Tween.get(objects["raven"]).to({y:objects["raven"].y+ravenmovedir*40}, 2000);
+    },2000);
 
     drawSceneTwo();
 }
@@ -599,6 +607,7 @@ function onSceneoneClicked(){
 }
 
 function onRavenClicked(){
+    clearInterval(ravenmove);
     objects["raven"].removeEventListener("click", onRavenClicked);
     createjs.Tween.get(objects["raven"]).to({guide: {path: [450, 300, 460, 500, 600, 700, 900, 750, 1200, 650]}}, 6000).call(function(){
         createjs.Tween.get(objects["raven"]).to({alpha:0}, 1000);
@@ -776,6 +785,7 @@ function oncameraClicked(){
     && controller.checkStatus("workmate") == COMPLETED)
     {
         createjs.Tween.get(objects["camera"]).to({alpha:0}, 1000);
+        createjs.Tween.get(objects["files"]).to({alpha:0}, 1000);
         createjs.Tween.get(objects["Scenefour"]).to({alpha:0}, 1000).call(function(){
             clearScreen();
             container.addChild(textSceneFive1);

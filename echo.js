@@ -307,8 +307,8 @@ function HandleCompleteSceneTwo(){
 
     objects["s2_1"] = new createjs.Bitmap(Queue.getResult("s2_1")).set({alpha:0});
     objects["s2_2"] = new createjs.Bitmap(Queue.getResult("s2_2")).set({alpha:0});
-    objects["arrowhead1"] = new createjs.Bitmap(Queue.getResult("arrowhead")).set({alpha:0, x:100, y:250, scaleX:0.1, scaleY:0.1, rotation:180});
-    objects["arrowhead2"] = new createjs.Bitmap(Queue.getResult("arrowhead")).set({alpha:0, x:1850, y:450, scaleX:0.1, scaleY:0.1});
+    objects["arrowhead1"] = new createjs.Bitmap(Queue.getResult("arrowhead")).set({alpha:0, x:200, y:250, scaleX:0.1, scaleY:0.1, rotation:180});
+    objects["arrowhead2"] = new createjs.Bitmap(Queue.getResult("arrowhead")).set({alpha:0, x:1700, y:450, scaleX:0.1, scaleY:0.1});
 
     objects["photo1"] = new createjs.Bitmap(Queue.getResult("photo1")).set({alpha:0.01, x:50, y:350, scaleX:0.2, scaleY:0.2});
     objects["photo2"] = new createjs.Bitmap(Queue.getResult("photo2")).set({alpha:0.01, x:500, y:270, scaleX:0.2, scaleY:0.3});

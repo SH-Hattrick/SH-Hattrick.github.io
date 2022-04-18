@@ -3,7 +3,7 @@ var stage = new createjs.Stage("wrapper");
 createjs.Touch.enable(stage);
 var container = new createjs.Container();
 stage.addChild(container);
-var text = container.addChild(new createjs.Text("The Diaries of John Rabe", "150px Times", "#fff").set({x:190, y:470}));
+
 stage.update();
 createjs.Ticker.setFPS(30);
 createjs.Ticker.addEventListener("tick", stage);
@@ -38,6 +38,7 @@ var things = [];//ticket2 ticket1 letter letter1 letter2 sand , tele diary1 2 3
 var rects = [];//diary turn window
 var timer;
 var bg;
+var progressnum = 0;
 var pressing = 0,pressx, pressy;
 function f(){};
 function calculateX(e) {
@@ -56,7 +57,8 @@ function calculateY(e) {
         return e.stageY;
     }
 }
-
+loading = new createjs.Text("正在打开日记...  "+progressnum, "150px kaiti", "#fff").set({x:190, y:470});
+var text = container.addChild(loading);
 var Queue = new createjs.LoadQueue();
 Queue.installPlugin(createjs.Sound);
 Queue.on("complete", HandleComplete, this);
@@ -71,6 +73,14 @@ Queue.loadManifest([
     {id: "pointer", src:"img/pointer.png"},
     {id: "mession", src:"img/mession.png"}
 ]);
+function HandleProgress(){
+    let num = `${Math.floor(Queue.progress * 100)}%`;
+    progressnum = num;
+    container.removeChild(loading)
+    loading = new createjs.Text("正在打开日记...  "+progressnum, "150px kaiti", "#fff").set({x:190, y:470});
+    var text = container.addChild(loading);
+    stage.update();
+}
 function HandleComplete() {
     bg = container.addChild(new createjs.Bitmap(Queue.getResult("box")));
     things.push(new createjs.Bitmap(Queue.getResult("box_open")));
