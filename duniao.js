@@ -51,7 +51,15 @@ var textSceneSeven1 = new createjs.Text("1930年，\n\n因为出色的工作能�
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 var endingtext = new createjs.Text("约翰·拉贝"
     ,"Italic 300px KaiTi","#fff").set({x:220, y:350});
-    
+var photo1text = new createjs.Text("十七孔桥"
+    ,"Italic 50px KaiTi","#fff").set({x:300, y:50});
+var photo3text = new createjs.Text("四大部州"
+    ,"Italic 50px KaiTi","#fff").set({x:1100, y:50});
+var photo2text = new createjs.Text("清晏舫"
+    ,"Italic 50px KaiTi","#fff").set({x:620, y:950});
+var photo4text = new createjs.Text("牌楼"
+    ,"Italic 50px KaiTi","#fff").set({x:1420, y:950});
+
 /////////////////////////////////////// class /////////////////////////////////////////////
 
 
@@ -418,10 +426,10 @@ function HandleCompleteSceneFive(){
 
     progressnum = 0;
 
-    objects["o1"] = new createjs.Bitmap(Queue.getResult("oldphoto1")).set({alpha:0, x:100, y:50, scaleX:0.17, scaleY:0.17});
-    objects["o2"] = new createjs.Bitmap(Queue.getResult("oldphoto2")).set({alpha:0, x:400, y:450, scaleX:0.17, scaleY:0.17});
-    objects["o3"] = new createjs.Bitmap(Queue.getResult("oldphoto3")).set({alpha:0, x:900, y:50, scaleX:0.17, scaleY:0.17});
-    objects["o4"] = new createjs.Bitmap(Queue.getResult("oldphoto4")).set({alpha:0, x:1200, y:450, scaleX:0.17, scaleY:0.17});
+    objects["o1"] = new createjs.Bitmap(Queue.getResult("oldphoto1")).set({alpha:0, x:100, y:100, scaleX:0.15, scaleY:0.15});
+    objects["o2"] = new createjs.Bitmap(Queue.getResult("oldphoto2")).set({alpha:0, x:400, y:500, scaleX:0.15, scaleY:0.15});
+    objects["o3"] = new createjs.Bitmap(Queue.getResult("oldphoto3")).set({alpha:0, x:900, y:100, scaleX:0.15, scaleY:0.15});
+    objects["o4"] = new createjs.Bitmap(Queue.getResult("oldphoto4")).set({alpha:0, x:1200, y:500, scaleX:0.15, scaleY:0.15});
 
     drawSceneFive();
 }
@@ -817,6 +825,9 @@ function clearScreen(){
 }
 
 function ono1Clicked(){
+    container.addChild(photo1text);
+    photo1text.set({alpha:0});
+    createjs.Tween.get(photo1text).to({alpha:1}, 2000);
     objects["o1"].removeEventListener("click", ono1Clicked);
     createjs.Tween.get(objects["o1"]).to({alpha:1}, 2000).call(function(){
         controller.completeTask("o1");
@@ -830,6 +841,9 @@ function ono1Clicked(){
 }
 
 function ono2Clicked(){
+    container.addChild(photo2text);
+    photo2text.set({alpha:0});
+    createjs.Tween.get(photo2text).to({alpha:1}, 2000);
     objects["o2"].removeEventListener("click", ono2Clicked);
     createjs.Tween.get(objects["o2"]).to({alpha:1}, 2000).call(function(){
         controller.completeTask("o2");
@@ -843,6 +857,9 @@ function ono2Clicked(){
 }
 
 function ono3Clicked(){
+    container.addChild(photo3text);
+    photo3text.set({alpha:0});
+    createjs.Tween.get(photo3text).to({alpha:1}, 2000);
     objects["o3"].removeEventListener("click", ono3Clicked);
     createjs.Tween.get(objects["o3"]).to({alpha:1}, 2000).call(function(){
         controller.completeTask("o3");
@@ -856,6 +873,9 @@ function ono3Clicked(){
 }
 
 function ono4Clicked(){
+    container.addChild(photo4text);
+    photo4text.set({alpha:0});
+    createjs.Tween.get(photo4text).to({alpha:1}, 2000);
     objects["o4"].removeEventListener("click", ono4Clicked);
     createjs.Tween.get(objects["o4"]).to({alpha:1}, 2000).call(function(){
         controller.completeTask("o4");
@@ -869,10 +889,23 @@ function ono4Clicked(){
 }
 
 function scene5end(){
+    createjs.Tween.get(photo1text).to({alpha:0}, 1000);
+    createjs.Tween.get(photo2text).to({alpha:0}, 1000);
+    createjs.Tween.get(photo3text).to({alpha:0}, 1000);
+    createjs.Tween.get(photo4text).to({alpha:0}, 1000);
     createjs.Tween.get(objects["o1"]).to({alpha:0}, 1000);
     createjs.Tween.get(objects["o2"]).to({alpha:0}, 1000);
     createjs.Tween.get(objects["o3"]).to({alpha:0}, 1000);
     createjs.Tween.get(objects["o4"]).to({alpha:0}, 1000).call(function(){
+    container.removeChild(objects["o1"]);
+    container.removeChild(objects["o2"]);
+    container.removeChild(objects["o3"]);
+    container.removeChild(objects["o4"]);
+    container.removeChild(photo1text);
+    container.removeChild(photo2text);
+    container.removeChild(photo3text);
+    container.removeChild(photo4text);
+
         textSceneFive3.set({alpha:0});
         container.addChild(textSceneFive3);
         createjs.Tween.get(textSceneFive3).to({alpha:1},1000).call(function(){
@@ -895,6 +928,12 @@ function playEffect(str, timegap){
     }, timegap);
 }
 
+function clearScreen(){
+    for(var i;i<objects.length;++i){
+        objects[i].set({alpha:0});
+        container.removeChild(objects[i]);
+    }
+}
 ///////////////////////////////////////Now we are on a go/////////////////////////////////////////
 init();
 //////////////////////////////////////////////////////////////////////////////////////////////////

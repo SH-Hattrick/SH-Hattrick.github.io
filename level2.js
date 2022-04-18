@@ -23,7 +23,13 @@ const SceneMap = 10;
 var loading;
 var diaryState = 0;
 //var text = container.addChild(new createjs.Text("加载中...", "150px Times", "#fff").set({x:190, y:470}));
-var texthint = new createjs.Text("", "Italic 40px KaiTi", "#fff").set({x:190, y:900});//提示信息
+var texthint = new createjs.Text("", "Italic 50px KaiTi", "#fff").set({x:190, y:900});//提示信息
+var endingtext = new createjs.Text("金陵城内仍炮火阵阵，\n\n1937年南京的冬天似乎格外寒冷漫长，\n\n但善良救助的脚步始终没有因此退缩。"
+, "Italic 50px KaiTi", "#fff").set({x:100, y:100});
+var begintext = new createjs.Text("这是一段1937年11月到次年2月的历史记忆。\n\n日军向南京推进，危难之中国际委员会成立，\n\n欲建立平民中立区，拉贝被推选为主席。\n\n南京沦陷后，国际委员会与各方艰难斡旋，\n\n获得粮食、药品救助安全区内的平民。"
+, "Italic 50px KaiTi", "#fff").set({x:100, y:100});
+
+
 /////////////////////////////////////// class /////////////////////////////////////////////
 
 //背包系统
@@ -262,6 +268,7 @@ function HandleProgress(){
 
 function HandleCompleteSceneOne() {
     progressnum = 0;
+    loading.set({alpha:0});
 
     objects["Sceneone"] = new createjs.Bitmap(Queue.getResult("Sceneone"));
     objects["diary"] = new createjs.Bitmap(Queue.getResult("diaryone")).set({x:900, y:600, scaleX:0.06, scaleY:0.035, alpha:0.01});
@@ -296,7 +303,17 @@ function HandleCompleteSceneOne() {
         objects["sealmark"].addEventListener("click", onsealmarkTriggered);
     }
 
-    drawSceneOne();
+    container.addChild(begintext);
+    begintext.set({alpha:0});
+    createjs.Tween.get(loading).to({alpha:0}, 1000).call(function(){
+        createjs.Tween.get(begintext).to({alpha:1}, 1000).call(function(){
+            createjs.Tween.get(begintext).to({alpha:1}, 7000).call(function(){
+                createjs.Tween.get(begintext).to({alpha:0}, 1000).call(function(){
+                    drawSceneOne();
+                })
+            })
+        })
+    })
 }
 
 function drawSceneOne(){
@@ -373,6 +390,7 @@ function ondiaryClicked(){
             else{
                 createjs.Tween.get(objects["diary"]).to({x:900, y:600, scaleX:0.06, scaleY:0.035, alpha:0.01}, 200);
             }
+            break;
         }
         case 2:{
             if(objects["diary"].scaleX < 0.1){
@@ -381,6 +399,7 @@ function ondiaryClicked(){
             else{
                 createjs.Tween.get(objects["diary"]).to({x:900, y:600, scaleX:0.06, scaleY:0.035, alpha:0.01}, 200);
             }
+            break;
         }
         case 3:{
             if(objects["diary"].scaleX < 0.1){
@@ -388,7 +407,27 @@ function ondiaryClicked(){
             }
             else{
                 createjs.Tween.get(objects["diary"]).to({x:900, y:600, scaleX:0.06, scaleY:0.035, alpha:0.01}, 200);
+                clearScreen();
+                loading.set({alpha:0});
+                createjs.Tween.get(objects["Sceneone"]).to({alpha:0}, 1000);
+                createjs.Tween.get(objects["announcement"]).to({alpha:0}, 1000);
+                createjs.Tween.get(objects["photo"]).to({alpha:0}, 1000);
+                createjs.Tween.get(objects["photoframe"]).to({alpha:0}, 1000);
+                createjs.Tween.get(objects["sealmark"]).to({alpha:0}, 1000);
+                createjs.Tween.get(objects["xjkfill"]).to({alpha:0}, 1000);
+                createjs.Tween.get(objects["zslfill"]).to({alpha:0}, 1000).call(function(){
+                    container.addChild(endingtext);
+                    endingtext.set({alpha:0});
+                    createjs.Tween.get(endingtext).to({alpha:1}, 1000).call(function(){
+                        createjs.Tween.get(endingtext).to({alpha:1}, 7000).call(function(){
+                            createjs.Tween.get(endingtext).to({alpha:0}, 1000);
+                        });
+                    });
+                });
+
+
             }
+            break;
         }
         default:{
 
@@ -453,7 +492,7 @@ function onphotoframeTriggered(evt){
 
         container.removeChild(objects["diary"]);
         objects["diary"] = new createjs.Bitmap(Queue.getResult("diarytwo")).set({x:900, y:600, scaleX:0.06, scaleY:0.035, alpha:0.01});
-        diaryState++;
+        diaryState = 1;
         objects["diary"].addEventListener("click", ondiaryClicked);
         container.addChild(objects["diary"]);
         controller.enableTask("telegram");
@@ -471,7 +510,7 @@ function onsealmarkTriggered(){
 
         container.removeChild(objects["diary"]);
         objects["diary"] = new createjs.Bitmap(Queue.getResult("diaryfour")).set({x:900, y:600, scaleX:0.06, scaleY:0.035, alpha:0.01});
-        diaryState++;
+        diaryState = 3;
         objects["diary"].addEventListener("click", ondiaryClicked);
         container.addChild(objects["diary"]);
     }
@@ -493,7 +532,7 @@ function ontelegramTriggered(){
         //解锁日记三
         container.removeChild(objects["diary"]);
         objects["diary"] = new createjs.Bitmap(Queue.getResult("diarythree")).set({x:900, y:600, scaleX:0.06, scaleY:0.035, alpha:0.01});
-        diaryState++;
+        diaryState = 2;
         objects["diary"].addEventListener("click", ondiaryClicked);
         container.addChild(objects["diary"]);
         controller.enableTask("seal");
@@ -585,6 +624,13 @@ function onbagitemDraggedEnd(evt){
     else{
         setTimeout(function(){itemHeld = null;}, 500)
         bag.reload();
+    }
+}
+
+function clearScreen(){
+    for(var i;i<objects.length;++i){
+        objects[i].set({alpha:0});
+        container.removeChild(objects[i]);
     }
 }
 ///////////////////////////////////////Now we are on a go/////////////////////////////////////////

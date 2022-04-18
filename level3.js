@@ -26,7 +26,10 @@ var inputnumber = "";//输入的号码
 var textnumber = new createjs.Text(inputnumber, "Italic 150px KaiTi", "#fff").set({x:190, y:470});//显示的号码
 //var text = container.addChild(new createjs.Text("加载中...", "150px Times", "#fff").set({x:190, y:470}));
 var texthint = new createjs.Text("", "Italic 40px KaiTi", "#fff").set({x:190, y:900});//提示信息
-
+var begintext = new createjs.Text("南京沦陷后，日军在城内烧杀抢掠，\n\n拉贝凭借自己特殊的身份驱逐行凶作恶的日本士兵，\n\n保护和救助安全区内外的平民。\n\n同时以战时日记的形式记录日军暴行，\n\n并多次发送给日本大使馆表示抗议。"
+, "Italic 50px KaiTi", "#fff").set({x:100, y:100});
+var endingtext = new createjs.Text("黑夜里的烛光虽然微弱，\n\n却坚定地照亮一方。\n\n人性的温度能穿越时光，\n\n激励不忘历史的后人。"
+, "Italic 50px KaiTi", "#fff").set({x:100, y:100});
 var itemHeld = null;
 /////////////////////////////////////// class /////////////////////////////////////////////
 
@@ -117,6 +120,13 @@ class Bag {
             createjs.Tween.get(objects[this.bagItem[i].name]).to({x:this.startX, y:this.startY + this.offset * i, scaleX:this.scaleX *this.bagItem[i].scaleXoffset, scaleY:this.scaleY *this.bagItem[i].scaleYoffset}, 200);
         }
     }
+    clear(){
+        for(var i=0;i<this.index;++i){
+            objects[this.bagItem[i].name].set({alpha:0});
+            container.removeChild(objects[this.bagItem[i].name]);
+        }
+        this.index = 0;
+    }
 }; var bag = new Bag(6);
 
 
@@ -150,15 +160,17 @@ class TaskController{
         this.addTask(new Task(this.size,"Rabeletter",[],true));//查看信件
         this.addTask(new Task(this.size,"diaryOne",[],true));//查看日记一
         this.addTask(new Task(this.size,"report",[],true));//日军暴行
-        this.addTask(new Task(this.size,"phone",[],true));//电话
+        this.addTask(new Task(this.size,"phone",[],false));//电话
         this.addTask(new Task(this.size,"sendmail",[],true));//投递信件
         this.addTask(new Task(this.size,"sendreport",[],true));//投递信件
-        this.addTask(new Task(this.size,"car",[],true));//上车
+        this.addTask(new Task(this.size,"car",[],false));//上车
     }
-    enableTask(id){
-        // for(var i = 0;i<this.tasks[id].next.length; ++i){
-        //     this.tasks[this.tasks[id].next[i]].enable = true;
-        // }
+    enableTask(name){
+        for(var i = 0;i<this.tasks.length; ++i){
+            if(this.tasks[i].key == name){
+                this.tasks[i].enable = true;
+            }
+        }
     }
     completeTask(key){
         for(var i = 0;i<this.size; ++i){
@@ -287,6 +299,8 @@ function HandleProgress(){
 function HandleCompleteSceneOne() {
     //搭建第一个室内场景
     //静态预加载物品
+    loading.set({alpha:0});
+
     objects["bg1"] = new createjs.Bitmap(Queue.getResult("bgindoor"));
     objects["armband"] = new createjs.Bitmap(Queue.getResult("armband")).set({x:438, y:340, scaleX:0.12, scaleY:0.12, rotation:10});
     objects["helmet"] = new createjs.Bitmap(Queue.getResult("helmet")).set({x:1330, y:580, scaleX:0.12, scaleY:0.12});
@@ -321,7 +335,17 @@ function HandleCompleteSceneOne() {
     objects["window"].addEventListener("click",onwindowClicked);
     objects["phone"].addEventListener("click",onphoneClicked);
 
-    drawSceneOne();
+    container.addChild(begintext);
+    begintext.set({alpha:0});
+    createjs.Tween.get(begintext).to({alpha:0}, 1000).call(function(){
+        createjs.Tween.get(begintext).to({alpha:1}, 1000).call(function(){
+            createjs.Tween.get(begintext).to({alpha:1}, 7000).call(function(){
+                createjs.Tween.get(begintext).to({alpha:0}, 1000).call(function(){
+                    drawSceneOne();
+                })
+            })
+        })
+    })
 }
 
 function drawSceneOne(){
@@ -564,6 +588,8 @@ function ondialClicked(evt){
 
             showHint("受伤妇女已及时送医,正在接受治疗。",2000);
 
+    controller.enableTask("car");
+
             onphoneClicked();
         }
         else{
@@ -603,13 +629,36 @@ function ondoorClicked(){
 }
 
 function oncarClicked(){
-    if(controller.checkStatus("car") == DISABLED || SceneState != SceneTwo){
+    if(SceneState != SceneTwo || controller.checkStatus("car") == COMPLETED){
+        return;
+    }
+    if(controller.checkStatus("car") == DISABLED){
+        showHint("通知救护车和日本大使馆！",2000)
         return;
     }
     if(bag.getItem("helmet") != null && bag.getItem("armband") != null){
         showHint("在中山路找到两人,成功解救",2000);
         objects["thanks"] = new createjs.Bitmap(Queue.getResult("thanks")).set({x:0, y:0, scaleX:0.01, scaleY:0.01, alpha:1});
         bag.add(new BagItem("thanks",920,628,0.07,0.07,0,0.01));
+        controller.completeTask("car");
+
+        clearScreen();
+        bag.clear();
+        var block = new createjs.Shape(); objects["block"] = block;
+        block.graphics.beginFill("black").drawRect(0,0,canvasX,canvasY); 
+        container.addChild(block);
+        container.addChild(endingtext);
+        block.set({alpha:0});
+        endingtext.set({alpha:0});
+        createjs.Tween.get(block).to({alpha:1}, 1000).call(function(){
+            createjs.Tween.get(endingtext).to({alpha:1}, 1000).call(function(){
+                createjs.Tween.get(endingtext).to({alpha:1}, 7000).call(function(){
+                    createjs.Tween.get(endingtext).to({alpha:0}, 1000).call(function(){
+                        
+                    });
+                });
+            });
+        });
     }
     else{
         showHint("需要与日军交涉,请携带钢盔与表明身份的袖章",2000);
@@ -626,7 +675,6 @@ function onmailboxTrigger(evt){
             objects["diaryOne"].addEventListener("click", ondiaryOneClicked);
 
             controller.enableTask("phone");
-            controller.enableTask("car");
         }
     }
     else if((itemHeld != null && itemHeld.name == "report") || (isMobile && bag.getItem("report") != null)){
@@ -636,9 +684,7 @@ function onmailboxTrigger(evt){
         if(controller.checkStatus("sendmail") == COMPLETED){
             objects["diaryOne"] = new createjs.Bitmap(Queue.getResult("diaryTwo")).set({x:835, y:628, scaleX:0.03, scaleY:0.03, alpha:0.01});
             objects["diaryOne"].addEventListener("click", ondiaryOneClicked);
-
             controller.enableTask("phone");
-            controller.enableTask("car");
         }
     }
 }
@@ -680,6 +726,7 @@ function onbagitemDragged(evt){
 
 function clearScreen(){
     for(var i;i<objects.length;++i){
+        objects[i].set({alpha:0});
         container.removeChild(objects[i]);
     }
 }
