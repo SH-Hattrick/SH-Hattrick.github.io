@@ -2,26 +2,87 @@
 <html lang="zh">
 
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no, user-scalable=no">
     <meta name="referrer" content="no-referrer" />
     <meta charset="utf-8"/>
     <!--meta http-equiv="x-dns-prefetch-control" content="on"  百叶窗进入-->
     <style type="text/css">
-        button{
-            width:300px;
-            height:300px;
-            background-color: yellow;
-            font-size: 40px;
+        .btn{
+            width:800px;
+            height:250px;
+            position:fixed;
+            left:3100px;
+            top:2820px;
+            background:transparent;	/*按钮背景透明*/
+            border-width:0px;	/*边框透明*/
+            outline:none;	/*点击后没边框*/
         }
-        div{
-            width: 200px;
-            height: 200px;
+        .btn1{
+            width:1500px;
+            height:250px;
+            position:absolute;
+            left:4200px;
+            top:900px;
+            background:transparent;	/*按钮背景透明*/
+            border-width:0px;	/*边框透明*/
+            outline:none;	/*点击后没边框*/
         }
-        .center-in-center{
-            position: absolute;
-            top: 10%;
-            left: 40%;
+        .btn2{
+            width:600px;
+            height:200px;
+            position:absolute;
+            left:4800px;
+            top:1700px; 
+            background:transparent;	/*按钮背景透明*/
+            border-width:0px;	/*边框透明*/
+            outline:none;	/*点击后没边框*/
         }
+        .btn3{
+            width:600px;
+            height:200px;
+            position:absolute;
+            left:4800px;
+            top:1980px; 
+            background:transparent;	/*按钮背景透明*/
+            border-width:0px;	/*边框透明*/
+            outline:none;	/*点击后没边框*/
+        }
+        .btn4{
+            width:600px;
+            height:200px;
+            position:absolute;
+            left:4800px;
+            top:2200px; 
+            background:transparent;	/*按钮背景透明*/
+            border-width:0px;	/*边框透明*/
+            outline:none;	/*点击后没边框*/
+        }
+        .btn5{
+            width:1500px;
+            height:250px;
+            position:absolute;
+            left:4200px;
+            top:2600px; 
+            background:transparent;	/*按钮背景透明*/
+            border-width:0px;	/*边框透明*/
+            outline:none;	/*点击后没边框*/
+        }
+        div#div1{
+            position:fixed;
+            top:0;
+            left:0;
+            bottom:0;
+            right:0;
+            z-index:-1;
+        }
+        div#div1 > img {
+            height:100%;
+            width:100%;
+            border:0;
+        }
+        
+        
+        
     </style>
     <link href="index.css" rel="stylesheet" type="text/css" />
     <script src="./js/easeljs-0.8.1.min.js"></script>
@@ -30,17 +91,10 @@
     <script src="./js/jquery.js"></script>
 </head>
 
-<body id = "main" >
+<body id = "main">
     <canvas id = wrapper>
         您的浏览器暂不支持！
     </canvas>
-    <div class="center-in-center" id="a">
-        <button type="button" onclick=loadlevel1();>场景一</button>
-        <button type="button" onclick=loadlevel2();>场景二</button>
-        <button type="button" onclick=loadlevel3();>场景三</button>
-        <button type="button" onclick=loadduniao();>渡鸟的遐想</button>
-        <button type="button" onclick=loadecho();>永远的回声</button>
-    </div>
 
     <audio name = "musicplayer" id = "myaudio" autoplay="autoplay" loop="loop" src="sound/bgm1.mp3" volume=0.2>
         你的浏览器版本太低， 无法播放音乐
@@ -48,60 +102,86 @@
     <audio name = "musicplayer" id = "effect" autoplay="autoplay">
         你的浏览器版本太低， 无法播放音乐
     </audio>
-
+    <input type="submit" class="btn" onclick="loadselect()" id="b0">
+    <input type="submit" disabled="disabled" class="btn1" onclick="loadduniao()" id="b1">
+    <input type="submit" disabled="disabled" class="btn2" onclick="loadlevel1()" id="b2">
+    <input type="submit" disabled="disabled" class="btn3" onclick="loadlevel2()" id="b3">
+    <input type="submit" disabled="disabled" class="btn4" onclick="loadlevel3()" id="b4">
+    <input type="submit" disabled="disabled" class="btn5" onclick="loadecho()" id="b5">
+    <div id="div1">
+        <img id="im" src="img/init.png"/>
+    </div>
     <script src="media.js"></script>
     <script>
+        function loadselect(){
+            document.getElementById("im").src="img/init_select.png";
+            document.getElementById("b0").remove();
+            document.getElementById("b1").disabled=false;
+            document.getElementById("b2").disabled=false;
+            document.getElementById("b3").disabled=false;
+            document.getElementById("b4").disabled=false;
+            document.getElementById("b5").disabled=false;
+        }
+
+        function removeelements(){
+            document.getElementById("b1").remove();
+            document.getElementById("b2").remove();
+            document.getElementById("b3").remove();
+            document.getElementById("b4").remove();
+            document.getElementById("b5").remove();
+            document.getElementById("div1").remove();
+        }
 
         function loadlevel1(){
+            removeelements();
             var oHead = document.getElementsByTagName('HEAD').item(0);
             var oScript= document.createElement("script");
             oScript.type = "text/javascript";   
             oScript.src="app.js";
-            document.getElementById("a").remove();
             document.getElementById("effect").volume = 0.5;
             document.getElementById("myaudio").volume = 0.2;
             document.getElementById("myaudio").play();
             oHead.appendChild(oScript);
         }
         function loadlevel2(){
+            removeelements();
             var oHead = document.getElementsByTagName('HEAD').item(0);
             var oScript= document.createElement("script");
             oScript.type = "text/javascript";   
             oScript.src="level2.js";
-            document.getElementById("a").remove();
             document.getElementById("effect").volume = 0.5;
             document.getElementById("myaudio").volume = 0.2;
             document.getElementById("myaudio").play();
             oHead.appendChild(oScript);
         }
         function loadlevel3(){
+            removeelements();
             var oHead = document.getElementsByTagName('HEAD').item(0);
             var oScript= document.createElement("script");
             oScript.type = "text/javascript";   
             oScript.src="level3.js";
-            document.getElementById("a").remove();
             document.getElementById("effect").volume = 0.5;
             document.getElementById("myaudio").volume = 0.2;
             document.getElementById("myaudio").play();
             oHead.appendChild(oScript);
         }
         function loadduniao(){
+            removeelements();
             var oHead = document.getElementsByTagName('HEAD').item(0);
             var oScript= document.createElement("script");
             oScript.type = "text/javascript";   
             oScript.src="duniao.js";
-            document.getElementById("a").remove();
             document.getElementById("effect").volume = 0.5;
             document.getElementById("myaudio").volume = 0.2;
             document.getElementById("myaudio").play();
             oHead.appendChild(oScript);
         }        
         function loadecho(){
+            removeelements();
             var oHead = document.getElementsByTagName('HEAD').item(0);
             var oScript= document.createElement("script");
             oScript.type = "text/javascript";   
             oScript.src="echo.js";
-            document.getElementById("a").remove();
             document.getElementById("effect").volume = 0.5;
             document.getElementById("myaudio").volume = 0.2;
             document.getElementById("myaudio").play();
