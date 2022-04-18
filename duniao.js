@@ -23,7 +23,7 @@ const SceneOne = 1;
 var loading;
 
 var texthint = new createjs.Text("", "Italic 40px KaiTi", "#fff").set({x:190, y:900});//提示信息
-var textSceneone = new createjs.Text("水手从遥远的东方紧急赶来，\n\n在海上鸣响汽笛迎接他新生的孩子。\n\n那时他不曾预想：\n\n日后的小拉贝会像楼顶那只善飞的渡鸟一样，\n游走世界各地，飞得那么高，那么远，\n\n并深深奉献于他曾经去往的中国。"
+var textSceneone = new createjs.Text("水手从遥远的东方紧急赶来，\n\n在海上鸣响汽笛迎接他新生的孩子。\n\n那时他不曾预想：\n\n日后的小拉贝会像楼顶那只善飞的渡鸟一样，\n\n游走世界各地，飞得那么高，那么远，\n\n并深深奉献于他曾经去往的中国。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 var textSceneTwo = new createjs.Text("童年时，父亲从中国带回的那些传说和艺术品，\n\n就像一些文明的种子播撒在了拉贝心中。\n\n他兴奋于能有一份工作，让他领略东方古国文化的神韵。\n\n1918年，拉贝远渡重洋，来到了心仪已久的北京。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
@@ -271,7 +271,7 @@ function duniao_adjust_screen(){
 };
 
 function initSceneOne(){
-    Queue.on("complete", HandleCompleteSceneTwo, this);
+    Queue.on("complete", HandleCompleteSceneOne, this);
     Queue.on("progress", HandleProgress, this);
     Queue.loadManifest([
         {id:"Sceneone", src:"img/duniao/Sceneone.png"},
