@@ -279,7 +279,7 @@ function duniao_adjust_screen(){
 };
 
 function initSceneOne(){
-    Queue.on("complete", HandleCompleteSceneFour, this);
+    Queue.on("complete", HandleCompleteSceneTwo, this);
     Queue.on("progress", HandleProgress, this);
     Queue.loadManifest([
         {id:"Sceneone", src:"img/duniao/Sceneone.png"},
