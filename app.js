@@ -2,11 +2,16 @@ var stage = new createjs.Stage("wrapper");
 createjs.Touch.enable(stage);
 var container = new createjs.Container();
 stage.addChild(container);
-var text = container.addChild(new createjs.Text("The Diaries of John Rabe", "150px Times", "#fff").set({x:190, y:470}));
+loading = new createjs.Text("正在打开日记...  "+progressnum, "150px kaiti", "#fff").set({x:190, y:470});
+var text = container.addChild(loading);
 stage.update();
+var progressnum = 0;
 createjs.Ticker.setFPS(30);
 createjs.Ticker.addEventListener("tick", stage);
 var screen = 1;
+var loading;
+var begintext = new createjs.Text("1937年9月7日下午，\n\n一辆人力车停在了南京广州路小粉桥1号门前，\n\n从北方回来风尘仆仆的拉贝按响了门铃。\n\n他看到院子有一个简陋的防空洞，\n\n这是公司职员为对付来自头顶的狂轰滥炸一起挖的。\n\n敌机飞临南京上空了！"
+, "Italic 50px KaiTi", "#fff").set({x:100, y:100});
 function adjust_screen(){
     canvas = document.getElementById("wrapper");
     canvas.width = 1920;
@@ -58,6 +63,7 @@ function calculateY(e) {
 
 var Queue = new createjs.LoadQueue();
 Queue.on("complete", HandleComplete, this);
+Queue.on("progress", HandleProgress, this);
 Queue.loadManifest([
     {id: "bgm", src:"sound/bgm.m4a"},
     {id: "box_sound", src:"sound/box.wav"},
@@ -69,57 +75,76 @@ Queue.loadManifest([
     {id: "pointer", src:"img/pointer.png"},
     {id: "mession", src:"img/mession.png"}
 ]);
+function HandleProgress(){
+    loading.set({alpha:1});
+    let num = `${Math.floor(Queue.progress * 100)}%`;
+    progressnum = num;
+    container.removeChild(loading)
+    loading = new createjs.Text("正在打开日记...  "+progressnum, "150px kaiti", "#fff").set({x:190, y:470});
+    var text = container.addChild(loading);
+    stage.update();
+}
 function HandleComplete() {
-    bg = container.addChild(new createjs.Bitmap(Queue.getResult("box")));
-    things.push(new createjs.Bitmap(Queue.getResult("box_open")));
-    things.push(new createjs.Bitmap(Queue.getResult("mession")).set({x:270, y:-70, scaleX:0.5, scaleY:0.5}));
-    things.push(new createjs.Bitmap(Queue.getResult("pointer")).set({x:900, y:420, scaleX:0.4, scaleY:0.4}));
-    things.push(new createjs.Bitmap(Queue.getResult("outdoor")));
-    
-    bg.addEventListener("click", function() {
-
-        bg.removeEventListener("click", arguments.callee);
-        createjs.Tween.get(container).to({alpha:0}, 1000).call(function(){
-            var element = document.getElementById("main");
-            if (element.requestFullscreen) {
-                element.requestFullscreen();
-            } else if (element.mozRequestFullScreen) {
-                element.mozRequestFullScreen();
-            } else if (element.webkitRequestFullscreen) {
-                element.webkitRequestFullscreen();
-            } else if (element.msRequestFullscreen) {
-                element.msRequestFullscreen();
-            }
-            adjust_screen();
-            container.removeChild(bg);
-            container.removeChild(text);
-            container.addChild(things[0]);
-        }).to({alpha:1}, 1000);
-    });
-    things[0].addEventListener("click", function() {
-        things[0].removeEventListener("click", arguments.callee);
-        container.addChild(things[1]);
-        container.addChild(things[2]);
-    });
-    things[2].addEventListener("click", function() {
-        things[2].removeEventListener("click", arguments.callee);
-        createjs.Tween.get(container).to({alpha:0}, 1000).call(function(){
-        container.removeChild(things[0]);
-        container.removeChild(things[1]);
-        container.removeChild(things[2]);
-        container.addChild(text);
-        container.addChild(things[3]);
-        }).to({alpha:1}, 1000);
+    loading.set({alpha:0});
+    container.addChild(begintext);
+    begintext.set({alpha:0});
+    createjs.Tween.get(begintext).to({alpha:1}, 1000).call(function(){
+        createjs.Tween.get(begintext).to({alpha:1}, 7000).call(function(){
+            createjs.Tween.get(begintext).to({alpha:0}, 1000).call(function(){
+                bg = container.addChild(new createjs.Bitmap(Queue.getResult("box")));
+                things.push(new createjs.Bitmap(Queue.getResult("box_open")));
+                things.push(new createjs.Bitmap(Queue.getResult("mession")).set({x:270, y:-70, scaleX:0.5, scaleY:0.5}));
+                things.push(new createjs.Bitmap(Queue.getResult("pointer")).set({x:900, y:420, scaleX:0.4, scaleY:0.4}));
+                things.push(new createjs.Bitmap(Queue.getResult("outdoor")));
+                
+                bg.addEventListener("click", function() {
+            
+                    bg.removeEventListener("click", arguments.callee);
+                    createjs.Tween.get(container).to({alpha:0}, 1000).call(function(){
+                        var element = document.getElementById("main");
+                        if (element.requestFullscreen) {
+                            element.requestFullscreen();
+                        } else if (element.mozRequestFullScreen) {
+                            element.mozRequestFullScreen();
+                        } else if (element.webkitRequestFullscreen) {
+                            element.webkitRequestFullscreen();
+                        } else if (element.msRequestFullscreen) {
+                            element.msRequestFullscreen();
+                        }
+                        adjust_screen();
+                        container.removeChild(bg);
+                        container.addChild(things[0]);
+                    }).to({alpha:1}, 1000);
+                });
+                things[0].addEventListener("click", function() {
+                    things[0].removeEventListener("click", arguments.callee);
+                    container.addChild(things[1]);
+                    container.addChild(things[2]);
+                });
+                things[2].addEventListener("click", function() {
+                    things[2].removeEventListener("click", arguments.callee);
+                    createjs.Tween.get(container).to({alpha:0}, 1000).call(function(){
+                    container.removeChild(things[0]);
+                    container.removeChild(things[1]);
+                    container.removeChild(things[2]);
+                    container.addChild(things[3]);
+                    }).to({alpha:1}, 1000);
+                })
+                things[3].addEventListener("click", function() {
+                    things[3].removeEventListener("click", arguments.callee);
+                    createjs.Tween.get(container).to({alpha:0}, 1000).call(function(){
+                    state = 1;
+                    container.removeChild(things[3]);
+                    things.length = 0;
+                    bg.set({alpha:0.01});
+                    }).to({alpha:1}, 1000);
+                });
+            })
+        })
     })
-    things[3].addEventListener("click", function() {
-        things[3].removeEventListener("click", arguments.callee);
-        createjs.Tween.get(container).to({alpha:0}, 1000).call(function(){
-        state = 1;
-        container.removeChild(things[3]);
-        things.length = 0;
-        bg.set({alpha:0.01});
-        }).to({alpha:1}, 1000);
-    });
+
+
+    
 }
 
 /*box.onload = function() {
@@ -484,7 +509,6 @@ function gameover() {
     if(things[5].x == 630)
         state3_end();
     else {
-        text.text = "    You Were Bombed.";
         createjs.Tween.get(container).to({alpha:0.95}, 500).call(function(){})
 .to({alpha:0.01}, 5500).call(function(){window.location.reload();});
     }
