@@ -23,9 +23,9 @@ var SceneOne = 1;
 var loading;
 
 var texthint = new createjs.Text("", "Italic 40px KaiTi", "#fff").set({x:190, y:900});//提示信息
-var textSceneone = new createjs.Text("水手从遥远的东方紧急赶来，\n\n在海上鸣响汽笛迎接他新生的孩子。\n\n那时他不曾预想：\n\n日后的小拉贝会像楼顶那只善飞的渡鸟一样，\n\n游走世界各地，飞得那么高，那么远，\n\n并深深奉献于他曾经去往的中国。"
+var textSceneone = new createjs.Text("水手从遥远的东方紧急赶来，\n\n在海上鸣响汽笛迎接他新生的孩子。\n\n那时他不曾预想：\n\n日后，小拉贝会像楼顶那只善飞的渡鸟一样，\n\n游走世界各地，飞得那么高，那么远，\n\n并深深奉献于他曾经去往的中国。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
-var textSceneTwo = new createjs.Text("童年时，父亲从中国带回的那些传说和艺术品，\n\n就像一些文明的种子播撒在了拉贝心中。\n\n他兴奋于能有一份工作，让他领略东方古国文化的神韵。\n\n1918年，拉贝远渡重洋，来到了心仪已久的北京。"
+var textSceneTwo = new createjs.Text("童年时，父亲从中国带回的那些传说和艺术品，\n\n就像一些文明的种子播撒在拉贝心中。\n\n他兴奋于能有一份工作，让他领略东方古国文化的神韵。\n\n1918年，拉贝远渡重洋，来到了心仪已久的北京。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 var textSceneThree = new createjs.Text("\"年轻人，我们需要一名会计兼文书，\n\n如果你不计较工资的微薄，\n\n不嫌弃工作的辛劳，\n\n明天就可以来这儿上班。\""
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
@@ -35,25 +35,25 @@ var textSceneFour2 = new createjs.Text("在拉贝影响下，\n\n他的未婚妻
     ,"Italic 50px KaiTi","#fff").set({x:900, y:100});
 var textSceneFour3 = new createjs.Text("凭借着自己的才能与勤奋，\n\n拉贝在西门子站稳了脚跟，\n\n很快就出任西门子北京分公司经理，\n\n之后又在天津分公司工作。"
     ,"Italic 50px KaiTi","#fff").set({x:950, y:150});
-var textSceneFour4 = new createjs.Text("拉贝和公司的中国人相处得尤为融洽，\n\n他很喜欢和中国人交朋友，\n\n其中有一位交鲍家良的青年在他手下干会计，\n\n拉贝待他情同父子。"
+var textSceneFour4 = new createjs.Text("拉贝和公司的中国人相处得尤为融洽，\n\n他很喜欢和中国人交朋友，\n\n其中有一位叫鲍家良的青年在他手下干会计，\n\n拉贝待他情同父子。"
     ,"Italic 50px KaiTi","#fff").set({x:950, y:150});
 var textSceneFive1 = new createjs.Text("生意之余，拉贝热衷于领略中国文化的精髓。\n\n北京的博物馆、庙宇、宫殿、古玩市场、甚至周围的田野和乡村，\n\n都让他和道拉惊叹并赞不绝口。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 var textSceneFive2 = new createjs.Text("拿起老相机，\n\n看看100年前拉贝镜头下的颐和园是什么样子吧"
-    ,"Italic 50px KaiTi","#fff").set({x:100, y:350});
-var textSceneFive3 = new createjs.Text("出于对中国文化的热爱，\n\n他收集了大量有关北京的照片和绘画，\n\n并辅以对北京社会生活方方面面的详细记录。"
+    ,"Italic 50px KaiTi","#fff").set({x:100, y:280});
+var textSceneFive3 = new createjs.Text("出于对中国文化的热爱，\n\n他收集了大量有关北京的照片和绘画，\n\n辅以对北京社会生活方方面面的详细记录。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 var textSceneSix1 = new createjs.Text("1930年8月份，\n\n拉贝女儿的婚礼在天津一处教堂举行。\n\n牧师牵着两位新人的手说：\n\n天使们走到了一起。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 var textSceneSix2 = new createjs.Text("我一生中最美好的青年时代\n\n都在这个国家愉快度过，\n\n我的儿孙都出生在这里，我\n\n的事业在这里得到了成功，\n\n我始终得到了中国人的厚待。\n\n——约翰·拉贝"
     ,"Italic 50px KaiTi","#fff").set({x:1150, y:100});
-var textSceneSeven1 = new createjs.Text("1930年，\n\n因为出色的工作能力，\n\n西门子上海总部任命拉贝为南京分公司经理，\n\n把他放到中国首都来开辟业务。"
+var textSceneSeven1 = new createjs.Text("1930年，\n\n因为出色的工作能力，\n\n西门子上海总部任命拉贝为南京分公司经理，\n\n把他派到中国首都来开辟业务。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 var endingtext = new createjs.Text("约翰·拉贝"
     ,"Italic 300px KaiTi","#fff").set({x:220, y:350});
 var photo1text = new createjs.Text("十七孔桥"
     ,"Italic 50px KaiTi","#fff").set({x:300, y:50});
-var photo3text = new createjs.Text("四大部州"
+var photo3text = new createjs.Text("四大部洲"
     ,"Italic 50px KaiTi","#fff").set({x:1100, y:50});
 var photo2text = new createjs.Text("清晏舫"
     ,"Italic 50px KaiTi","#fff").set({x:620, y:950});
@@ -279,7 +279,7 @@ function duniao_adjust_screen(){
 };
 
 function initSceneOne(){
-    Queue.on("complete", HandleCompleteSceneOne, this);
+    Queue.on("complete", HandleCompleteSceneFour, this);
     Queue.on("progress", HandleProgress, this);
     Queue.loadManifest([
         {id:"Sceneone", src:"img/duniao/Sceneone.png"},
