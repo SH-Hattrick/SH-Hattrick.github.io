@@ -8,15 +8,15 @@ var rects = [];//diary turn window
 var bg;
 var Queue = new createjs.LoadQueue();
 var isMobile = false;
-const COMPLETED = 2;
-const READY = 1;
-const DISABLED = 0;
+var COMPLETED = 2;
+var READY = 1;
+var DISABLED = 0;
 
 var itemHeld = null;
 
 var progressnum = 0;
 var SceneState = 0;
-const SceneOne = 1;
+var SceneOne = 1;
 var loading;
 
 var texthint = new createjs.Text("", "Italic 40px KaiTi", "#fff").set({x:190, y:900});//提示信息

@@ -8,9 +8,9 @@ var rects = [];//diary turn window
 var bg;
 var Queue = new createjs.LoadQueue();
 var isMobile = false;
-const COMPLETED = 2;
-const READY = 1;
-const DISABLED = 0;
+var COMPLETED = 2;
+var READY = 1;
+var DISABLED = 0;
 
 var itemHeld = null;
 
@@ -19,7 +19,7 @@ var ravenmovedir = 1;
 
 var progressnum = 0;
 var SceneState = 0;
-const SceneOne = 1;
+var SceneOne = 1;
 var loading;
 
 var texthint = new createjs.Text("", "Italic 40px KaiTi", "#fff").set({x:190, y:900});//提示信息
@@ -453,7 +453,7 @@ function HandleCompleteSceneSeven(){
 
     progressnum = 0;
 
-    objects["map"] = new createjs.Bitmap(Queue.getResult("map")).set({alpha:0, scaleX:0.2, scaleY:0.2, x:600});
+    objects["map"] = new createjs.Bitmap(Queue.getResult("map")).set({alpha:0, scaleX:0.6, scaleY:0.6, x:100});
 
     drawSceneSeven();
 }
@@ -568,15 +568,7 @@ function drawSceneSeven(){
 }
 
 function ending(){
-    container.addChild(endingtext);
-    endingtext.set({alpha:0});
-    createjs.Tween.get(endingtext).to({alpha:1}, 1000).call(function(){
-        createjs.Tween.get(endingtext).to({alpha:1}, 7000).call(function(){
-            createjs.Tween.get(endingtext).to({alpha:0}, 1000).call(function(){
-                container.removeChild(endingtext);
-            });
-        });
-    });
+    location.reload();
 }
 
 function showHint(str, time){

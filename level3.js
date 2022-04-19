@@ -11,14 +11,14 @@ var isMobile = false;
 var loading;
 var progressnum = 0;
 
-const COMPLETED = 2;
-const READY = 1;
-const DISABLED = 0;
+var COMPLETED = 2;
+var READY = 1;
+var DISABLED = 0;
 
 var SceneState = 0;
-const SceneOne = 1;
-const SceneTwo = 2;
-const ScenePhone = 3;
+var SceneOne = 1;
+var SceneTwo = 2;
+var ScenePhone = 3;
 
 var phoneOffset = 0; //输入到第几个数字
 var dianum = [0,0,0,0,0,0,0,0,0,0]; //数字按钮id
@@ -438,6 +438,10 @@ function onRabeletterClicked(){
     }
 }
 
+function ending(){
+    location.reload();
+}
+
 function ondiaryOneClicked(){
     if(objects["diaryOne"].scaleX < 0.2){
         if(controller.checkStatus("sendmail") == COMPLETED){
@@ -654,7 +658,7 @@ function oncarClicked(){
             createjs.Tween.get(endingtext).to({alpha:1}, 1000).call(function(){
                 createjs.Tween.get(endingtext).to({alpha:1}, 7000).call(function(){
                     createjs.Tween.get(endingtext).to({alpha:0}, 1000).call(function(){
-                        
+                        ending();
                     });
                 });
             });

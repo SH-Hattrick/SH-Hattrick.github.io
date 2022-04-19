@@ -15,7 +15,8 @@ function init(){
     createjs.MotionGuidePlugin.install();
     container = new createjs.Container();
     stage.addChild(container);
-
+    document.getElementById("effect").volume = 0.5;
+    document.getElementById("myaudio").volume = 0.2;
     stage.enableMouseOver();
     createjs.Touch.enable(stage);
     stage.update();
@@ -131,6 +132,23 @@ function removeelements(){
     container.removeChild(objects["but5"]);
     container.removeChild(objects["but6"]);
     container.removeChild(objects["init"]);
+}
+function removejscssfile(filename,filetype){
+
+    var targetelement=(filetype=="js")? "script" :(filetype=="css")? "link" : "none"
+    
+    var targetattr=(filetype=="js")?"src" : (filetype=="css")? "href" :"none"
+    
+    var allsuspects=document.getElementsByTagName(targetelement)
+    
+    for (var i=allsuspects.length; i>=0;i--){
+    
+    if (allsuspects[i] &&allsuspects[i].getAttribute(targetattr)!=null && allsuspects[i].getAttribute(targetattr).indexOf(filename)!=-1)
+    
+      allsuspects[i].parentNode.removeChild(allsuspects[i])
+    
+    }
+    
 }
 function onbut1Clicked(){
     container.removeChild(objects["init"]);

@@ -10,16 +10,16 @@ var Queue = new createjs.LoadQueue();
 
 var isMobile = false;
 
-const COMPLETED = 2;
-const READY = 1;
-const DISABLED = 0;
+var COMPLETED = 2;
+var READY = 1;
+var DISABLED = 0;
 
 var itemHeld = null;
 
 var progressnum = 0;
 var SceneState = 0;
-const SceneOne = 1;
-const SceneMap = 10;
+var SceneOne = 1;
+var SceneMap = 10;
 var loading;
 var diaryState = 0;
 //var text = container.addChild(new createjs.Text("加载中...", "150px Times", "#fff").set({x:190, y:470}));
@@ -420,7 +420,9 @@ function ondiaryClicked(){
                     endingtext.set({alpha:0});
                     createjs.Tween.get(endingtext).to({alpha:1}, 1000).call(function(){
                         createjs.Tween.get(endingtext).to({alpha:1}, 7000).call(function(){
-                            createjs.Tween.get(endingtext).to({alpha:0}, 1000);
+                            createjs.Tween.get(endingtext).to({alpha:0}, 1000).call(function(){
+                                ending();
+                            });
                         });
                     });
                 });
@@ -632,6 +634,10 @@ function clearScreen(){
         objects[i].set({alpha:0});
         container.removeChild(objects[i]);
     }
+}
+
+function ending(){
+    location.reload();
 }
 ///////////////////////////////////////Now we are on a go/////////////////////////////////////////
 init();
