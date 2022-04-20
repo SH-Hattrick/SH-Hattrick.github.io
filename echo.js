@@ -22,35 +22,12 @@ var SceneOne = 1;
 var loading;
 
 var texthint = new createjs.Text("", "Italic 40px KaiTi", "#fff").set({x:190, y:900});//提示信息
-var textSceneone = new createjs.Text("水手从遥远的东方紧急赶来，\n\n在海上鸣响汽笛迎接他新生的孩子。\n\n那时他不曾预想：\n\n日后的小拉贝会像楼顶那只善飞的渡鸟一样，游走世界各地，飞得那么高，那么远，\n\n并深深奉献于他曾经去往的中国。"
+var begintext = new createjs.Text("1938年2月底，\n\n拉贝自南京下关坐船前往上海，返回德国。\n\n夕阳下的码头，浪水冲击着船身。\n\n拉贝似乎仍看见难民带着泪水与惊恐，与他依依惜别。\n\n\"再见，我心底里深爱过的南京\"。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
-var textSceneTwo = new createjs.Text("童年时，父亲从中国带回的那些传说和艺术品，\n\n就像一些文明的种子播撒在了拉贝心中。\n\n他兴奋于能有一份工作，让他领略东方古国文化的神韵。\n\n1918年，拉贝远渡重洋，来到了心仪已久的北京。"
-    ,"Italic 50px KaiTi","#000").set({x:100, y:100});
-var textSceneThree = new createjs.Text("年轻人，我们需要一名会计兼文书，\n\n如果你不计较工资的微博，\n\n不嫌弃工作的辛劳，\n\n明天就可以来这儿上班。"
+var museumtext = new createjs.Text("斯人远逝，大爱犹存。进入博物馆，\n\n了解拉贝故事发现的经历和拉贝精神在今天的传播。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
-var textSceneFour1 = new createjs.Text("拉贝，感谢你出色地完成会计整理的任务，\n\n为公司省去每月结算的好几百美元，\n\n你真是公司商务中的第一流专家！"
+var endingtext = new createjs.Text("善良感恩的中国人不会忘记战争寒夜里为救助生命而奔走呼告的友人。\n\n拉贝的精神穿越时间与空间，\n\n仍温暖着当代的我们。\n\n屏幕前亲爱的您，感谢您同我们一起寻找拉贝，\n\n愿我们一道珍视和平。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
-var textSceneFour2 = new createjs.Text("在拉贝影响下，\n\n他的未婚妻道拉对中国的向往之情由来已久。\n\n在爱人到达北京的次年，\n\n勇敢的道拉独自旅行到中国，\n\n1909年10月，\n\n他们在北京举行了婚礼"
-    ,"Italic 50px KaiTi","#fff").set({x:900, y:100});
-var textSceneFour3 = new createjs.Text("凭借着自己的才能与勤奋，\n\n拉贝在西门子站稳了脚跟，\n\n很快就出任西门子北京分公司经理，\n\n之后又在天津分公司工作。"
-    ,"Italic 50px KaiTi","#fff").set({x:950, y:100});
-var textSceneFour4 = new createjs.Text("拉贝和公司的中国人相处得尤为融洽，\n\n他很喜欢和中国人交朋友，\n\n其中有一位交鲍家良的青年在他手下干会计，\n\n拉贝待他情同父子。"
-    ,"Italic 50px KaiTi","#fff").set({x:950, y:100});
-var textSceneFive1 = new createjs.Text("生意之余，拉贝热衷于领略中国文化的精髓。\n\n北京的博物馆、庙宇、宫殿、古玩市场、甚至周围的田野和乡村，\n\n都让他和道拉惊叹并赞不绝口。"
-    ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
-var textSceneFive2 = new createjs.Text("拿起老相机，\n\n看看100年前拉贝镜头下的颐和园是什么样子吧"
-    ,"Italic 50px KaiTi","#fff").set({x:100, y:500});
-var textSceneFive3 = new createjs.Text("出于对中国文化的热爱，\n\n他收集了大量有关北京的照片和绘画，\n\n并辅以对北京社会生活方方面面的详细记录。"
-    ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
-var textSceneSix1 = new createjs.Text("1930年8月份，\n\n拉贝女儿的婚礼在天津一处教堂举行。\n\n牧师牵着两位新人的手说：\n\n天使们走到了一起。"
-    ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
-var textSceneSix2 = new createjs.Text("我一生中最美好的青年时代\n\n都在这个国家愉快度过，\n\n我的儿孙都出生在这里，我\n\n的事业在这里得到了成功，\n\n我始终得到了中国人的厚待。\n\n——约翰·拉贝"
-    ,"Italic 50px KaiTi","#fff").set({x:1150, y:100});
-var textSceneSeven1 = new createjs.Text("1930年，\n\n因为出色的工作能力，\n\n西门子上海总部任命拉贝为南京分公司经理，\n\n把他放到中国首都来开辟业务。"
-    ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
-var endingtext = new createjs.Text("约翰·拉贝"
-    ,"Italic 300px KaiTi","#fff").set({x:220, y:350});
-    
 /////////////////////////////////////// class /////////////////////////////////////////////
 
 
@@ -170,7 +147,13 @@ class TaskController{
         this.initTask();
     }
     initTask(){
-
+        this.addTask(new Task(this.size,"photo1",[],true));
+        this.addTask(new Task(this.size,"photo2",[],true));
+        this.addTask(new Task(this.size,"photo3",[],true));
+        this.addTask(new Task(this.size,"photo4",[],true));
+        this.addTask(new Task(this.size,"photo5",[],true));
+        this.addTask(new Task(this.size,"photo6",[],true));
+        this.addTask(new Task(this.size,"photo7",[],true));
     }
     enableTask(name){
         for(var i = 0;i<this.tasks.length; ++i){
@@ -244,6 +227,10 @@ function handleTick(){
     //itemHeld = null;
 }
 
+function ending(){
+    location.reload();
+}
+
 function duniao_adjust_screen(){
     canvas = document.getElementById("wrapper");
     canvas.width = 1920;
@@ -261,7 +248,7 @@ function duniao_adjust_screen(){
 };
 
 function initSceneOne(){
-    Queue.on("complete", HandleCompleteSceneTwo, this);
+    Queue.on("complete", HandleCompleteSceneOne, this);
     Queue.on("progress", HandleProgress, this);
     Queue.loadManifest([
         {id:"dock", src:"img/echo/dock.png"},
@@ -322,7 +309,7 @@ function HandleCompleteSceneTwo(){
     objects["photo5"] = new createjs.Bitmap(Queue.getResult("photo5")).set({alpha:0, x:300, y:300, scaleX:0.2, scaleY:0.4});
     objects["photo6"] = new createjs.Bitmap(Queue.getResult("photo6")).set({alpha:0, x:900, y:250, scaleX:0.2, scaleY:0.4});
     objects["photo7"] = new createjs.Bitmap(Queue.getResult("photo7")).set({alpha:0, x:1400, y:200, scaleX:0.2, scaleY:0.4});
-    objects["play"] = new createjs.Bitmap(Queue.getResult("play")).set({alpha:0, x:200, y:200, scaleX:0.2, scaleY:0.2});
+    objects["play"] = new createjs.Bitmap(Queue.getResult("play")).set({alpha:0, x:50, y:50, scaleX:0.2, scaleY:0.2});
     
     objects["arrowhead2"].addEventListener("click", onarrow2Scene2Clicked);
 
@@ -343,22 +330,31 @@ function drawSceneOne(){
 
     removeHint();
 
-    container.addChild(objects["dock"]);
-    container.addChild(objects["rabe"]);
-
-    createjs.Tween.get(objects["dock"]).to({alpha:1}, 2000).call(function(){
-        createjs.Tween.get(objects["rabe"]).to({alpha:1}, 2000).call(function(){
-            objects["dock"].addEventListener("click", function(){
-                createjs.Tween.get(objects["rabe"]).to({alpha:0}, 1000);
-                createjs.Tween.get(objects["dock"]).to({alpha:0}, 1000).call(function(){
-                    container.removeChild(objects["dock"]);
-                    initSceneTwo();
-                })
-            });
+    container.addChild(begintext);
+    begintext.set({alpha:0});
+    createjs.Tween.get(begintext).to({alpha:1}, 1000).call(function(){
+        createjs.Tween.get(begintext).to({alpha:1}, 7000).call(function(){
+            createjs.Tween.get(begintext).to({alpha:0}, 1000).call(function(){
+                container.addChild(objects["dock"]);
+                container.addChild(objects["rabe"]);
+            
+                createjs.Tween.get(objects["dock"]).to({alpha:1}, 2000).call(function(){
+                    createjs.Tween.get(objects["rabe"]).to({alpha:1}, 2000).call(function(){
+                        objects["dock"].addEventListener("click", function(){
+                            createjs.Tween.get(objects["rabe"]).to({alpha:0}, 1000);
+                            createjs.Tween.get(objects["dock"]).to({alpha:0}, 1000).call(function(){
+                                container.removeChild(objects["dock"]);
+                                initSceneTwo();
+                            })
+                        });
+                    })
+                });
+            
+                stage.update();
+            })
         })
-    });
+    })
 
-    stage.update();
 }
 
 function drawSceneTwo(){
@@ -366,27 +362,37 @@ function drawSceneTwo(){
 
     removeHint();
 
-    container.addChild(objects["s2_1"]);
-    container.addChild(objects["s2_2"]);
-    container.addChild(objects["arrowhead1"]);
-    container.addChild(objects["arrowhead2"]);
+    container.addChild(museumtext);
+    museumtext.set({alpha:0});
+    createjs.Tween.get(museumtext).to({alpha:1}, 1000).call(function(){
+        createjs.Tween.get(museumtext).to({alpha:1}, 7000).call(function(){
+            createjs.Tween.get(museumtext).to({alpha:0}, 1000).call(function(){
 
-    container.addChild(objects["photo1"]);
-    container.addChild(objects["photo2"]);
-    container.addChild(objects["photo3"]);
-    container.addChild(objects["photo4"]);
-    container.addChild(objects["photo5"]);
-    container.addChild(objects["photo6"]);
-    container.addChild(objects["photo7"]);
-
-    createjs.Tween.get(objects["arrowhead1"]).to({alpha:1}, 1000);
-    createjs.Tween.get(objects["s2_1"]).to({alpha:1}, 1000).call(function(){
-        objects["arrowhead1"].addEventListener("click", onarrow1Scene2Clicked);
+                container.addChild(objects["s2_1"]);
+                container.addChild(objects["s2_2"]);
+                container.addChild(objects["arrowhead1"]);
+                container.addChild(objects["arrowhead2"]);
+            
+                container.addChild(objects["photo1"]);
+                container.addChild(objects["photo2"]);
+                container.addChild(objects["photo3"]);
+                container.addChild(objects["photo4"]);
+                container.addChild(objects["photo5"]);
+                container.addChild(objects["photo6"]);
+                container.addChild(objects["photo7"]);
+            
+                createjs.Tween.get(objects["arrowhead1"]).to({alpha:1}, 1000);
+                createjs.Tween.get(objects["s2_1"]).to({alpha:1}, 1000).call(function(){
+                    objects["arrowhead1"].addEventListener("click", onarrow1Scene2Clicked);
+                })
+            
+                container.addChild(objects["play"]);
+            
+                stage.update();
+            })
+        })
     })
 
-    container.addChild(objects["play"]);
-
-    stage.update();
 }
 
 function onarrow1Scene2Clicked(){
@@ -424,13 +430,18 @@ function onarrow2Scene2Clicked(){
 function onphoto1Clicked(){
     if(objects["photo1"].scaleX > 0.5){
         createjs.Tween.get(objects["photo1"]).to({alpha:0}, 1000).call(function(){
-            showPhono();
-            objects["photo1"].set({alpha:0.01, x:50, y:350, scaleX:0.2, scaleY:0.2});
-            createjs.Tween.get(objects["s2_1"]).to({alpha:1}, 1000);
+            createjs.Tween.get(objects["s2_1"]).to({alpha:1}, 1000).call(function(){
+                showPhono();
+                objects["photo1"].set({alpha:0.01, x:50, y:350, scaleX:0.2, scaleY:0.2});
+                objects["photo2"].set({alpha:0.01});
+                objects["photo3"].set({alpha:0.01});
+                objects["photo4"].set({alpha:0.01});
+                controller.completeTask("photo1");
+                if(checkEndingCondition()){
+                    showEndingScene();
+                }
+            });
             createjs.Tween.get(objects["arrowhead1"]).to({alpha:1}, 1000);
-            objects["photo2"].set({alpha:0.01});
-            objects["photo3"].set({alpha:0.01});
-            objects["photo4"].set({alpha:0.01});
         });
         
         return;
@@ -451,13 +462,18 @@ function onphoto1Clicked(){
 function onphoto2Clicked(){
     if(objects["photo2"].scaleX > 0.5){
         createjs.Tween.get(objects["photo2"]).to({alpha:0}, 1000).call(function(){
-            showPhono();
-            objects["photo2"].set({alpha:0.01, x:500, y:270, scaleX:0.2, scaleY:0.3});
-            createjs.Tween.get(objects["s2_1"]).to({alpha:1}, 1000);
+            createjs.Tween.get(objects["s2_1"]).to({alpha:1}, 1000).call(function(){
+                showPhono();
+                objects["photo2"].set({alpha:0.01, x:500, y:270, scaleX:0.2, scaleY:0.3});
+                objects["photo1"].set({alpha:0.01});
+                objects["photo3"].set({alpha:0.01});
+                objects["photo4"].set({alpha:0.01});
+                controller.completeTask("photo2");
+                if(checkEndingCondition()){
+                    showEndingScene();
+                }
+            });
             createjs.Tween.get(objects["arrowhead1"]).to({alpha:1}, 1000);
-            objects["photo1"].set({alpha:0.01});
-            objects["photo3"].set({alpha:0.01});
-            objects["photo4"].set({alpha:0.01});
         });
         
         return;
@@ -478,13 +494,19 @@ function onphoto2Clicked(){
 function onphoto3Clicked(){
     if(objects["photo3"].scaleX > 0.5){
         createjs.Tween.get(objects["photo3"]).to({alpha:0}, 1000).call(function(){
-            showPhono();
-            objects["photo3"].set({alpha:0.01, x:1000, y:350, scaleX:0.2, scaleY:0.2});
-            createjs.Tween.get(objects["s2_1"]).to({alpha:1}, 1000);
+            createjs.Tween.get(objects["s2_1"]).to({alpha:1}, 1000).call(function(){
+                showPhono();
+                objects["photo3"].set({alpha:0.01, x:1000, y:350, scaleX:0.2, scaleY:0.2});
+                objects["photo2"].set({alpha:0.01});
+                objects["photo1"].set({alpha:0.01});
+                objects["photo4"].set({alpha:0.01});
+                controller.completeTask("photo3");
+                if(checkEndingCondition()){
+                    showEndingScene();
+                }
+            });
             createjs.Tween.get(objects["arrowhead1"]).to({alpha:1}, 1000);
-            objects["photo2"].set({alpha:0.01});
-            objects["photo1"].set({alpha:0.01});
-            objects["photo4"].set({alpha:0.01});
+
         });
         
         return;
@@ -505,13 +527,20 @@ function onphoto3Clicked(){
 function onphoto4Clicked(){
     if(objects["photo4"].scaleX > 0.5){
         createjs.Tween.get(objects["photo4"]).to({alpha:0}, 1000).call(function(){
-            showPhono();
-            objects["photo4"].set({alpha:0.01, x:1500, y:350, scaleX:0.2, scaleY:0.3});
-            createjs.Tween.get(objects["s2_1"]).to({alpha:1}, 1000);
+
+            createjs.Tween.get(objects["s2_1"]).to({alpha:1}, 1000).call(function(){
+                showPhono();
+                objects["photo4"].set({alpha:0.01, x:1500, y:350, scaleX:0.2, scaleY:0.3});
+                objects["photo2"].set({alpha:0.01});
+                objects["photo3"].set({alpha:0.01});
+                objects["photo1"].set({alpha:0.01});
+                controller.completeTask("photo4");
+                if(checkEndingCondition()){
+                    showEndingScene();
+                }
+            });
             createjs.Tween.get(objects["arrowhead1"]).to({alpha:1}, 1000);
-            objects["photo2"].set({alpha:0.01});
-            objects["photo3"].set({alpha:0.01});
-            objects["photo1"].set({alpha:0.01});
+
         });
         
         return;
@@ -533,12 +562,18 @@ function onphoto4Clicked(){
 function onphoto5Clicked(){
     if(objects["photo5"].scaleX > 0.5){
         createjs.Tween.get(objects["photo5"]).to({alpha:0}, 1000).call(function(){
-            showPhono();
-            objects["photo5"].set({alpha:0.01, x:300, y:300, scaleX:0.2, scaleY:0.4});
             createjs.Tween.get(objects["s2_2"]).to({alpha:1}, 1000);
-            createjs.Tween.get(objects["arrowhead2"]).to({alpha:1}, 1000);
-            objects["photo6"].set({alpha:0.01});
-            objects["photo7"].set({alpha:0.01});
+            createjs.Tween.get(objects["arrowhead2"]).to({alpha:1}, 1000).call(function(){
+                showPhono();
+                objects["photo5"].set({alpha:0.01, x:300, y:300, scaleX:0.2, scaleY:0.4});
+                objects["photo6"].set({alpha:0.01});
+                objects["photo7"].set({alpha:0.01});
+                controller.completeTask("photo5");
+                if(checkEndingCondition()){
+                    showEndingScene();
+                }
+            });
+
         });
         
         return;
@@ -558,12 +593,17 @@ function onphoto5Clicked(){
 function onphoto6Clicked(){
     if(objects["photo6"].scaleX > 0.5){
         createjs.Tween.get(objects["photo6"]).to({alpha:0}, 1000).call(function(){
-            showPhono();
-            objects["photo6"].set({alpha:0.01, x:900, y:250, scaleX:0.2, scaleY:0.4});
-            createjs.Tween.get(objects["s2_2"]).to({alpha:1}, 1000);
+            createjs.Tween.get(objects["s2_2"]).to({alpha:1}, 1000).call(function(){
+                showPhono();
+                objects["photo6"].set({alpha:0.01, x:900, y:250, scaleX:0.2, scaleY:0.4});
+                objects["photo5"].set({alpha:0.01});
+                objects["photo7"].set({alpha:0.01});
+                controller.completeTask("photo6");
+                if(checkEndingCondition()){
+                    showEndingScene();
+                }
+            });
             createjs.Tween.get(objects["arrowhead2"]).to({alpha:1}, 1000);
-            objects["photo5"].set({alpha:0.01});
-            objects["photo7"].set({alpha:0.01});
         });
         
         return;
@@ -583,12 +623,18 @@ function onphoto6Clicked(){
 function onphoto7Clicked(){
     if(objects["photo7"].scaleX > 0.5){
         createjs.Tween.get(objects["photo7"]).to({alpha:0}, 1000).call(function(){
-            showPhono();
-            objects["photo7"].set({alpha:0.01, x:1400, y:200, scaleX:0.2, scaleY:0.4});
-            createjs.Tween.get(objects["s2_2"]).to({alpha:1}, 1000);
+            createjs.Tween.get(objects["s2_2"]).to({alpha:1}, 1000).call(function(){
+                showPhono();
+                objects["photo7"].set({alpha:0.01, x:1400, y:200, scaleX:0.2, scaleY:0.4});
+                objects["photo5"].set({alpha:0.01});
+                objects["photo6"].set({alpha:0.01});
+                controller.completeTask("photo7");
+                if(checkEndingCondition()){
+                    showEndingScene();
+                }
+            });
             createjs.Tween.get(objects["arrowhead2"]).to({alpha:1}, 1000);
-            objects["photo5"].set({alpha:0.01});
-            objects["photo6"].set({alpha:0.01});
+
         });
         
         return;
@@ -642,7 +688,7 @@ function clearScreen(){
 }
 
 function showPhono(){
-    if(objects["play"].alpha == 0){
+    if(objects["s2_1"].alpha == 0){
         objects["play"].set({alpha:1});
     }
     else{
@@ -653,6 +699,35 @@ function showPhono(){
 
 function playNarration(){
     playEffect(audioName, 4000);
+}
+
+function checkEndingCondition(){
+    return controller.checkStatus("photo1") == COMPLETED &&
+    controller.checkStatus("photo2") == COMPLETED &&
+    controller.checkStatus("photo3") == COMPLETED &&
+    controller.checkStatus("photo4") == COMPLETED &&
+    controller.checkStatus("photo5") == COMPLETED &&
+    controller.checkStatus("photo6") == COMPLETED &&
+    controller.checkStatus("photo7") == COMPLETED ;
+}
+
+function showEndingScene(){
+    createjs.Tween.get(objects["arrowhead2"]).to({alpha:0}, 2000);
+    createjs.Tween.get(objects["arrowhead1"]).to({alpha:0}, 2000);
+    createjs.Tween.get(objects["s2_2"]).to({alpha:0}, 2000)
+    createjs.Tween.get(objects["s2_1"]).to({alpha:0}, 2000).call(function(){
+        container.addChild(endingtext);
+        endingtext.set({alpha:0});
+        createjs.Tween.get(endingtext).to({alpha:1}, 1000).call(function(){
+            createjs.Tween.get(endingtext).to({alpha:1}, 7000).call(function(){
+                createjs.Tween.get(endingtext).to({alpha:0}, 1000).call(function(){
+                    ending();
+                });
+            });
+        });
+    });
+
+
 }
 ///////////////////////////////////////Now we are on a go/////////////////////////////////////////
 init();
