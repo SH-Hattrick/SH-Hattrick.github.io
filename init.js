@@ -76,7 +76,7 @@ function loadlevel1(){
     oScript.type = "text/javascript";   
     oScript.src="app.js";
     document.getElementById("effect").volume = 0.5;
-    document.getElementById("myaudio").volume = 0.2;
+    document.getElementById("myaudio").volume = 0.15;
     document.getElementById("myaudio").play();
     oHead.appendChild(oScript);
 }
@@ -87,7 +87,7 @@ function loadlevel2(){
     oScript.type = "text/javascript";   
     oScript.src="level2.js";
     document.getElementById("effect").volume = 0.5;
-    document.getElementById("myaudio").volume = 0.2;
+    document.getElementById("myaudio").volume = 0.15;
     document.getElementById("myaudio").play();
     oHead.appendChild(oScript);
 }
@@ -98,7 +98,7 @@ function loadlevel3(){
     oScript.type = "text/javascript";   
     oScript.src="level3.js";
     document.getElementById("effect").volume = 0.5;
-    document.getElementById("myaudio").volume = 0.2;
+    document.getElementById("myaudio").volume = 0.15;
     document.getElementById("myaudio").play();
     oHead.appendChild(oScript);
 }
@@ -109,7 +109,7 @@ function loadduniao(){
     oScript.type = "text/javascript";   
     oScript.src="duniao.js";
     document.getElementById("effect").volume = 0.5;
-    document.getElementById("myaudio").volume = 0.2;
+    document.getElementById("myaudio").volume = 0.15;
     document.getElementById("myaudio").play();
     oHead.appendChild(oScript);
 }        
@@ -120,7 +120,7 @@ function loadecho(){
     oScript.type = "text/javascript";   
     oScript.src="echo.js";
     document.getElementById("effect").volume = 0.5;
-    document.getElementById("myaudio").volume = 0.2;
+    document.getElementById("myaudio").volume = 0.15;
     document.getElementById("myaudio").play();
     oHead.appendChild(oScript);
 }

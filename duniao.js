@@ -279,7 +279,7 @@ function duniao_adjust_screen(){
 };
 
 function initSceneOne(){
-    Queue.on("complete", HandleCompleteSceneTwo, this);
+    Queue.on("complete", HandleCompleteSceneOne, this);
     Queue.on("progress", HandleProgress, this);
     Queue.loadManifest([
         {id:"Sceneone", src:"img/duniao/Sceneone.png"},
@@ -911,13 +911,8 @@ function scene5end(){
 }
 
 function playEffect(str, timegap){
-    
-    document.getElementById("myaudio").volume = 0.05;
     document.getElementById("effect").src = "sound/" + str;
     document.getElementById("effect").play();
-    setTimeout(function(){
-        document.getElementById("myaudio").volume = 0.2;
-    }, timegap);
 }
 
 function clearScreen(){
