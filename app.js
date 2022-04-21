@@ -147,6 +147,16 @@ function HandleComplete() {
     
 }
 
+function pauseAudio(){
+    document.getElementById("effect").pause();
+}
+
+function playEffect(str, timegap){
+    document.getElementById("effect").src = "sound/" + str;
+    document.getElementById("effect").play();
+}
+
+
 /*box.onload = function() {
     bg = container.addChild(new createjs.Bitmap(this));
     bg.addEventListener("click", function() {

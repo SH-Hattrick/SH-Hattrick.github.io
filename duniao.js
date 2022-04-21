@@ -528,7 +528,12 @@ function drawSceneSix(){
             createjs.Tween.get(textSceneSix1).to({alpha:0},1000).call(function(){
                 container.removeChild(textSceneSix1);
                 container.addChild(textSceneSix2);
-                container.addChild(objects["family"])
+                container.addChild(objects["family"]);
+
+                document.getElementById("myaudio").pause();
+                document.getElementById("myaudio").src = "sound/m3.mp3";
+                document.getElementById("myaudio").play();
+
                 textSceneSix2.set({alpha:0});
                 createjs.Tween.get(objects["family"]).to({alpha:1}, 1000);
                 createjs.Tween.get(textSceneSix2).to({alpha:1}, 1000).call(function(){
@@ -913,6 +918,10 @@ function scene5end(){
 function playEffect(str, timegap){
     document.getElementById("effect").src = "sound/" + str;
     document.getElementById("effect").play();
+}
+
+function pauseAudio(){
+    document.getElementById("effect").pause();
 }
 
 function clearScreen(){

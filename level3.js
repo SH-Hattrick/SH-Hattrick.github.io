@@ -348,6 +348,16 @@ function HandleCompleteSceneOne() {
     })
 }
 
+function playEffect(str, timegap){
+    document.getElementById("effect").src = "sound/" + str;
+    document.getElementById("effect").play();
+    document.getElementById("effect").volume = 0.8;
+}
+
+function pauseAudio(){
+    document.getElementById("effect").pause();
+}
+
 function drawSceneOne(){
     bg = container.addChild(objects["bg1"]);
 

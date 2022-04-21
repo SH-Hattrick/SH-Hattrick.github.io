@@ -70,6 +70,7 @@ function init_drawSceneOne(){
 }
 
 function loadlevel1(){
+    pauseAudio();
     removeelements();
     var oHead = document.getElementsByTagName('HEAD').item(0);
     var oScript= document.createElement("script");
@@ -77,10 +78,12 @@ function loadlevel1(){
     oScript.src="app.js";
     document.getElementById("effect").volume = 0.5;
     document.getElementById("myaudio").volume = 0.15;
+    document.getElementById("myaudio").src = "sound/m4-1.mp3";
     document.getElementById("myaudio").play();
     oHead.appendChild(oScript);
 }
 function loadlevel2(){
+    pauseAudio();
     removeelements();
     var oHead = document.getElementsByTagName('HEAD').item(0);
     var oScript= document.createElement("script");
@@ -88,10 +91,12 @@ function loadlevel2(){
     oScript.src="level2.js";
     document.getElementById("effect").volume = 0.5;
     document.getElementById("myaudio").volume = 0.15;
+    document.getElementById("myaudio").src = "sound/m5.mp3";
     document.getElementById("myaudio").play();
     oHead.appendChild(oScript);
 }
 function loadlevel3(){
+    pauseAudio();
     removeelements();
     var oHead = document.getElementsByTagName('HEAD').item(0);
     var oScript= document.createElement("script");
@@ -99,10 +104,12 @@ function loadlevel3(){
     oScript.src="level3.js";
     document.getElementById("effect").volume = 0.5;
     document.getElementById("myaudio").volume = 0.15;
+    document.getElementById("myaudio").src = "sound/m6-2.mp3";
     document.getElementById("myaudio").play();
     oHead.appendChild(oScript);
 }
 function loadduniao(){
+    pauseAudio();
     removeelements();
     var oHead = document.getElementsByTagName('HEAD').item(0);
     var oScript= document.createElement("script");
@@ -110,10 +117,12 @@ function loadduniao(){
     oScript.src="duniao.js";
     document.getElementById("effect").volume = 0.5;
     document.getElementById("myaudio").volume = 0.15;
+    document.getElementById("myaudio").src = "sound/m2.mp3";
     document.getElementById("myaudio").play();
     oHead.appendChild(oScript);
 }        
 function loadecho(){
+    pauseAudio();
     removeelements();
     var oHead = document.getElementsByTagName('HEAD').item(0);
     var oScript= document.createElement("script");
@@ -121,6 +130,7 @@ function loadecho(){
     oScript.src="echo.js";
     document.getElementById("effect").volume = 0.5;
     document.getElementById("myaudio").volume = 0.15;
+    document.getElementById("myaudio").src = "sound/m7.mp3";
     document.getElementById("myaudio").play();
     oHead.appendChild(oScript);
 }
@@ -150,6 +160,14 @@ function removejscssfile(filename,filetype){
     }
     
 }
+function playEffect(str, timegap){
+    document.getElementById("effect").src = "sound/" + str;
+    document.getElementById("effect").play();
+    document.getElementById("effect").volume = 0.8;
+}
+function pauseAudio(){
+    document.getElementById("effect").pause();
+}
 function onbut1Clicked(){
     container.removeChild(objects["init"]);
     objects["init"] = new createjs.Bitmap(Queue.getResult("init_select")).set({scaleX: 0.5, scaleY:0.5});
@@ -174,6 +192,8 @@ function onbut1Clicked(){
     var but6 = new createjs.Shape(); objects["but5"] = but6;
     but6.graphics.beginFill("red").drawRect(0,0,1200,250); but6.set({x:1100, y:700, scaleX:0.3, scaleY:0.3, rotation:0, alpha:0.01});
     but6.addEventListener("click", loadecho);
+
+    playEffect("m1.mp3");
 
     container.addChild(but2);
     container.addChild(but3);

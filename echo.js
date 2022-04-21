@@ -205,7 +205,6 @@ class TaskController{
 
 /////////////////////////////////////// methods /////////////////////////////////////////////
 function init(){
-    document.getElementById("myaudio").pause();
 
     createjs.MotionGuidePlugin.install();
     container = new createjs.Container();
@@ -712,6 +711,10 @@ function checkEndingCondition(){
 }
 
 function showEndingScene(){
+    document.getElementById("myaudio").pause();
+    document.getElementById("myaudio").src = "sound/m8.mp3";
+    document.getElementById("myaudio").play();
+
     createjs.Tween.get(objects["arrowhead2"]).to({alpha:0}, 2000);
     createjs.Tween.get(objects["arrowhead1"]).to({alpha:0}, 2000);
     createjs.Tween.get(objects["s2_2"]).to({alpha:0}, 2000)
