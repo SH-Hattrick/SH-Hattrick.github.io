@@ -361,6 +361,8 @@ function drawSceneTwo(){
 
     removeHint();
 
+    document.getElementById("myaudio").pause();
+
     container.addChild(museumtext);
     museumtext.set({alpha:0});
     createjs.Tween.get(museumtext).to({alpha:1}, 1000).call(function(){
@@ -711,7 +713,7 @@ function checkEndingCondition(){
 }
 
 function showEndingScene(){
-    document.getElementById("myaudio").pause();
+    objects["play"].alpha = 0;
     document.getElementById("myaudio").src = "sound/m8.mp3";
     document.getElementById("myaudio").play();
 
