@@ -247,7 +247,7 @@ function duniao_adjust_screen(){
 };
 
 function initSceneOne(){
-    Queue.on("complete", HandleCompleteSceneOne, this);
+    Queue.on("complete", HandleCompleteSceneTwo, this);
     Queue.on("progress", HandleProgress, this);
     Queue.loadManifest([
         {id:"dock", src:"img/echo/dock.png"},
@@ -262,7 +262,8 @@ function initSceneOne(){
         {id:"photo5", src:"img/echo/photo5.png"},
         {id:"photo6", src:"img/echo/photo6.png"},
         {id:"photo7", src:"img/echo/photo7.png"},
-        {id:"play", src:"img/echo/play.png"}
+        {id:"play", src:"img/echo/play.png"},
+        {id:"exit", src:"img/echo/exit.png"}
     ]);
 }
 
@@ -308,7 +309,8 @@ function HandleCompleteSceneTwo(){
     objects["photo5"] = new createjs.Bitmap(Queue.getResult("photo5")).set({alpha:0.01, x:300, y:300, scaleX:0.2, scaleY:0.4});
     objects["photo6"] = new createjs.Bitmap(Queue.getResult("photo6")).set({alpha:0.01, x:900, y:250, scaleX:0.2, scaleY:0.4});
     objects["photo7"] = new createjs.Bitmap(Queue.getResult("photo7")).set({alpha:0.01, x:1400, y:200, scaleX:0.2, scaleY:0.4});
-    objects["play"] = new createjs.Bitmap(Queue.getResult("play")).set({alpha:0, x:50, y:50, scaleX:0.2, scaleY:0.2});
+    objects["play"] = new createjs.Bitmap(Queue.getResult("play")).set({alpha:0, x:50, y:50, scaleX:0.15, scaleY:0.15});
+    objects["exit"] = new createjs.Bitmap(Queue.getResult("exit")).set({alpha:0, x:1600, y:850, scaleX:0.15, scaleY:0.15});
     
     objects["arrowhead2"].addEventListener("click", onarrow2Scene2Clicked);
 
@@ -374,6 +376,8 @@ function drawSceneTwo(){
                 container.addChild(objects["arrowhead1"]);
                 container.addChild(objects["arrowhead2"]);
             
+                container.addChild(objects["exit"]);
+
                 container.addChild(objects["photo1"]);
                 container.addChild(objects["photo2"]);
                 container.addChild(objects["photo3"]);
@@ -432,7 +436,7 @@ function onphoto1Clicked(){
     if(objects["photo1"].scaleX > 0.5){
         createjs.Tween.get(objects["photo1"]).to({alpha:0}, 1000).call(function(){
             createjs.Tween.get(objects["s2_1"]).to({alpha:1}, 1000).call(function(){
-                showPhono();
+                showPhono1();
                 objects["photo1"].set({alpha:0.01, x:50, y:350, scaleX:0.2, scaleY:0.2});
                 objects["photo2"].set({alpha:0.01});
                 objects["photo3"].set({alpha:0.01});
@@ -454,7 +458,7 @@ function onphoto1Clicked(){
 
     createjs.Tween.get(objects["arrowhead1"]).to({alpha:0}, 1000);
     createjs.Tween.get(objects["s2_1"]).to({alpha:0}, 1000).call(function(){
-        showPhono();
+        showPhono1();
         audioName = "4.mp3";
         createjs.Tween.get(objects["photo1"]).to({alpha:1}, 1000);
     })
@@ -464,7 +468,7 @@ function onphoto2Clicked(){
     if(objects["photo2"].scaleX > 0.5){
         createjs.Tween.get(objects["photo2"]).to({alpha:0}, 1000).call(function(){
             createjs.Tween.get(objects["s2_1"]).to({alpha:1}, 1000).call(function(){
-                showPhono();
+                showPhono1();
                 objects["photo2"].set({alpha:0.01, x:500, y:270, scaleX:0.2, scaleY:0.3});
                 objects["photo1"].set({alpha:0.01});
                 objects["photo3"].set({alpha:0.01});
@@ -486,7 +490,7 @@ function onphoto2Clicked(){
 
     createjs.Tween.get(objects["arrowhead1"]).to({alpha:0}, 1000);
     createjs.Tween.get(objects["s2_1"]).to({alpha:0}, 1000).call(function(){
-        showPhono();
+        showPhono1();
         audioName = "5.mp3";
         createjs.Tween.get(objects["photo2"]).to({alpha:1}, 1000);
     })
@@ -496,13 +500,14 @@ function onphoto3Clicked(){
     if(objects["photo3"].scaleX > 0.5){
         createjs.Tween.get(objects["photo3"]).to({alpha:0}, 1000).call(function(){
             createjs.Tween.get(objects["s2_1"]).to({alpha:1}, 1000).call(function(){
-                showPhono();
+                showPhono1();
                 objects["photo3"].set({alpha:0.01, x:1000, y:350, scaleX:0.2, scaleY:0.2});
                 objects["photo2"].set({alpha:0.01});
                 objects["photo1"].set({alpha:0.01});
                 objects["photo4"].set({alpha:0.01});
                 controller.completeTask("photo3");
                 if(checkEndingCondition()){
+                    
                     showEndingScene();
                 }
             });
@@ -519,7 +524,7 @@ function onphoto3Clicked(){
 
     createjs.Tween.get(objects["arrowhead1"]).to({alpha:0}, 1000);
     createjs.Tween.get(objects["s2_1"]).to({alpha:0}, 1000).call(function(){
-        showPhono();
+        showPhono1();
         audioName = "6.mp3";
         createjs.Tween.get(objects["photo3"]).to({alpha:1}, 1000);
     })
@@ -530,14 +535,15 @@ function onphoto4Clicked(){
         createjs.Tween.get(objects["photo4"]).to({alpha:0}, 1000).call(function(){
 
             createjs.Tween.get(objects["s2_1"]).to({alpha:1}, 1000).call(function(){
-                showPhono();
+                showPhono1();
                 objects["photo4"].set({alpha:0.01, x:1500, y:350, scaleX:0.2, scaleY:0.3});
                 objects["photo2"].set({alpha:0.01});
                 objects["photo3"].set({alpha:0.01});
                 objects["photo1"].set({alpha:0.01});
                 controller.completeTask("photo4");
                 if(checkEndingCondition()){
-                    showEndingScene();
+                    objects["exit"].set({alpha:1});
+                    objects["exit"].addEventListener("click", showEndingScene);
                 }
             });
             createjs.Tween.get(objects["arrowhead1"]).to({alpha:1}, 1000);
@@ -553,7 +559,7 @@ function onphoto4Clicked(){
 
     createjs.Tween.get(objects["arrowhead1"]).to({alpha:0}, 1000);
     createjs.Tween.get(objects["s2_1"]).to({alpha:0}, 1000).call(function(){
-        showPhono();
+        showPhono1();
         audioName = "7.mp3";
         createjs.Tween.get(objects["photo4"]).to({alpha:1}, 1000);
     })
@@ -565,7 +571,7 @@ function onphoto5Clicked(){
         createjs.Tween.get(objects["photo5"]).to({alpha:0}, 1000).call(function(){
             createjs.Tween.get(objects["s2_2"]).to({alpha:1}, 1000);
             createjs.Tween.get(objects["arrowhead2"]).to({alpha:1}, 1000).call(function(){
-                showPhono();
+                showPhono2();
                 objects["photo5"].set({alpha:0.01, x:300, y:300, scaleX:0.2, scaleY:0.4});
                 objects["photo6"].set({alpha:0.01});
                 objects["photo7"].set({alpha:0.01});
@@ -585,7 +591,7 @@ function onphoto5Clicked(){
 
     createjs.Tween.get(objects["arrowhead2"]).to({alpha:0}, 1000);
     createjs.Tween.get(objects["s2_2"]).to({alpha:0}, 1000).call(function(){
-        showPhono();
+        showPhono2();
         audioName = "1.mp3";
         createjs.Tween.get(objects["photo5"]).to({alpha:1}, 1000);
     })
@@ -595,7 +601,7 @@ function onphoto6Clicked(){
     if(objects["photo6"].scaleX > 0.5){
         createjs.Tween.get(objects["photo6"]).to({alpha:0}, 1000).call(function(){
             createjs.Tween.get(objects["s2_2"]).to({alpha:1}, 1000).call(function(){
-                showPhono();
+                showPhono2();
                 objects["photo6"].set({alpha:0.01, x:900, y:250, scaleX:0.2, scaleY:0.4});
                 objects["photo5"].set({alpha:0.01});
                 objects["photo7"].set({alpha:0.01});
@@ -615,7 +621,7 @@ function onphoto6Clicked(){
 
     createjs.Tween.get(objects["arrowhead2"]).to({alpha:0}, 1000);
     createjs.Tween.get(objects["s2_2"]).to({alpha:0}, 1000).call(function(){
-        showPhono();
+        showPhono2();
         audioName = "2.mp3";
         createjs.Tween.get(objects["photo6"]).to({alpha:1}, 1000);
     })
@@ -625,7 +631,7 @@ function onphoto7Clicked(){
     if(objects["photo7"].scaleX > 0.5){
         createjs.Tween.get(objects["photo7"]).to({alpha:0}, 1000).call(function(){
             createjs.Tween.get(objects["s2_2"]).to({alpha:1}, 1000).call(function(){
-                showPhono();
+                showPhono2();
                 objects["photo7"].set({alpha:0.01, x:1400, y:200, scaleX:0.2, scaleY:0.4});
                 objects["photo5"].set({alpha:0.01});
                 objects["photo6"].set({alpha:0.01});
@@ -646,7 +652,7 @@ function onphoto7Clicked(){
 
     createjs.Tween.get(objects["arrowhead2"]).to({alpha:0}, 1000);
     createjs.Tween.get(objects["s2_2"]).to({alpha:0}, 1000).call(function(){
-        showPhono();
+        showPhono2();
         audioName = "3.mp3";
         createjs.Tween.get(objects["photo7"]).to({alpha:1}, 1000);
     })
@@ -688,8 +694,18 @@ function clearScreen(){
     }
 }
 
-function showPhono(){
-    if(objects["s2_1"].alpha == 0){
+function showPhono1(){
+    if(objects["s2_1"].alpha == 0 ){
+        objects["play"].set({alpha:1});
+    }
+    else{
+        objects["play"].set({alpha:0});
+        document.getElementById("effect").pause();
+    }
+}   
+
+function showPhono2(){
+    if(objects["s2_2"].alpha == 0 ){
         objects["play"].set({alpha:1});
     }
     else{
@@ -713,6 +729,7 @@ function checkEndingCondition(){
 }
 
 function showEndingScene(){
+    objects["exit"].alpha = 0;
     objects["play"].alpha = 0;
     document.getElementById("myaudio").src = "sound/m8.mp3";
     document.getElementById("myaudio").play();

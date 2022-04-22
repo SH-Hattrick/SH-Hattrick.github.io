@@ -360,7 +360,7 @@ function HandleCompleteSceneTwo() {
 
     progressnum = 0;
 
-    objects["AsiaEuroMap"] = new createjs.Bitmap(Queue.getResult("AsiaEuroMap")).set({alpha:0, x: 100,scaleX:0.38, scaleY:0.38});
+    objects["AsiaEuroMap"] = new createjs.Bitmap(Queue.getResult("AsiaEuroMap")).set({alpha:0, x: 100,scaleX:0.21, scaleY:0.21});
     objects["raven"] = new createjs.Bitmap(Queue.getResult("raven")).set({alpha:0,x:450,y:300,scaleX:0.04,scaleY:0.04});
 
     objects["raven"].addEventListener("click", onRavenClicked);
