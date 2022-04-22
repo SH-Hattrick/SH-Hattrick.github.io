@@ -14,7 +14,7 @@ var screen = 1;
 var loading;
 var begintext = new createjs.Text("1937年9月7日下午，\n\n一辆人力车停在了南京广州路小粉桥1号门前，\n\n从北方回来风尘仆仆的拉贝按响了门铃。\n\n他看到院子有一个简陋的防空洞，\n\n这是公司职员为对付来自头顶的狂轰滥炸一起挖的。\n\n敌机飞临南京上空了！"
 , "Italic 50px KaiTi", "#fff").set({x:100, y:100});
-var endingtext = new createjs.Text("这灾难前夕的片刻安宁已经结束，\n\n，1937年南京12月凛冬的雪正飘飘洒洒地落下来。"
+var endingtext = new createjs.Text("这灾难前夕的片刻安宁已经结束，\n\n1937年南京12月凛冬的雪正飘飘洒洒地落下来。"
 , "Italic 50px KaiTi", "#fff").set({x:100, y:100});
 function adjust_screen(){
     canvas = document.getElementById("wrapper");
