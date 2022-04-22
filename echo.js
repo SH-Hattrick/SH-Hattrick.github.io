@@ -247,7 +247,7 @@ function duniao_adjust_screen(){
 };
 
 function initSceneOne(){
-    Queue.on("complete", HandleCompleteSceneTwo, this);
+    Queue.on("complete", HandleCompleteSceneOne, this);
     Queue.on("progress", HandleProgress, this);
     Queue.loadManifest([
         {id:"dock", src:"img/echo/dock.png"},
