@@ -1,4 +1,6 @@
 var stage = new createjs.Stage("wrapper");
+var canvasX = 1920;
+var canvasY = 1080;
 createjs.Touch.enable(stage);
 var container = new createjs.Container();
 stage.addChild(container);
@@ -11,6 +13,8 @@ createjs.Ticker.addEventListener("tick", stage);
 var screen = 1;
 var loading;
 var begintext = new createjs.Text("1937年9月7日下午，\n\n一辆人力车停在了南京广州路小粉桥1号门前，\n\n从北方回来风尘仆仆的拉贝按响了门铃。\n\n他看到院子有一个简陋的防空洞，\n\n这是公司职员为对付来自头顶的狂轰滥炸一起挖的。\n\n敌机飞临南京上空了！"
+, "Italic 50px KaiTi", "#fff").set({x:100, y:100});
+var endingtext = new createjs.Text("这灾难前夕的片刻安宁已经结束，\n\n，1937年南京12月凛冬的雪正飘飘洒洒地落下来。"
 , "Italic 50px KaiTi", "#fff").set({x:100, y:100});
 function adjust_screen(){
     canvas = document.getElementById("wrapper");
@@ -182,6 +186,7 @@ outdoor.onload = function() {
     //container.addChild(bg);
 }*/
 
+
 var queue = new createjs.LoadQueue();
 queue.on("complete", handleComplete, this);
 queue.loadManifest([
@@ -345,7 +350,27 @@ function state3_end() {
         shelter_handler();
         container.addChild(things[10]);
         createjs.Tween.get(things[10]).to({x:304, y:0, scaleX:0.9, scaleY:0.9}, 300);
+        things[10].addEventListener("click", function(){
+            var block = new createjs.Shape(); objects["block"] = block; block.set({alpha:0});
+            block.graphics.beginFill("black").drawRect(0,0,canvasX,canvasY); 
+            container.addChild(block);
+            createjs.Tween.get(block).to({alpha:1}, 1000).call(function(){
+                container.addChild(endingtext);
+                endingtext.set({alpha:0});
+                createjs.Tween.get(endingtext).to({alpha:1}, 1000).call(function(){
+                    createjs.Tween.get(endingtext).to({alpha:1}, 7000).call(function(){
+                        createjs.Tween.get(endingtext).to({alpha:0}, 1000).call(function(){
+                            ending();
+                        })
+                    })
+                })
+            })
+        });
     });
+}
+
+function ending(){
+    location.reload();
 }
 
 function press_start(e) {
@@ -508,7 +533,7 @@ function tele_end() {
         container.addChild(things[12]);
         state = 3;
         things[7].set({x:40, y:570, scaleX:0.16, scaleY:0.16});
-        timer = window.setTimeout(gameover, 30000);
+        timer = window.setTimeout(gameover, 3000);
     }
     else {
         createjs.Tween.get(things[7]).to({x:40, y:570, scaleX:0.16, scaleY:0.16}, 200);
