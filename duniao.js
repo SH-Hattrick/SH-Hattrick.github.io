@@ -737,7 +737,7 @@ function onfactoryClicked(){
     objects["factory"].removeEventListener("click", onfactoryClicked);
     createjs.Tween.get(objects["files"]).to({alpha:0.5}, 1000);
     createjs.Tween.get(objects["Scenefour"]).to({alpha:0.5}, 1000).call(function(){
-        playEffect("elecnoise.wav", 3000);
+        //playEffect("elecnoise.wav", 3000);
         objects["factory"].addEventListener("click", function(){
             createjs.Tween.get(objects["files"]).to({alpha:1}, 1000);
             createjs.Tween.get(objects["Scenefour"]).to({alpha:1}, 1000);
