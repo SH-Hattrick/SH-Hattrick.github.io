@@ -22,7 +22,7 @@ var SceneOne = 1;
 var loading;
 
 var texthint = new createjs.Text("", "Italic 40px KaiTi", "#fff").set({x:190, y:900});//提示信息
-var begintext = new createjs.Text("1938年2月底，\n\n拉贝自南京下关坐船前往上海，返回德国。\n\n夕阳下的码头，浪水冲击着船身。\n\n拉贝似乎仍看见难民带着泪水与惊恐，与他依依惜别。\n\n\"再见，我心底里深爱过的南京\"。"
+var begintext = new createjs.Text("1938年2月底，\n\n拉贝自南京下关坐船前往上海，返回德国。\n\n夕阳下的码头，浪水冲击着船身。\n\n拉贝似乎仍看见难民带着泪水与惊恐，与他依依惜别。\n\n\"再见，我心底里深爱过的南京。\""
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
 var museumtext = new createjs.Text("斯人远逝，大爱犹存。进入博物馆，\n\n了解拉贝故事发现的经历和拉贝精神在今天的传播。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
@@ -301,13 +301,13 @@ function HandleCompleteSceneTwo(){
     objects["arrowhead1"] = new createjs.Bitmap(Queue.getResult("arrowhead")).set({alpha:0, x:200, y:250, scaleX:0.1, scaleY:0.1, rotation:180});
     objects["arrowhead2"] = new createjs.Bitmap(Queue.getResult("arrowhead")).set({alpha:0, x:1700, y:450, scaleX:0.1, scaleY:0.1});
 
-    objects["photo1"] = new createjs.Bitmap(Queue.getResult("photo1")).set({alpha:0.01, x:50, y:350, scaleX:0.2, scaleY:0.2});
-    objects["photo2"] = new createjs.Bitmap(Queue.getResult("photo2")).set({alpha:0.01, x:500, y:270, scaleX:0.2, scaleY:0.3});
-    objects["photo3"] = new createjs.Bitmap(Queue.getResult("photo3")).set({alpha:0.01, x:1000, y:350, scaleX:0.2, scaleY:0.2});
-    objects["photo4"] = new createjs.Bitmap(Queue.getResult("photo4")).set({alpha:0.01, x:1500, y:350, scaleX:0.2, scaleY:0.3});
-    objects["photo5"] = new createjs.Bitmap(Queue.getResult("photo5")).set({alpha:0, x:300, y:300, scaleX:0.2, scaleY:0.4});
-    objects["photo6"] = new createjs.Bitmap(Queue.getResult("photo6")).set({alpha:0, x:900, y:250, scaleX:0.2, scaleY:0.4});
-    objects["photo7"] = new createjs.Bitmap(Queue.getResult("photo7")).set({alpha:0, x:1400, y:200, scaleX:0.2, scaleY:0.4});
+    objects["photo1"] = new createjs.Bitmap(Queue.getResult("photo1")).set({alpha:0, x:50, y:350, scaleX:0.2, scaleY:0.2});
+    objects["photo2"] = new createjs.Bitmap(Queue.getResult("photo2")).set({alpha:0, x:500, y:270, scaleX:0.2, scaleY:0.3});
+    objects["photo3"] = new createjs.Bitmap(Queue.getResult("photo3")).set({alpha:0, x:1000, y:350, scaleX:0.2, scaleY:0.2});
+    objects["photo4"] = new createjs.Bitmap(Queue.getResult("photo4")).set({alpha:0, x:1500, y:350, scaleX:0.2, scaleY:0.3});
+    objects["photo5"] = new createjs.Bitmap(Queue.getResult("photo5")).set({alpha:0.01, x:300, y:300, scaleX:0.2, scaleY:0.4});
+    objects["photo6"] = new createjs.Bitmap(Queue.getResult("photo6")).set({alpha:0.01, x:900, y:250, scaleX:0.2, scaleY:0.4});
+    objects["photo7"] = new createjs.Bitmap(Queue.getResult("photo7")).set({alpha:0.01, x:1400, y:200, scaleX:0.2, scaleY:0.4});
     objects["play"] = new createjs.Bitmap(Queue.getResult("play")).set({alpha:0, x:50, y:50, scaleX:0.2, scaleY:0.2});
     
     objects["arrowhead2"].addEventListener("click", onarrow2Scene2Clicked);
@@ -382,8 +382,8 @@ function drawSceneTwo(){
                 container.addChild(objects["photo6"]);
                 container.addChild(objects["photo7"]);
             
-                createjs.Tween.get(objects["arrowhead1"]).to({alpha:1}, 1000);
-                createjs.Tween.get(objects["s2_1"]).to({alpha:1}, 1000).call(function(){
+                createjs.Tween.get(objects["arrowhead2"]).to({alpha:1}, 1000);
+                createjs.Tween.get(objects["s2_2"]).to({alpha:1}, 1000).call(function(){
                     objects["arrowhead1"].addEventListener("click", onarrow1Scene2Clicked);
                 })
             
