@@ -344,6 +344,10 @@ function HandleProgress(){
 function HandleCompleteSceneOne() {
     loading.set({alpha:0});
 
+    playEffect("e1.wav", 0);
+    // playEffect("e2.wav", 0);
+    // playEffect("e3.wav", 0);
+
     progressnum = 0;
 
     objects["Sceneone"] = new createjs.Bitmap(Queue.getResult("Sceneone"));
