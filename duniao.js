@@ -595,7 +595,7 @@ function removeHint(){
 
 function onSceneoneClicked(){
     objects["Sceneone"].removeEventListener("click", onSceneoneClicked);
-    playEffect("ship.wav", 4000);
+    playEffect("e3.wav", 4000);
     createjs.Tween.get(objects["Sceneone"]).to({alpha:0.3}, 2000).call(function(){
         container.addChild(textSceneone); 
         textSceneone.set({alpha:0});

@@ -268,6 +268,7 @@ function draw_rects() {
 };draw_rects();
 
 function aircraft_handler() {
+    playEffect("e5.wav" ,0);
     container.removeChild(things[12]);
     container.addChild(things[13]);
 }
