@@ -37,9 +37,9 @@ var textSceneFour3 = new createjs.Text("凭借着自己的才能与勤奋，\n\n
     ,"Italic 50px KaiTi","#fff").set({x:950, y:150});
 var textSceneFour4 = new createjs.Text("拉贝和公司的中国人相处得尤为融洽，\n\n他很喜欢和中国人交朋友，\n\n其中有一位叫鲍家良的青年在他手下干会计，\n\n拉贝待他情同父子。"
     ,"Italic 50px KaiTi","#fff").set({x:950, y:150});
-var textSceneFive1 = new createjs.Text("生意之余，拉贝热衷于领略中国文化的精髓。\n\n北京的博物馆、庙宇、宫殿、古玩市场、甚至周围的田野和乡村，\n\n都让他和道拉惊叹并赞不绝口。"
+var textSceneFive1 = new createjs.Text("生意之余，拉贝热衷于领略中国文化的精髓。\n\n北京的博物馆、庙宇、宫殿、古玩市场、甚至周围的田野和乡村，\n\n都让他和道拉惊叹并赞不绝口。\n\n拿起老相机，\n\n看看100年前拉贝镜头下的颐和园是什么样子吧"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
-var textSceneFive2 = new createjs.Text("拿起老相机，\n\n看看100年前拉贝镜头下的颐和园是什么样子吧"
+var textSceneFive2 = new createjs.Text(""
     ,"Italic 50px KaiTi","#fff").set({x:100, y:280});
 var textSceneFive3 = new createjs.Text("出于对中国文化的热爱，\n\n他收集了大量有关北京的照片和绘画，\n\n辅以对北京社会生活方方面面的详细记录。"
     ,"Italic 50px KaiTi","#fff").set({x:100, y:100});
