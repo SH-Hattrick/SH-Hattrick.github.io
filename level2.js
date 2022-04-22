@@ -415,6 +415,9 @@ function ondiaryClicked(){
                 createjs.Tween.get(objects["photoframe"]).to({alpha:0}, 1000);
                 createjs.Tween.get(objects["sealmark"]).to({alpha:0}, 1000);
                 createjs.Tween.get(objects["xjkfill"]).to({alpha:0}, 1000);
+                createjs.Tween.get(objects["map"]).to({alpha:0}, 1000);
+                createjs.Tween.get(objects["telegram"]).to({alpha:0}, 1000);
+                createjs.Tween.get(objects["typer"]).to({alpha:0}, 1000);
                 createjs.Tween.get(objects["zslfill"]).to({alpha:0}, 1000).call(function(){
                     container.addChild(endingtext);
                     endingtext.set({alpha:0});

@@ -530,9 +530,6 @@ function drawSceneSix(){
                 container.addChild(textSceneSix2);
                 container.addChild(objects["family"]);
 
-                document.getElementById("myaudio").pause();
-                document.getElementById("myaudio").src = "sound/m3.mp3";
-                document.getElementById("myaudio").play();
 
                 textSceneSix2.set({alpha:0});
                 createjs.Tween.get(objects["family"]).to({alpha:1}, 1000);

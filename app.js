@@ -533,7 +533,7 @@ function tele_end() {
         container.addChild(things[12]);
         state = 3;
         things[7].set({x:40, y:570, scaleX:0.16, scaleY:0.16});
-        timer = window.setTimeout(gameover, 3000);
+        timer = window.setTimeout(gameover, 10000);
     }
     else {
         createjs.Tween.get(things[7]).to({x:40, y:570, scaleX:0.16, scaleY:0.16}, 200);
