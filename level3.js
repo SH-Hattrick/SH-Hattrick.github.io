@@ -571,6 +571,17 @@ function onphoneClicked(){
         createjs.Tween.get(objects["phone"]).to({x:640, y:550, scaleX:0.15, scaleY:0.15, alpha:0.01}, 200);
         createjs.Tween.get(objects["dial"]).to({x:640, y:550, scaleX:0.15, scaleY:0.15, alpha:0.01}, 200);
 
+        objects["circle1"].alpha = 0;
+        objects["circle2"].alpha = 0;
+        objects["circle3"].alpha = 0;
+        objects["circle4"].alpha = 0;
+        objects["circle5"].alpha = 0;
+        objects["circle6"].alpha = 0;
+        objects["circle7"].alpha = 0;
+        objects["circle8"].alpha = 0;
+        objects["circle9"].alpha = 0;
+        objects["circle0"].alpha = 0;
+
         container.removeChild(objects["circle1"]);
         container.removeChild(objects["circle2"]);
         container.removeChild(objects["circle3"]);
@@ -601,8 +612,9 @@ function ondialClicked(evt){
             controller.completeTask("phone");
 
             showHint("受伤妇女已及时送医,正在接受治疗。",2000);
-
-    controller.enableTask("car");
+            textnumber.set({alpha:0});
+            container.removeChild(textnumber);
+            controller.enableTask("car");
 
             onphoneClicked();
         }

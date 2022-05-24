@@ -368,6 +368,7 @@ function HandleCompleteSceneTwo() {
     objects["raven"] = new createjs.Bitmap(Queue.getResult("raven")).set({alpha:0,x:450,y:300,scaleX:0.04,scaleY:0.04});
 
     objects["raven"].addEventListener("click", onRavenClicked);
+    objects["AsiaEuroMap"].addEventListener("click", onRavenClicked);
 
     ravenmove = setInterval(function(){
         ravenmovedir = -ravenmovedir;
@@ -389,6 +390,7 @@ function HandleCompleteSceneThree(){
     drawSceneThree();
 }
 
+var ScenefourTimer = 0;
 function HandleCompleteSceneFour(){
     clearScreen();
 
@@ -418,9 +420,30 @@ function HandleCompleteSceneFour(){
     objects["factory"].addEventListener("click", onfactoryClicked);
     objects["workmate"].addEventListener("click", onphotoClicked);
     objects["camera"].addEventListener("click", oncameraClicked);
+
+    ScenefourTimer = Date.now();
+    objects["Scenefour"].addEventListener("click", onScenefourClick);
     
 
     drawSceneFour();
+}
+
+function onScenefourClick(){
+    thistime = Date.now();
+    if(thistime - ScenefourTimer > 5000 && controller.checkStatus("scenefour") != DISABLED){
+        ScenefourTimer = thistime;
+        if(controller.checkStatus("files") != COMPLETED){
+            showHint("瞧瞧那一堆杂乱的文件？" ,2000);
+        }
+        else if(controller.checkStatus("marriage") != COMPLETED || controller.checkStatus("factory") != COMPLETED || controller.checkStatus("workmate") != COMPLETED){
+            showHint("看看墙上的相片？" ,2000);
+        }
+        else{
+            showHint("去拍照吧" ,2000);
+            objects["Scenefour"].removeEventListener("click", onScenefourClick);
+            
+        }
+    }
 }
 
 function HandleCompleteSceneFive(){
